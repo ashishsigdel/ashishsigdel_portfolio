@@ -33,7 +33,7 @@ export function middleware(request: NextRequest) {
 
 function isValidSlug(slug: string | undefined): boolean {
   if (!slug) return false;
-  if (slug === "client1" || slug === "client2") {
+  if (slug === "client1" || slug === "client2" || slug === "auth") {
     return true;
   }
   return false;
