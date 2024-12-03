@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 const BASE_DOMAIN = process.env.NEXT_PUBLIC_BASE_DOMAIN;
+import { subdomains } from "./data/subdomains";
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
@@ -33,10 +34,7 @@ export function middleware(request: NextRequest) {
 
 function isValidSlug(slug: string | undefined): boolean {
   if (!slug) return false;
-  if (slug === "client1" || slug === "client2" || slug === "auth") {
-    return true;
-  }
-  return false;
+  return subdomains.includes(slug);
 }
 
 export const config = {
