@@ -1,1 +1,1 @@
-export const subdomains = ["auth", "me", "links", "asprog"];
+export const subdomains = ["auth", "me", "links", "asprog", "admin"];

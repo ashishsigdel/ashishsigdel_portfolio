@@ -15,3 +15,19 @@
 body {
   @apply font-poppins;
 }
+
+.border-color {
+  @apply border-black/10 dark:border-white/20;
+}
+
+.sidebar {
+  transition: min-width 0.3s ease-in-out;
+
+  &.sidebar-expanded {
+    min-width: 265px;
+  }
+
+  &.sidebar-collapsed {
+    min-width: 75px;
+  }
+}
