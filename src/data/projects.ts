@@ -13,9 +13,10 @@ export const projects = [
     id: 2,
     title: "Project Two",
     description:
-      "A mobile app developed using React Native that allows users to track their daily tasks and set reminders.",
+      "<div>  <p>🤝 <strong>Build a Robust Chat Application in React Native!</strong></p>  <p>In this video, we’ll create a feature-packed chat app with:</p>  <ul>    <li>✅ Secure authentication</li>    <li>✅ Friend search and connection requests</li>    <li>✅ Real-time chat with online and typing status</li>  </ul>  <p>Perfect for learning advanced React Native concepts and enhancing your app development skills! 🚀</p>  <p>#ReactNative #ChatApp #RealTimeChat #AppDevelopment</p></div>",
     coverPhoto: "https://img.youtube.com/vi/sYcFXWPSEek/maxresdefault.jpg",
-    tags: ["React Native", "Expo", "Firebase"],
+    tags: ["Nodejs", "Nextjs", "Tailwind"],
+    demoLink: "https://example.com/project1-demo",
     isFree: false,
     price: "$5",
     sourceLink: "https://buymeacoffee.com/ashishsigdel/e/319890",

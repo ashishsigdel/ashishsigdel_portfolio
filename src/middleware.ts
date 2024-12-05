@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
 
   if (
     subdomain === "www" ||
-    subdomain === BASE_DOMAIN ||
+    subdomain === BASE_DOMAIN?.split(".")[0] ||
     url.pathname.endsWith("/not-found")
   ) {
     return NextResponse.next();

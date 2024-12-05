@@ -17,7 +17,7 @@ export default function ProjectCard({ project }: any) {
 
   return (
     <Link key={project.id} href={`/resources/${project.id}`}>
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer group">
+      <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden cursor-pointer group">
         <div
           className="relative w-full h-0"
           style={{ paddingBottom: "56.25%" }}
