@@ -17,7 +17,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`sidebar sticky top-0 z-[999] bg-light-white dark:bg-dark-black min-h-screen ${
+      className={`sidebar sticky top-0 z-[999] bg-white dark:bg-black min-h-screen ${
         openFullSidebar ? "sidebar-expanded" : "sidebar-collapsed"
       } border-r border-color`}
     >

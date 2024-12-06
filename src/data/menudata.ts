@@ -2,8 +2,6 @@ import { Menu } from "@/types/menu";
 import { AiTwotoneAppstore } from "react-icons/ai";
 import { CiSettings } from "react-icons/ci";
 import {
-  FaAddressBook,
-  FaDesktop,
   FaFingerprint,
   FaGlobe,
   FaTag,
@@ -11,13 +9,14 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { GrAppsRounded } from "react-icons/gr";
+import { MdOutlineAlternateEmail } from "react-icons/md";
 import { RiBook2Fill } from "react-icons/ri";
 
 export const MenuData: Menu[] = [
   {
     id: 1,
     name: "Dashboard",
-    link: "/dashboard",
+    link: "/",
     icon: AiTwotoneAppstore,
   },
   {
@@ -37,18 +36,6 @@ export const MenuData: Menu[] = [
         name: "Project",
         link: "/portfolio/project",
         icon: GrAppsRounded,
-      },
-      {
-        id: 3,
-        name: "Service",
-        link: "/portfolio/service",
-        icon: FaDesktop,
-      },
-      {
-        id: 4,
-        name: "Contacts",
-        link: "/portfolio/contact",
-        icon: RiBook2Fill,
       },
     ],
   },
@@ -77,6 +64,18 @@ export const MenuData: Menu[] = [
     name: "Users",
     link: "/users",
     icon: FaUsers,
+  },
+  {
+    id: 7,
+    name: "Inbox",
+    link: "/portfolio/inbox",
+    icon: RiBook2Fill,
+  },
+  {
+    id: 6,
+    name: "Email Manager",
+    link: "/email-manager",
+    icon: MdOutlineAlternateEmail,
   },
   {
     id: 5,

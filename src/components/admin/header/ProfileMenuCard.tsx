@@ -13,7 +13,7 @@ export default function ProfileMenuCard() {
 
   return (
     <div className="absolute top-16 right-12 bg-white dark:bg-black rounded-md shadow-md min-w-72 py-3 border border-color">
-      <div className="flex gap-4 items-center border-b border-color dark:border-graycolor p-5 ">
+      <div className="flex gap-4 items-center border-b border-color dark:border-gray-500 p-5 ">
         <Image
           src={profilePic}
           alt="profile-pic"
@@ -23,7 +23,7 @@ export default function ProfileMenuCard() {
         />
         <div>
           <h3 className="font-semibold leading-3 text[15px]">Ashish Sigdel</h3>
-          <span className="text-[11px] text-graycolor">@ashishsigdel</span>
+          <span className="text-[11px] text-gray-500">@ashishsigdel</span>
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "@/components/admin/header";
 import { Sidebar } from "@/components/admin/sidebar";
-// import { Footer } from "@/components/admin/footer";
+import { Footer } from "@/components/admin/footer";
 // import { RequireAdmin, RequireAuth } from "@/utils";
 
 export default function AdminLayout({
@@ -18,10 +18,8 @@ export default function AdminLayout({
       </div>
       <div className="w-full">
         <Header />
-        Header
         {children}
-        {/* <Footer /> */}
-        Footer
+        <Footer />
       </div>
     </div>
     //   </RequireAdmin>

@@ -20,10 +20,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-light-white dark:bg-black w-full h-20 flex items-center sticky top-0 z-[998] border-b border-color">
+      <header className="bg-white dark:bg-black w-full h-20 flex items-center sticky top-0 z-[998] border-b border-color">
         <div className="px-6 w-full flex justify-between items-center">
           <div className="gap-3 items-center hidden md:flex">
-            <span className="p-2 shadow-sm rounded-md text-bluecolor font-semibold">
+            <span className="p-2 shadow-sm bg-light-white dark:bg-dark-black border border-color rounded-md text-skin font-semibold">
               Dashboard
             </span>
           </div>
