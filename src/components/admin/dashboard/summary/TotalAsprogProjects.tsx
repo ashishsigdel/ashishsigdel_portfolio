@@ -1,4 +1,4 @@
-import { FaUsers } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 
 export default function TotalAsprogProjects() {
   return (
@@ -19,7 +19,7 @@ export default function TotalAsprogProjects() {
             />
           </svg>
           <div className="absolute inset-0 flex justify-center items-center text-white">
-            <FaUsers size={26} />
+            <AiFillProduct size={26} />
           </div>
         </div>
 

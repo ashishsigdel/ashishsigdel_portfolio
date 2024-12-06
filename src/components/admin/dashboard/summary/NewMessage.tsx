@@ -1,4 +1,4 @@
-import { FaUsers } from "react-icons/fa";
+import { AiFillMessage } from "react-icons/ai";
 
 export default function NewMessage() {
   return (
@@ -19,7 +19,7 @@ export default function NewMessage() {
             />
           </svg>
           <div className="absolute inset-0 flex justify-center items-center text-white">
-            <FaUsers size={26} />
+            <AiFillMessage size={26} />
           </div>
         </div>
 

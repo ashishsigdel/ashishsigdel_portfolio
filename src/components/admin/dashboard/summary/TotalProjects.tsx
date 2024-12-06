@@ -1,4 +1,4 @@
-import { LuGalleryVerticalEnd } from "react-icons/lu";
+import { AiFillAppstore } from "react-icons/ai";
 
 export default function TotalProjects() {
   return (
@@ -19,7 +19,7 @@ export default function TotalProjects() {
             />
           </svg>
           <div className="absolute inset-0 flex justify-center items-center text-white">
-            <LuGalleryVerticalEnd size={26} />
+            <AiFillAppstore size={26} />
           </div>
         </div>
 

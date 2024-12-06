@@ -10,7 +10,7 @@ import {
 
 export default function Dashboard() {
   return (
-    <div className="bg-light-white dark:bg-dark-black">
+    <div className="bg-light-white dark:bg-dark-black pb-5">
       <div className="px-6 w-full flex justify-between items-center ">
         <div className="my-5">
           <h3 className="font-semibold text-[17.5px] leading-5">

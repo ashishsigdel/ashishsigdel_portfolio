@@ -22,7 +22,7 @@ export const MenuData: Menu[] = [
   {
     id: 2,
     name: "Portfolio",
-    link: "/portfolio",
+    link: "/portfolio/about",
     icon: FaGlobe,
     subMenu: [
       {
@@ -42,7 +42,7 @@ export const MenuData: Menu[] = [
   {
     id: 3,
     name: "AsProg",
-    link: "/asprog",
+    link: "/asprog/project",
     icon: FaYoutube,
     subMenu: [
       {
@@ -68,7 +68,7 @@ export const MenuData: Menu[] = [
   {
     id: 7,
     name: "Inbox",
-    link: "/portfolio/inbox",
+    link: "/inbox",
     icon: RiBook2Fill,
   },
   {

@@ -62,7 +62,7 @@ export default function RecentUserqs() {
                 </td>
                 <td
                   scope="row"
-                  className="pr-6 h-14 py-4 font-normal line-clamp-2 text-gray-600 dark:text-gray-400"
+                  className="pr-6 py-4 font-normal whitespace-nowrap text-gray-600 dark:text-gray-400"
                 >
                   <p>{message.email}</p>
                 </td>
