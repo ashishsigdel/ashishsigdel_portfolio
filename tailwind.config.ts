@@ -27,6 +27,8 @@ const config: Config = {
         success: "#198754",
         "dark-black": "#0d1117",
         "light-white": "#efefef",
+        "form-background": "#efefef",
+        "dark-form-background": "#0d1117",
       },
     },
   },

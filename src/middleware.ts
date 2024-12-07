@@ -5,6 +5,7 @@ import { subdomains } from "./data/subdomains";
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
+
   const host = request.headers.get("host");
   const subdomain = host?.split(".")[0];
 
@@ -26,7 +27,7 @@ export function middleware(request: NextRequest) {
 
   return NextResponse.rewrite(
     new URL(
-      `/pages/${subdomain}${url.pathname}${url.searchParams}${url.hash}`,
+      `/pages/${subdomain}${url.pathname}${url.search}${url.hash}`,
       request.url
     )
   );

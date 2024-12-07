@@ -4,7 +4,7 @@ import { messages } from "@/data/dashboard";
 
 export default function RecentMessages() {
   return (
-    <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6 w-full">
+    <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       <div className="flex justify-between items-center">
         <div className="flex flex-col">
           <span className="text-[17px] font-semibold">Recent Messages</span>

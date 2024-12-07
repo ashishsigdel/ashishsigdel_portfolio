@@ -1,15 +1,7 @@
 import Link from "next/link";
-import {
-  NewMessage,
-  RecentMessages,
-  RecentUsers,
-  TotalAsprogProjects,
-  TotalProjects,
-  TotalUsers,
-} from "@/components/admin/dashboard";
-import { AllImages } from "@/components/admin/about";
+import { ProjectTable } from "@/components/admin/projects";
 
-export default function About() {
+export default function Project() {
   return (
     <div className="bg-light-white dark:bg-dark-black pb-5 min-h-screen">
       <div className="px-6 w-full flex justify-between items-center ">
@@ -21,13 +13,13 @@ export default function About() {
             Home
           </Link>{" "}
           <span className="text-[14px] text-gray-500">-</span>{" "}
-          <span className="text-[14px] text-gray-500">About</span>
+          <span className="text-[14px] text-gray-500">Projects</span>
         </div>
       </div>
       <div className="px-6 mb-4">
         <div className="flex flex-wrap gap-4 justify-center">
           <div className="flex-1 min-w-[300px] md:min-w-[500px] ">
-            <AllImages />
+            <ProjectTable />
           </div>
         </div>
       </div>

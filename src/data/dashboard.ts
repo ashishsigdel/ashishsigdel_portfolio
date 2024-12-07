@@ -36,3 +36,47 @@ export const messages = [
     message: "Great job on the project!",
   },
 ];
+
+export const profile = [
+  {
+    id: 1,
+    profilePic: "https://img.youtube.com/",
+    createdAt: "2024-10-01 10:16:21",
+    isActive: true,
+  },
+  {
+    id: 2,
+    profilePic: "https://img.youtube.com/",
+    createdAt: "2024-11-01 10:16:21",
+    isActive: false,
+  },
+];
+
+export const projectsMe = [
+  {
+    id: 1,
+    title: "Ecommerce Website",
+    description:
+      "<div>  <p>🤝 <strong>Build a Robust Chat Application in React Native!</strong></p>  <p>In this video, we’ll create a feature-packed chat app with:</p>  <ul>    <li>✅ Secure authentication</li>    <li>✅ Friend search and connection requests</li>    <li>✅ Real-time chat with online and typing status</li>  </ul>  <p>Perfect for learning advanced React Native concepts and enhancing your app development skills! 🚀</p>  <p>#ReactNative #ChatApp #RealTimeChat #AppDevelopment</p></div>",
+    coverPhoto: "https://img.youtube.com/vi/sYcFXWPSEek/maxresdefault.jpg",
+    isActive: true,
+    githubLink: "https://github.com",
+    demoLink: "https://gogole.com",
+    previewPics: [],
+    tags: ["nodejs", "mysql", "nextjs"],
+    createdAt: "2024-10-01 10:16:21",
+  },
+  {
+    id: 2,
+    title: "Chat Application",
+    description:
+      "<div>  <p>🤝 <strong>Build a Robust Chat Application in React Native!</strong></p>  <p>In this video, we’ll create a feature-packed chat app with:</p>  <ul>    <li>✅ Secure authentication</li>    <li>✅ Friend search and connection requests</li>    <li>✅ Real-time chat with online and typing status</li>  </ul>  <p>Perfect for learning advanced React Native concepts and enhancing your app development skills! 🚀</p>  <p>#ReactNative #ChatApp #RealTimeChat #AppDevelopment</p></div>",
+    coverPhoto: "https://img.youtube.com/vi/sYcFXWPSEek/maxresdefault.jpg",
+    isActive: false,
+    githubLink: "https://github.com",
+    demoLink: "https://gogole.com",
+    previewPics: [],
+    tags: ["nodejs", "mysql", "react-native"],
+    createdAt: "2024-07-06 08:14:12",
+  },
+];

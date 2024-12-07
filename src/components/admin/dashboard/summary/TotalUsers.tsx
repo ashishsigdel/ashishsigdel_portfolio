@@ -2,7 +2,7 @@ import { FaUsers } from "react-icons/fa";
 
 export default function TotalUsers() {
   return (
-    <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6 w-full">
+    <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       {/* Header Section */}
       <div className="flex items-center">
         <div className="relative">
