@@ -7,6 +7,7 @@ import FreeLinkForm from "./FreeLinkForm";
 import { useParams } from "next/navigation";
 import PaidLinkForm from "./PaidLinkForm";
 import crown from "@/assets/icons//crown.svg";
+import he from "he";
 
 export default function Project() {
   const params = useParams<{ uuid: string }>();
@@ -51,12 +52,16 @@ export default function Project() {
             className="absolute top-0 left-0 w-full h-full object-cover rounded-lg shadow-lg"
           />
         </div>
-        <div
-          className="text-lg text-gray-700 dark:text-gray-300 mb-8"
-          dangerouslySetInnerHTML={{ __html: mockCreation.description }}
-        />
+        <div className="description-container">
+          <div
+            className="description-content"
+            dangerouslySetInnerHTML={{
+              __html: he.decode(mockCreation.description),
+            }}
+          ></div>
+        </div>
 
-        <div className="mb-8">
+        <div className="mb-5 mt-5">
           {mockCreation.demoLink && (
             <a
               href="#"

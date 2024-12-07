@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { CreateForm } from "@/components/admin/projects";
+import { CreateForm } from "@/components/admin/projects-asprog";
 import { useSearchParams } from "next/navigation";
 
 export default function AddProject() {
@@ -16,14 +16,11 @@ export default function AddProject() {
           <h3 className="font-normal text-[17.5px] leading-5">
             {projectId ? "Update" : "Create"} Project
           </h3>
-          <Link href="/dashboard" className="text-[14px] text-graycolor">
+          <Link href="/" className="text-[14px] text-graycolor">
             Dashboard
           </Link>{" "}
           <span className="text-[14px] text-graycolor">-</span>{" "}
-          <Link
-            href={"/portfolio/project"}
-            className="text-[14px] text-graycolor"
-          >
+          <Link href={"/asprog/project"} className="text-[14px] text-graycolor">
             Projects
           </Link>{" "}
           <span className="text-[14px] text-graycolor">-</span>{" "}

@@ -54,7 +54,7 @@ export const MenuData: Menu[] = [
       {
         id: 2,
         name: "Tags",
-        link: "/portfolio/tags",
+        link: "/asprog/tags",
         icon: FaTag,
       },
     ],

@@ -2,9 +2,9 @@ import React from "react";
 import { AiOutlineCopy } from "react-icons/ai";
 
 interface LinkInformationProps {
-  githubLink: string;
+  resourceLink: string;
   previewLink: string;
-  setGithubLink: React.Dispatch<React.SetStateAction<string>>;
+  setResourceLink: React.Dispatch<React.SetStateAction<string>>;
   setPreviewLink: React.Dispatch<React.SetStateAction<string>>;
   pasteFromClipboard: (
     setLink: React.Dispatch<React.SetStateAction<string>>
@@ -12,9 +12,9 @@ interface LinkInformationProps {
 }
 
 export default function LinkInformation({
-  githubLink,
+  resourceLink,
   previewLink,
-  setGithubLink,
+  setResourceLink,
   setPreviewLink,
   pasteFromClipboard,
 }: LinkInformationProps) {
@@ -30,19 +30,19 @@ export default function LinkInformation({
           <div className="mb-4">
             <div className="flex flex-col gap-x-2">
               <label className="text-sm text-hardgray dark:text-lightgray font-normal">
-                Github
+                Resource
               </label>
               <div className="flex items-center">
                 <input
                   type="text"
-                  value={githubLink}
-                  onChange={(e) => setGithubLink(e.target.value)}
+                  value={resourceLink}
+                  onChange={(e) => setResourceLink(e.target.value)}
                   className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background border-[1px] border-color`}
-                  placeholder="Github Link"
+                  placeholder="Resource Link"
                 />
                 <button
                   className="ml-2"
-                  onClick={() => pasteFromClipboard(setGithubLink)}
+                  onClick={() => pasteFromClipboard(setResourceLink)}
                   title="Paste from clipboard"
                 >
                   <AiOutlineCopy size={20} />
@@ -60,7 +60,7 @@ export default function LinkInformation({
                   type="text"
                   value={previewLink}
                   onChange={(e) => setPreviewLink(e.target.value)}
-                  className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background border-[1px]`}
+                  className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background border-[1px] border-color`}
                   placeholder="Preview Deployed Link"
                 />
                 <button
