@@ -61,13 +61,13 @@ export default function SingleProject({
           {index + 1}
         </td>
         <td scope="row" className="py-4 pr-6 font-semibold whitespace-nowrap">
-          <div className="border-[1px] w-[100px] h-[100px] bg-white border-skin/40 rounded-md flex justify-center images-center">
+          <div className="border-[1px] w-[160px] h-[90px] bg-white border-skin/40 rounded-md flex justify-center images-center">
             <Image
-              width={98}
-              height={98}
+              width={160}
+              height={90}
               alt={"Project"}
               src={project.coverPhoto || LogoImage}
-              className="max-h-[98px] max-w-[98px] object-cover rounded-md"
+              className="max-h-[90px] max-w-[160px] object-cover rounded-md"
               priority={true}
               quality={100}
             />
@@ -99,7 +99,7 @@ export default function SingleProject({
         <td className="px-6 py-4 font-semibold whitespace-nowrap text-graycolor ">
           <div className="flex gap-2 items-center">
             <a
-              href={`products/${project.id}`}
+              href={`project/create?project=${project.id}`}
               className="bg-skin p-2 text-white rounded-sm"
             >
               <BiEdit />

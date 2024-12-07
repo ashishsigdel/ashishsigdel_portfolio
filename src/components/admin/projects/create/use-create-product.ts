@@ -19,7 +19,6 @@ export default function useCreateProduct() {
   const [descriptionError, setDescriptionError] = useState<string>("");
   const [tagsError, setTagsError] = useState<string>("");
 
-  const [longImage, setLongImage] = useState<File | null>(null);
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImages, setPreviewImages] = useState<File[] | []>([]);
 
@@ -76,14 +75,6 @@ export default function useCreateProduct() {
     }
   };
 
-  const validateLongImage = () => {
-    if (longImage === null) {
-      setLongImageError("Long Image is required.");
-    } else {
-      setLongImageError("");
-    }
-  };
-
   const validateCoverImage = () => {
     if (coverImage === null) {
       setCoverImageError("Cover Image is required.");
@@ -98,7 +89,6 @@ export default function useCreateProduct() {
     setTags([]);
     setGithubLink("");
     setPreviewLink("");
-    setLongImage(null);
     setCoverImage(null);
     setPreviewImages([]);
   };
@@ -107,13 +97,11 @@ export default function useCreateProduct() {
     validateTitle();
     validateDescription();
     validateTag();
-    validateLongImage();
     validateCoverImage();
     if (
       title &&
       description &&
       tags &&
-      longImage &&
       coverImage &&
       !titleError &&
       !descriptionError &&
@@ -127,7 +115,6 @@ export default function useCreateProduct() {
         //   title,
         //   description,
         //   tags,
-        //   longImage,
         //   coverImage,
         //   githubLink,
         //   previewLink,
@@ -145,8 +132,6 @@ export default function useCreateProduct() {
   };
 
   return {
-    longImage,
-    setLongImage,
     coverImage,
     setCoverImage,
     previewImages,

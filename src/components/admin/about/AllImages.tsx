@@ -3,11 +3,19 @@ import React, { useState } from "react";
 import { profile } from "@/data/dashboard";
 import SingleLineImage from "./SingleLineImage";
 import { SingleLineLoading } from "@/components/common";
+import { Modal } from "@/components/modal";
+import { AddProfileModal } from "@/components/admin/about";
 
 export default function AllImages() {
   const [loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
   const updateProfileStatus = (id: number, isActive: boolean) => {};
   const removeProfile = (id: number) => {};
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
   return (
     <>
       <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
@@ -18,6 +26,12 @@ export default function AllImages() {
               List of all profile
             </span>
           </div>
+          <button
+            className="py-1.5 px-3 bg-blue-500 text-[16px] font-semibold text-white rounded-md"
+            onClick={openModal}
+          >
+            Add New
+          </button>
         </div>
         <div className="relative overflow-x-auto my-5">
           <table className="w-full text-sm text-left rtl:text-right">
@@ -81,6 +95,9 @@ export default function AllImages() {
             </tbody>
           </table>
         </div>
+        <Modal isOpen={showModal}>
+          <AddProfileModal closeModal={closeModal} setRefresh={setRefresh} />
+        </Modal>
       </div>
     </>
   );

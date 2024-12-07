@@ -8,8 +8,12 @@ import {
   useCreate,
 } from "@/components/admin/projects";
 import { ButtonLoader, Spinner } from "@/components/common";
+import { useSearchParams } from "next/navigation";
 
 export default function CreateForm() {
+  const searchParams = useSearchParams();
+
+  const projectId = searchParams.get("project");
   const {
     title,
     setTitle,
@@ -24,10 +28,6 @@ export default function CreateForm() {
     setGithubLink,
     setPreviewLink,
     pasteFromClipboard,
-    longImage,
-    setLongImage,
-    longImageError,
-    setLongImageError,
     coverImage,
     setCoverImage,
     coverImageError,
@@ -121,7 +121,13 @@ export default function CreateForm() {
           className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
           onClick={handleSubmit}
         >
-          {loading ? <ButtonLoader /> : "Add Project"}
+          {loading ? (
+            <ButtonLoader />
+          ) : projectId ? (
+            "Update Project"
+          ) : (
+            "Create Project"
+          )}
         </button>
       </div>
     </div>
