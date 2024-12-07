@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import Description from "./Description";
 
 interface ProjectInformationProps {
   title: string;
@@ -13,6 +14,7 @@ interface ProjectInformationProps {
   onAddTag: (tag: string) => void;
   onRemoveTag: (tag: string) => void;
   tagsError: string;
+  setDescriptionError: any;
 }
 
 export default function ProjectInformation({
@@ -26,6 +28,7 @@ export default function ProjectInformation({
   onAddTag,
   onRemoveTag,
   tagsError,
+  setDescriptionError,
 }: ProjectInformationProps) {
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -70,27 +73,12 @@ export default function ProjectInformation({
               )}
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-2 mb-4">
-            <div className="flex flex-col gap-x-2">
-              <label className="text-sm text-dark-black dark:text-light-white font-normal">
-                Description *
-              </label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background focus:bg-form-background-focus focus:dark:bg-dark-form-background-focus text-form-color dark:text-dark-form-color focus:outline-none border-[1px] ${
-                  descriptionError ? "border-danger" : "border-color"
-                }`}
-                placeholder="Type project description"
-                required
-              />
-              {descriptionError && (
-                <span className="text-danger text-[12px] font-normal tracking-[0] mt-1 italic leading-[1] w-full">
-                  Description is required
-                </span>
-              )}
-            </div>
-          </div>
+          <Description
+            description={description}
+            descriptionError={descriptionError}
+            setDescriptionError={setDescriptionError}
+            setDescription={setDescription}
+          />
 
           {/* Tags Section */}
           <div className="grid grid-cols-1 gap-2 mb-4">

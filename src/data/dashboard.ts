@@ -6,6 +6,7 @@ export const messages = [
     company: "Tech Corp",
     message:
       "Looking forward to working with you! Can you provide more details about your services? Please send me the latest updates on your offerings. I have a question about your pricing.",
+    createdAt: "3748334",
   },
   {
     id: 2,
@@ -13,6 +14,7 @@ export const messages = [
     email: "janesmith@example.com",
     company: null,
     message: "Can you provide more details about your services?",
+    createdAt: "3748334",
   },
   {
     id: 3,
@@ -20,6 +22,7 @@ export const messages = [
     email: "alicej@example.com",
     company: "Creative Minds",
     message: "I have a question about your pricing.",
+    createdAt: "3748334",
   },
   {
     id: 4,
@@ -27,6 +30,7 @@ export const messages = [
     email: "robertbrown@example.com",
     company: null,
     message: "Please send me the latest updates on your offerings.",
+    createdAt: "3748334",
   },
   {
     id: 5,
@@ -34,6 +38,7 @@ export const messages = [
     email: "emilydavis@example.com",
     company: "Innovate Solutions",
     message: "Great job on the project!",
+    createdAt: "3748334",
   },
 ];
 

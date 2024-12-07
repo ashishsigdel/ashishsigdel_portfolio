@@ -1,37 +1,26 @@
 "use client";
 import React, { useState } from "react";
-import { profile } from "@/data/dashboard";
-import SingleLineImage from "./SingleLineImage";
+import { messages } from "@/data/dashboard";
+import SingleLineImage from "./SingleInbox";
 import { Pagination, SingleLineLoading } from "@/components/common";
-import { Modal } from "@/components/modal";
-import { AddProfileModal } from "@/components/admin/about";
+import SingleInbox from "./SingleInbox";
 
-export default function AllImages() {
+export default function AllInbox() {
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState<boolean>(false);
   const updateProfileStatus = (id: number, isActive: boolean) => {};
   const removeProfile = (id: number) => {};
 
-  const [showModal, setShowModal] = useState<boolean>(false);
-
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
   return (
     <>
       <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
-            <span className="text-[17px] font-semibold">All Images</span>
+            <span className="text-[17px] font-semibold">Inbox</span>
             <span className="text-[14px] text-gray-500">
-              List of all profile
+              List of all messages
             </span>
           </div>
-          <button
-            className="py-1.5 px-3 bg-blue-500 text-[16px] font-semibold text-white rounded-md"
-            onClick={openModal}
-          >
-            Add New
-          </button>
         </div>
         <div className="relative overflow-x-auto my-5">
           <table className="w-full text-sm text-left rtl:text-right">
@@ -41,13 +30,13 @@ export default function AllImages() {
                   SN
                 </th>
                 <th scope="col" className="pr-6 py-3 whitespace-nowrap">
-                  Profile
+                  Name
                 </th>
                 <th scope="col" className="pr-6 py-3 whitespace-nowrap">
-                  Status
+                  Email
                 </th>
                 <th scope="col" className="pr-6 py-3 whitespace-nowrap">
-                  Uploaded at
+                  Send At
                 </th>
                 <th scope="col" className="pr-6 py-3 whitespace-nowrap">
                   Action
@@ -69,7 +58,7 @@ export default function AllImages() {
                     </td>
                   </tr>
                 </>
-              ) : profile.length === 0 ? (
+              ) : messages.length === 0 ? (
                 <tr>
                   <td
                     scope="row"
@@ -81,12 +70,12 @@ export default function AllImages() {
                 </tr>
               ) : (
                 <>
-                  {profile.map((image: any, index) => (
-                    <SingleLineImage
+                  {messages.map((message: any, index) => (
+                    <SingleInbox
                       updateProfileStatus={updateProfileStatus}
-                      image={image}
+                      message={message}
                       index={index}
-                      key={image.id}
+                      key={message.id}
                       removeProfile={removeProfile}
                     />
                   ))}
@@ -100,9 +89,6 @@ export default function AllImages() {
           currentPage={3}
           handlePageChange={() => console.log("page change")}
         />
-        <Modal isOpen={showModal}>
-          <AddProfileModal closeModal={closeModal} setRefresh={setRefresh} />
-        </Modal>
       </div>
     </>
   );

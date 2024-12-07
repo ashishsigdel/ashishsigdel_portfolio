@@ -45,8 +45,8 @@ export default function CreateForm() {
 
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full border border-color">
-      <div className="hidden xl:flex xl:flex-row">
-        <div className="w-[65%] p-2">
+      <div className="w-full flex flex-col xl:flex-row">
+        <div className="w-full xl:w-[65%] p-2">
           <ProjectInformation
             tags={tags}
             title={title}
@@ -68,43 +68,7 @@ export default function CreateForm() {
             pasteFromClipboard={pasteFromClipboard}
           />
         </div>
-        <div className="w-[35%] p-2">
-          <CoverImage
-            coverImage={coverImage}
-            setCoverImage={setCoverImage}
-            setCoverImageError={setCoverImageError}
-            coverImageError={coverImageError}
-          />
-          <PriceInformation
-            price={price}
-            actualPrice={actualPrice}
-            setPrice={setPrice}
-            setActualPrice={setActualPrice}
-          />
-        </div>
-      </div>
-      <div className="flex flex-col xl:hidden">
-        <div className="p-2">
-          <ProjectInformation
-            tags={tags}
-            title={title}
-            setTitle={setTitle}
-            titleError={titleError}
-            description={description}
-            descriptionError={descriptionError}
-            setDescription={setDescription}
-            onAddTag={handleAddTag}
-            onRemoveTag={handleRemoveTag}
-            tagsError={tagsError}
-            setDescriptionError={setDescriptionError}
-          />
-          <LinkInformation
-            resourceLink={resourceLink}
-            previewLink={previewLink}
-            setResourceLink={setResourceLink}
-            setPreviewLink={setPreviewLink}
-            pasteFromClipboard={pasteFromClipboard}
-          />
+        <div className="w-full xl:w-[35%] p-2">
           <CoverImage
             coverImage={coverImage}
             setCoverImage={setCoverImage}

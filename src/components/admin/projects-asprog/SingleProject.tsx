@@ -77,7 +77,7 @@ export default function SingleProject({
           scope="row"
           className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor"
         >
-          <p> {project.title}</p>
+          <p className="whitespace-pre-wrap"> {project.title}</p>
           <p className="text-skin">Rs. $5</p>
         </td>
         <td

@@ -13,6 +13,9 @@
   }
 }
 
+::-webkit-scrollbar:vertical {
+  display: none;
+}
 body {
   @apply font-poppins;
 }
