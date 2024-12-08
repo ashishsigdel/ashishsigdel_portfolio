@@ -28,7 +28,7 @@ export default function AddTag({ closeModal, tag, setRefresh }: Props) {
     }
   };
   return (
-    <div className="relative z-[50] bg-white dark:bg-black border border-color rounded-lg shadow-3xl w-full max-w-3xl mt-100">
+    <div className="relative z-[50] bg-white dark:bg-black border border-color rounded-lg shadow-3xl w-full max-w-xl mt-100">
       <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
           Add Tag

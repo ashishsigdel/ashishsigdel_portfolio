@@ -1,34 +1,23 @@
 "use client";
 import React, { useState } from "react";
-import { tagAdmin } from "@/data/tag";
-import { AddTag, SingleTag } from "@/components/admin/tags";
+import { SingleUser } from "@/components/admin/users";
 import { Pagination, SingleLineLoading } from "@/components/common";
-import { Modal } from "@/components/modal";
+import { Users } from "@/data/users";
 
 export default function TagTable() {
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const updateProfileStatus = (id: number, isActive: boolean) => {};
-  const removeProfile = (id: number) => {};
+  const updateUserStatus = (id: number, isActive: boolean) => {};
+  const removeUser = (id: number) => {};
 
-  const [showModal, setShowModal] = useState<boolean>(false);
-
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
   return (
     <>
       <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
-            <span className="text-[17px] font-semibold">All Tags</span>
-            <span className="text-[14px] text-gray-500">List of all tags</span>
+            <span className="text-[17px] font-semibold">All Users</span>
+            <span className="text-[14px] text-gray-500">List of all users</span>
           </div>
-          <button
-            className="py-1.5 px-3 bg-blue-500 text-[16px] font-semibold text-white rounded-md"
-            onClick={openModal}
-          >
-            Add New
-          </button>
         </div>
         <div className="relative overflow-x-auto my-5">
           <table className="w-full text-sm text-left rtl:text-right">
@@ -41,7 +30,10 @@ export default function TagTable() {
                   Name
                 </th>
                 <th scope="col" className="pr-6 py-3 whitespace-nowrap">
-                  Status
+                  Email
+                </th>
+                <th scope="col" className="pr-6 py-3 whitespace-nowrap">
+                  Role
                 </th>
                 <th scope="col" className="pr-6 py-3 whitespace-nowrap">
                   Action
@@ -63,7 +55,7 @@ export default function TagTable() {
                     </td>
                   </tr>
                 </>
-              ) : tagAdmin.length === 0 ? (
+              ) : Users.length === 0 ? (
                 <tr>
                   <td
                     scope="row"
@@ -75,13 +67,13 @@ export default function TagTable() {
                 </tr>
               ) : (
                 <>
-                  {tagAdmin.map((tag: any, index) => (
-                    <SingleTag
-                      updateProfileStatus={updateProfileStatus}
-                      tag={tag}
+                  {Users.map((user: any, index) => (
+                    <SingleUser
+                      updateUserStatus={updateUserStatus}
+                      user={user}
                       index={index}
-                      key={tag.id}
-                      removeProfile={removeProfile}
+                      key={user.id}
+                      removeUser={removeUser}
                     />
                   ))}
                 </>
@@ -94,9 +86,6 @@ export default function TagTable() {
           currentPage={3}
           handlePageChange={() => console.log("page change")}
         />
-        <Modal isOpen={showModal}>
-          <AddTag closeModal={closeModal} setRefresh={setRefresh} />
-        </Modal>
       </div>
     </>
   );
