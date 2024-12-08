@@ -52,7 +52,7 @@ export default function Header() {
       </header>
       {openSidebar && (
         <>
-          <div className="flex absolute top-0 left-0 md:hidden bg-black">
+          <div className="fixed top-0 left-0 md:hidden z-[999]">
             <Sidebar />
           </div>
           <div
