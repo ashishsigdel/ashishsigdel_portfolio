@@ -34,8 +34,7 @@ export default function ProfileMenuCard() {
             <ThemeToggle />
           </li>
           <li className="text-hardgray dark:text-lightgray hover:text-bluecolor text-[14px] font-[600] flex justify-between">
-            <span>Language</span>
-            <span>English</span>
+            <Link href={"/settings"}>Settings</Link>
           </li>
 
           <li
