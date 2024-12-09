@@ -1,10 +1,10 @@
-import { AuthSection } from "@/components/auth";
+import { VerifyOtp } from "@/components/auth";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <AuthSection />
+      <VerifyOtp />
     </div>
   );
 }
