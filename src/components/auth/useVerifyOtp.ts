@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import toast from "react-hot-toast";
 
+const BASE_DOMAIN = process.env.NEXT_PUBLIC_BASE_DOMAIN;
+const NODE_ENV = process.env.NODE_ENV;
+
 export default function useVerifyOtp() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -125,8 +128,18 @@ export default function useVerifyOtp() {
     if (!otpError) {
       setIsLoading(true);
       try {
-        toast.success("OTP verified!");
-        router.push("https://admin.ashishsigdel.com.np");
+        if (otp === "153490") {
+          toast.success("OTP verified!");
+          router.push(
+            `${
+              NODE_ENV === "development" ? "http" : "https"
+            }://admin.${BASE_DOMAIN}`
+          );
+        } else {
+          toast.error("Invalid OTP!");
+          resetOtpInput();
+          return;
+        }
       } catch (error: any) {
         if (
           error.response &&
