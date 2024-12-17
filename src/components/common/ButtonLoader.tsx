@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ButtonLoader() {
   return (
-    <button className="gi-btn-1 p-[8px] bg-skin text-[#fff] border-[0] transition-all duration-[0.3s] ease-in-out overflow-hidden text-center text-[14px] font-semibold relative rounded-full max-[767px]:mt-[15px] hover:bg-skin">
+    <button className="p-[8px] bg-skin text-[#fff] border-[0] transition-all duration-[0.3s] ease-in-out overflow-hidden text-center text-[14px] font-semibold relative rounded-full max-[767px]:mt-[15px] hover:bg-skin">
       <svg
         aria-hidden="true"
         className="w-[21px] h-[21px] text-gray-200 animate-spin dark:text-gray-600 fill-gray-200"

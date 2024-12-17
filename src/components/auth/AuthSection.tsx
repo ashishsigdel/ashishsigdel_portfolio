@@ -9,15 +9,15 @@ import useLogin from "./useLogin";
 
 export default function AuthSection() {
   const {
-    email,
+    username,
     password,
     isLoading,
     showPassword,
-    emailError,
+    usernameError,
     passwordError,
     handleChange,
     togglePasswordVisibility,
-    validateEmail,
+    validateUsername,
     validatePassword,
     onSubmit,
     redirectIfAuthenticate,
@@ -41,16 +41,16 @@ export default function AuthSection() {
               </label>
               <input
                 type="text"
-                name="email"
-                value={email}
+                name="username"
+                value={username}
                 onChange={handleChange}
                 className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background  text-gray-800 focus:outline-none border-[1px] ${
-                  emailError ? "border-danger" : "border-color"
+                  usernameError ? "border-danger" : "border-color"
                 }`}
                 placeholder="Type username"
-                onBlur={validateEmail}
+                onBlur={validateUsername}
               />
-              {emailError && (
+              {usernameError && (
                 <span className="text-danger text-[12px] font-normal tracking-[0] mt-1 italic leading-[1] w-full">
                   Username is required
                 </span>
@@ -98,9 +98,7 @@ export default function AuthSection() {
 
             <div className="mb-6 w-full text-center">
               {isLoading ? (
-                <button className="bg-skin w-full py-2.5 rounded-lg text-white font-semibold">
-                  <ButtonLoader />
-                </button>
+                <ButtonLoader />
               ) : (
                 <button className="bg-skin w-full py-2.5 rounded-lg text-white font-semibold">
                   Sign In

@@ -1,28 +1,30 @@
 "use client";
-// import { encryptAccessToken } from "@/helper/Helper";
-// import { setAuth } from "@/redux/features/authSlice";
+import { setCredientials } from "@/redux/features/guestSlice";
+import { encryptAccessToken } from "@/helper/Helper";
+import { setAuth } from "@/redux/features/authSlice";
 import { setMessage } from "@/redux/features/popupMessageSlice";
-// import { logout, logoutAll } from "@/services/authService";
-// import { login } from "@/services/guestService";
-// import { Login } from "@/types/guest";
+import { login } from "@/services/loginServices";
+import { userLogin } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
+const protocal = process.env.NODE_ENV === "development" ? "http" : "https";
+
 export default function useLogin() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState<any>({
-    email: "",
+  const [formData, setFormData] = useState<userLogin>({
+    username: "",
     password: "",
   });
 
-  const { email, password } = formData;
+  const { username, password } = formData;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,11 +41,11 @@ export default function useLogin() {
     setShowPassword(!showPassword);
   };
 
-  const validateEmail = () => {
-    if (!email) {
-      setEmailError("Email is required!");
+  const validateUsername = () => {
+    if (!username) {
+      setUsernameError("Username is required!");
     } else {
-      setEmailError(null);
+      setUsernameError(null);
     }
   };
 
@@ -60,70 +62,52 @@ export default function useLogin() {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    validateEmail();
+    validateUsername();
     validatePassword();
 
-    if (email && password && !emailError && !passwordError) {
+    if (username && password && !usernameError && !passwordError) {
       setIsLoading(true);
       try {
         setIsLoading(true);
-        // const response = await login({
-        //   email,
-        //   password,
-        // });
 
-        // const data = response.data;
+        const response = await login({
+          username,
+          password,
+        });
 
-        // const accessToken: string = data.accessToken;
-        // const encryptedAccessToken: string = encryptAccessToken(accessToken);
+        const data = response.data;
 
-        // const user = data.user;
-        // if (user.role === "user") {
-        //   dispatch(
-        //     setMessage({
-        //       message: "Unauthorized access!",
-        //       type: "error",
-        //       showOn: "login",
-        //     })
-        //   );
-        //   throw new Error("Unauthorized access");
-        // }
-        // const userData = JSON.stringify(user);
-        // localStorage.setItem("accessToken", encryptedAccessToken);
-        // localStorage.setItem("user", userData);
-
-        // dispatch(setAuth(data.user));
-        toast.success("Login Successful.");
-
-        router.push("/verify-otp");
-      } catch (error: any) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status < 500
-        ) {
-          if (error.response.data.errors) {
-            const errors = error.response.data.errors;
-            errors.map((error: any) => {
-              const key = Object.keys(error)[0];
-              const value = error[key];
-              if (key === "email") {
-                setEmailError(value);
-              }
-              if (key === "password") {
-                setPasswordError(value);
-              }
-            });
-          }
+        if (data.twoFactorEnable) {
+          dispatch(
+            setCredientials({
+              email: username,
+              password: password,
+            })
+          );
+          toast.success("Otp Sent.");
+          router.push("/verify-otp");
+          return;
         }
-        console.log(error);
-        dispatch(
-          setMessage({
-            message: error.response.data?.message || "Something went wrong",
-            type: "error",
-            showOn: "login",
-          })
+
+        const accessToken: string = data.accessToken;
+        const encryptedAccessToken: string = encryptAccessToken(accessToken);
+
+        const user = data.user;
+        if (user.role === "user") {
+          toast.error("Unauthorized access");
+          throw new Error("Unauthorized access");
+        }
+        const userData = JSON.stringify(user);
+        localStorage.setItem("accessToken", encryptedAccessToken);
+        localStorage.setItem("user", userData);
+
+        dispatch(setAuth(data.user));
+        toast.success("Login Successful.");
+        router.push(
+          `${protocal}://admin.${process.env.NEXT_PUBLIC_BASE_DOMAIN}`
         );
+      } catch (error: any) {
+        toast.error(error?.response?.data?.message || "Something went wrong");
       } finally {
         setIsLoading(false);
       }
@@ -134,53 +118,23 @@ export default function useLogin() {
     const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
-      router.push("/dashboard");
+      router.push(`${protocal}://admin.${process.env.NEXT_PUBLIC_BASE_DOMAIN}`);
     }
   }, [router]);
 
-  const handleLogout = async () => {
-    try {
-      setIsLoading(true);
-      //   const response = await logout();
-      //   localStorage.removeItem("accessToken");
-      //   localStorage.removeItem("user");
-      //   dispatch(setAuth(null));
-    } catch (error: any) {
-    } finally {
-      router.push("/");
-      setIsLoading(false);
-    }
-  };
-
-  const handleLogoutAll = async () => {
-    try {
-      //   const response = await logoutAll();
-      //   setIsLoading(true);
-      //   localStorage.removeItem("accessToken");
-      //   localStorage.removeItem("user");
-      //   dispatch(setAuth(null));
-    } catch (error: any) {
-    } finally {
-      router.push("/");
-      setIsLoading(false);
-    }
-  };
-
   return {
-    email,
+    username,
     password,
     formData,
     showPassword,
-    emailError,
+    usernameError,
     passwordError,
     isLoading,
     redirectIfAuthenticate,
     handleChange,
     togglePasswordVisibility,
-    validateEmail,
+    validateUsername,
     validatePassword,
     onSubmit,
-    handleLogout,
-    handleLogoutAll,
   };
 }

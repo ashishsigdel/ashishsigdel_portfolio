@@ -12,6 +12,8 @@ const NODE_ENV = process.env.NODE_ENV;
 export default function useVerifyOtp() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const email = useSelector((state: RootState) => state.guest.email);
+  const password = useSelector((state: RootState) => state.guest.password);
 
   const [formData, setFormData] = useState<any>({
     otp: "",
