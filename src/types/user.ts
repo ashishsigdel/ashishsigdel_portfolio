@@ -3,6 +3,12 @@ export type userLogin = {
   password: string;
 };
 
+export type userLoginTwoFactor = {
+  otp: string;
+  username: string;
+  password: string;
+};
+
 export type User = {
   id: number;
   email: string;

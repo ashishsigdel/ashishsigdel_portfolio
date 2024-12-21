@@ -56,7 +56,7 @@ export default function AuthSection() {
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-x-2 mb-4">
+            <div className="flex flex-col gap-x-2 mb-4 relative">
               <label className="text-sm text-dark-black/80 font-normal">
                 Password
               </label>
@@ -65,13 +65,14 @@ export default function AuthSection() {
                 name="password"
                 value={password ?? ""}
                 onChange={handleChange}
-                className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background  text-gray-800 focus:outline-none border-[1px] ${
+                className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background text-gray-800 focus:outline-none border-[1px] ${
                   passwordError ? "border-danger" : "border-color"
                 }`}
-                placeholder="Type username"
+                placeholder="Type password"
                 onBlur={validatePassword}
               />
-              <div className="absolute inset-y-0 right-0 top-0 pr-3 flex justify-center items-center text-sm h-full">
+
+              <div className="absolute inset-y-0 top-2 right-0 pr-3 flex items-center h-full">
                 <button
                   type="button"
                   className="text-gray-500 hover:text-gray-700"
@@ -89,6 +90,7 @@ export default function AuthSection() {
                   )}
                 </button>
               </div>
+
               {passwordError && (
                 <span className="text-danger text-[12px] font-normal tracking-[0] mt-1 italic leading-[1] w-full">
                   Password is required

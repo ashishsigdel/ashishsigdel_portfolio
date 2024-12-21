@@ -85,7 +85,7 @@ export default function useLogin() {
             })
           );
           toast.success("Otp Sent.");
-          router.push("/verify-otp");
+          router.push("/auth/verify-otp");
           return;
         }
 
@@ -102,10 +102,8 @@ export default function useLogin() {
         localStorage.setItem("user", userData);
 
         dispatch(setAuth(data.user));
-        toast.success("Login Successful.");
-        router.push(
-          `${protocal}://admin.${process.env.NEXT_PUBLIC_BASE_DOMAIN}`
-        );
+        toast.success(`Login as ${user.role}.`);
+        router.push("/");
       } catch (error: any) {
         toast.error(error?.response?.data?.message || "Something went wrong");
       } finally {
@@ -116,7 +114,6 @@ export default function useLogin() {
 
   const redirectIfAuthenticate = useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-
     if (accessToken) {
       router.push(`${protocal}://admin.${process.env.NEXT_PUBLIC_BASE_DOMAIN}`);
     }

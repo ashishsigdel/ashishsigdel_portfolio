@@ -14,9 +14,12 @@ const guestSlice = createSlice({
   name: "guest",
   initialState,
   reducers: {
-    setCredientials: (state, action) => {
-      state.email = action.payload;
-      state.password = action.payload;
+    setCredientials: (
+      state,
+      action: PayloadAction<{ email: string; password: string }>
+    ) => {
+      state.email = action.payload.email;
+      state.password = action.payload.password;
     },
 
     resetGuest: (state) => {

@@ -5,6 +5,9 @@ import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import toast from "react-hot-toast";
+import { loginTwoFactor } from "@/services/loginServices";
+import { setAuth } from "@/redux/features/authSlice";
+import { encryptAccessToken } from "@/helper/Helper";
 
 const BASE_DOMAIN = process.env.NEXT_PUBLIC_BASE_DOMAIN;
 const NODE_ENV = process.env.NODE_ENV;
@@ -12,8 +15,7 @@ const NODE_ENV = process.env.NODE_ENV;
 export default function useVerifyOtp() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const email = useSelector((state: RootState) => state.guest.email);
-  const password = useSelector((state: RootState) => state.guest.password);
+  const guest = useSelector((state: RootState) => state.guest);
 
   const [formData, setFormData] = useState<any>({
     otp: "",
@@ -130,50 +132,39 @@ export default function useVerifyOtp() {
     if (!otpError) {
       setIsLoading(true);
       try {
-        if (otp === "153490") {
-          toast.success("OTP verified!");
-          router.push(
-            `${
-              NODE_ENV === "development" ? "http" : "https"
-            }://admin.${BASE_DOMAIN}`
-          );
-        } else {
-          toast.error("Invalid OTP!");
-          resetOtpInput();
+        setIsLoading(true);
+
+        if (!guest.email || !guest.password) {
+          toast.error("Unable to verify.");
+          router.push("/auth");
           return;
         }
+
+        const response = await loginTwoFactor({
+          username: guest.email,
+          password: guest.password,
+          otp: stringOTP,
+        });
+
+        const data = response.data;
+
+        const accessToken: string = data.accessToken;
+        const encryptedAccessToken: string = encryptAccessToken(accessToken);
+
+        const user = data.user;
+        if (user.role === "user") {
+          toast.error("Unauthorized access");
+          throw new Error("Unauthorized access");
+        }
+        const userData = JSON.stringify(user);
+        localStorage.setItem("accessToken", encryptedAccessToken);
+        localStorage.setItem("user", userData);
+
+        dispatch(setAuth(data.user));
+        toast.success(`Login as ${user.role}.`);
+        router.push("/");
       } catch (error: any) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status < 500
-        ) {
-          if (error.response.data.errors) {
-            const errors = error.response.data.errors;
-            errors.map((error: any) => {
-              const key = Object.keys(error)[0];
-              const value = error[key];
-              if (key === "otp") {
-                setOtpError(value);
-              }
-            });
-          }
-          dispatch(
-            setMessage({
-              message: error.response.data.message,
-              type: "error",
-              showOn: "verify-otp",
-            })
-          );
-          return;
-        }
-        dispatch(
-          setMessage({
-            message: "Something went wrong",
-            type: "error",
-            showOn: "verify-otp",
-          })
-        );
+        toast.error(error?.response?.data?.message || "Something went wrong");
       } finally {
         setIsLoading(false);
       }
