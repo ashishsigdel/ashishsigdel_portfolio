@@ -78,7 +78,20 @@ export default function SingleProject({
           className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor"
         >
           <p className="whitespace-pre-wrap"> {project.title}</p>
-          <p className="text-skin">Rs. $5</p>
+          <p className="text-skin">
+            {project.actualPrice ? (
+              <>
+                <span className="line-through text-gray-500">
+                  Rs. {project.price}
+                </span>
+                <span className="ml-2 font-semibold">
+                  Rs. {project.actualPrice}
+                </span>
+              </>
+            ) : (
+              <span>Rs. {project.price}</span>
+            )}
+          </p>
         </td>
         <td
           scope="row"
@@ -92,7 +105,7 @@ export default function SingleProject({
         >
           <Switch
             id={project.id}
-            status={project.isActive}
+            status={project.isPublic}
             changeStatus={changeStatus}
           />
         </td>

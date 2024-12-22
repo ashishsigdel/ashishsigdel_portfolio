@@ -4,15 +4,16 @@ import userImage from "@/assets/image-placeholder.png";
 // import { create } from "@/services/projectService";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { create } from "@/services/asprog/projectServices";
 
 export default function useCreateProduct() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
-  const [tags, setTags] = useState<string[]>([]);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
   const [resourceLink, setResourceLink] = useState<string>("");
-  const [previewLink, setPreviewLink] = useState<string>("");
+  const [demoLink, setDemoLink] = useState<string>("");
   const [price, setPrice] = useState<number | undefined>(undefined);
   const [actualPrice, setActualPrice] = useState<number | undefined>(undefined);
 
@@ -23,8 +24,6 @@ export default function useCreateProduct() {
 
   const [coverImage, setCoverImage] = useState<File | null>(null);
 
-  const [imageError, setImageError] = useState<string>("");
-  const [longImageError, setLongImageError] = useState<string | null>(null);
   const [coverImageError, setCoverImageError] = useState<string | null>(null);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -86,7 +85,7 @@ export default function useCreateProduct() {
     setDescription("");
     setTags([]);
     setResourceLink("");
-    setPreviewLink("");
+    setDemoLink("");
     setCoverImage(null);
   };
 
@@ -103,25 +102,25 @@ export default function useCreateProduct() {
       !titleError &&
       !descriptionError &&
       !tagsError &&
-      !longImageError &&
       !coverImageError
     ) {
       setLoading(true);
       console.log(description);
 
       try {
-        // const response = await create({
-        //   title,
-        //   description,
-        //   tags,
-        //   coverImage,
-        //   resourceLink,
-        //   previewLink,
-        //   previewImages,
-        // });
-        // resetForm();
+        const response = await create({
+          title,
+          description,
+          tags,
+          resourceLink,
+          demoLink,
+          price: price,
+          actualPrice: actualPrice,
+          coverImage,
+        });
+        resetForm();
         toast.success("Project Created Successfully!");
-        // router.push("/project");
+        router.push("/project");
       } catch (error: any) {
         toast.error(error.response?.data?.message || "Failed to save project");
       } finally {
@@ -144,16 +143,14 @@ export default function useCreateProduct() {
     setDescriptionError,
     tagsError,
     setTagsError,
-    longImageError,
-    setLongImageError,
     handleAddTag,
     handleRemoveTag,
     isOpen,
     fileInputRef,
     resourceLink,
-    previewLink,
+    demoLink,
     setResourceLink,
-    setPreviewLink,
+    setDemoLink,
     price,
     actualPrice,
     setPrice,

@@ -24,9 +24,9 @@ export default function CreateForm() {
     handleRemoveTag,
     handleSubmit,
     resourceLink,
-    previewLink,
+    demoLink,
     setResourceLink,
-    setPreviewLink,
+    setDemoLink,
     pasteFromClipboard,
     coverImage,
     setCoverImage,
@@ -62,9 +62,9 @@ export default function CreateForm() {
           />
           <LinkInformation
             resourceLink={resourceLink}
-            previewLink={previewLink}
+            previewLink={demoLink}
             setResourceLink={setResourceLink}
-            setPreviewLink={setPreviewLink}
+            setPreviewLink={setDemoLink}
             pasteFromClipboard={pasteFromClipboard}
           />
         </div>
@@ -84,18 +84,16 @@ export default function CreateForm() {
         </div>
       </div>
       <div className="w-full text-end">
-        <button
-          className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
-          onClick={handleSubmit}
-        >
-          {loading ? (
-            <ButtonLoader />
-          ) : projectId ? (
-            "Update Project"
-          ) : (
-            "Create Project"
-          )}
-        </button>
+        {loading ? (
+          <ButtonLoader />
+        ) : (
+          <button
+            className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
+            onClick={handleSubmit}
+          >
+            {projectId ? "Update Project" : "Create Project"}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  // eslint-disable-next-line no-unused-vars
   handlePageChange: (page: number) => void;
 }
 

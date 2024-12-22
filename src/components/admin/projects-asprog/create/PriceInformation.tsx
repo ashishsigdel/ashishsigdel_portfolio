@@ -31,7 +31,7 @@ export default function PriceInformation({
               <div className="flex items-center">
                 <input
                   type="text"
-                  value={price}
+                  value={price ? price : ""}
                   onChange={(e) => setPrice(e.target.value)}
                   className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background border-[1px] border-color`}
                   placeholder="$"
@@ -47,7 +47,7 @@ export default function PriceInformation({
               <div className="flex items-center">
                 <input
                   type="text"
-                  value={actualPrice}
+                  value={actualPrice ? actualPrice : ""}
                   onChange={(e) => setActualPrice(e.target.value)}
                   className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background border-[1px] border-color`}
                   placeholder="$"

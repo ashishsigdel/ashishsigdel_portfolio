@@ -1,15 +1,35 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { projectsMe } from "@/data/dashboard";
 import { SingleProject } from "@/components/admin/projects-asprog";
 import { Pagination, SingleLineLoading } from "@/components/common";
 import Search from "@/components/common/Search";
 import Link from "next/link";
+import { ProjectTableProps } from "@/types/asprog";
+import useProject from "./useProject";
 
 export default function ProjectTable() {
-  const [loading, setLoading] = useState(false);
   const updateProjectStatus = (id: number, isActive: boolean) => {};
   const removeProject = (id: number) => {};
+  const {
+    projects,
+    fetchProjects,
+    currentPage,
+    setCurrentPage,
+    totalPage,
+    setTotalPage,
+    loading,
+  } = useProject();
+
+  useEffect(() => {
+    fetchProjects(currentPage);
+  }, []);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    fetchProjects(page);
+  };
+
   return (
     <>
       <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
@@ -64,7 +84,7 @@ export default function ProjectTable() {
                     </td>
                   </tr>
                 </>
-              ) : projectsMe.length === 0 ? (
+              ) : projects.length === 0 ? (
                 <tr>
                   <td
                     scope="row"
@@ -76,7 +96,7 @@ export default function ProjectTable() {
                 </tr>
               ) : (
                 <>
-                  {projectsMe.map((project: any, index) => (
+                  {projects.map((project, index) => (
                     <SingleProject
                       updateProjectStatus={updateProjectStatus}
                       project={project}
@@ -91,9 +111,9 @@ export default function ProjectTable() {
           </table>
         </div>
         <Pagination
-          totalPages={5}
-          currentPage={3}
-          handlePageChange={() => console.log("page change")}
+          totalPages={totalPage}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
         />
       </div>
     </>

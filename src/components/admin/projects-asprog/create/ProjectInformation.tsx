@@ -59,6 +59,7 @@ export default function ProjectInformation({
               <input
                 type="text"
                 value={title}
+                name="title"
                 onChange={(e) => setTitle(e.target.value)}
                 className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background focus:bg-form-background-focus focus:dark:bg-dark-form-background-focus text-form-color dark:text-dark-form-color focus:outline-none border-[1px] ${
                   titleError ? "border-danger" : "border-color"
@@ -107,6 +108,7 @@ export default function ProjectInformation({
               <input
                 type="text"
                 value={inputValue}
+                name="tags"
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleTagKeyDown}
                 placeholder="Type and press Enter to add tags"
