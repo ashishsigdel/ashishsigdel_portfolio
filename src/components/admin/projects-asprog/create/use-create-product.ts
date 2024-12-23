@@ -1,21 +1,22 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import userImage from "@/assets/image-placeholder.png";
 // import { create } from "@/services/projectService";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
-import { create } from "@/services/asprog/projectServices";
+import { create, fetchUnique } from "@/services/asprog/projectServices";
 
 export default function useCreateProduct() {
   const router = useRouter();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
   const [resourceLink, setResourceLink] = useState<string>("");
   const [demoLink, setDemoLink] = useState<string>("");
-  const [price, setPrice] = useState<number | undefined>(undefined);
-  const [actualPrice, setActualPrice] = useState<number | undefined>(undefined);
+  const [price, setPrice] = useState<string>("");
+  const [actualPrice, setActualPrice] = useState<string>("");
 
   const [titleError, setTitleError] = useState<string>("");
 
@@ -23,6 +24,9 @@ export default function useCreateProduct() {
   const [tagsError, setTagsError] = useState<string>("");
 
   const [coverImage, setCoverImage] = useState<File | null>(null);
+
+  const [coverImageUrlFromServer, setCoverImageUrlFromServer] =
+    useState<string>("");
 
   const [coverImageError, setCoverImageError] = useState<string | null>(null);
 
@@ -105,7 +109,6 @@ export default function useCreateProduct() {
       !coverImageError
     ) {
       setLoading(true);
-      console.log(description);
 
       try {
         const response = await create({
@@ -120,7 +123,7 @@ export default function useCreateProduct() {
         });
         resetForm();
         toast.success("Project Created Successfully!");
-        router.push("/project");
+        router.push("/asprog/project");
       } catch (error: any) {
         toast.error(error.response?.data?.message || "Failed to save project");
       } finally {
@@ -129,9 +132,41 @@ export default function useCreateProduct() {
     }
   };
 
+  const fetchProject = async (id: string) => {
+    try {
+      setLoading(true);
+      const response = await fetchUnique({ uId: id });
+      setTitle(response.data.title);
+      setDescription(response.data.description);
+      setCoverImageUrlFromServer(response.data.coverPhoto);
+
+      if (response.data.resourceLink) {
+        setResourceLink(response.data.resourceLink);
+      }
+      if (response.data.demoLink) {
+        setDemoLink(response.data.demoLink);
+      }
+
+      const tagsArray: [] = response.data.tags.split(",");
+      setTags(tagsArray);
+
+      if (response.data.price) {
+        setPrice(response.data.price);
+      }
+      if (response.data.actualPrice) {
+        setActualPrice(response.data.actualPrice);
+      }
+    } catch (error: any) {
+      toast.error("Failed to fetch project");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     coverImage,
     setCoverImage,
+    coverImageUrlFromServer,
     title,
     setTitle,
     description,
@@ -160,5 +195,6 @@ export default function useCreateProduct() {
     coverImageError,
     setCoverImageError,
     loading,
+    fetchProject,
   };
 }

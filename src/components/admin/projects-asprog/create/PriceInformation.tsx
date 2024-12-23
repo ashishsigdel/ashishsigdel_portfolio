@@ -2,8 +2,8 @@ import React from "react";
 import { AiOutlineCopy } from "react-icons/ai";
 
 interface PriceInformationProps {
-  price: number | undefined;
-  actualPrice: number | undefined;
+  price: string;
+  actualPrice: string;
   setPrice: any;
   setActualPrice: any;
 }

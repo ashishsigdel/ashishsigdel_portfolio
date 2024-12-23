@@ -10,6 +10,7 @@ export default function CoverImage({
   setCoverImage,
   coverImageError,
   setCoverImageError,
+  coverImageUrlFromServer,
 }: any) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState<boolean>(false);
@@ -57,10 +58,10 @@ export default function CoverImage({
       </div>
       <div className="w-full flex justify-center items-center pb-6 pt-5 px-4 sm:px-6 md:px-8">
         <div className="flex justify-center items-center w-full relative">
-          {imagePreview ? (
+          {imagePreview || coverImageUrlFromServer ? (
             <>
               <Image
-                src={imagePreview}
+                src={imagePreview ? imagePreview : coverImageUrlFromServer}
                 height={1000}
                 width={200}
                 className="object-cover rounded-md w-full border-[1px] border-solid border-[#eee] dark:border-gray-500"

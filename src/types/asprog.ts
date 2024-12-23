@@ -2,11 +2,11 @@ export type ProjectCreate = {
   title: string;
   description: string;
   tags: string[];
-  coverImage: File;
+  coverImage: File | string;
   resourceLink: string;
   demoLink?: string;
-  price?: number;
-  actualPrice?: number;
+  price?: string;
+  actualPrice?: string;
 };
 
 export type ProjectTableProps = {

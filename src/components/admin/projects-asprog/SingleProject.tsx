@@ -113,7 +113,7 @@ export default function SingleProject({
         <td className="px-6 py-4 font-semibold whitespace-nowrap text-graycolor ">
           <div className="flex gap-2 items-center">
             <a
-              href={`project/create?project=${project.id}`}
+              href={`project/create?project=${project.creationId}`}
               className="bg-skin p-2 text-white rounded-sm"
             >
               <BiEdit />

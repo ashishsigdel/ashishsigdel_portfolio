@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CoverImage,
   LinkInformation,
@@ -41,7 +41,15 @@ export default function CreateForm() {
     tagsError,
     loading,
     setDescriptionError,
+    fetchProject,
+    coverImageUrlFromServer,
   } = useCreate();
+
+  useEffect(() => {
+    if (projectId) {
+      fetchProject(projectId);
+    }
+  }, []);
 
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full border border-color">
@@ -71,6 +79,7 @@ export default function CreateForm() {
         <div className="w-full xl:w-[35%] p-2">
           <CoverImage
             coverImage={coverImage}
+            coverImageUrlFromServer={coverImageUrlFromServer}
             setCoverImage={setCoverImage}
             setCoverImageError={setCoverImageError}
             coverImageError={coverImageError}

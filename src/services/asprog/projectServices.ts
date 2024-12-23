@@ -32,14 +32,25 @@ export const create = async (formData: ProjectCreate) => {
 export const fetchAll = async ({
   page = 1,
   limit = 10,
+  search = "",
 }: {
   page: number;
   limit: number;
+  search?: string;
 }) => {
   try {
     const response = await myAxios.get(
-      `/creation/get-all?page=${page}&limit=${limit}`
+      `/creation/get-all?page=${page}&limit=${limit}&search=${search}`
     );
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const fetchUnique = async ({ uId }: { uId: string }) => {
+  try {
+    const response = await myAxios.get(`/creation/get-admin/${uId}`);
     return response.data;
   } catch (error: any) {
     throw error;

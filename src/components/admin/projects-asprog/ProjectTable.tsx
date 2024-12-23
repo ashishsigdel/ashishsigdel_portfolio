@@ -7,8 +7,12 @@ import Search from "@/components/common/Search";
 import Link from "next/link";
 import { ProjectTableProps } from "@/types/asprog";
 import useProject from "./useProject";
+import { useSearchParams } from "next/navigation";
 
 export default function ProjectTable() {
+  const searchValue = useSearchParams().get("search") || "";
+  const [refresh, setRefresh] = useState<boolean>(false);
+
   const updateProjectStatus = (id: number, isActive: boolean) => {};
   const removeProject = (id: number) => {};
   const {
@@ -22,12 +26,12 @@ export default function ProjectTable() {
   } = useProject();
 
   useEffect(() => {
-    fetchProjects(currentPage);
-  }, []);
+    fetchProjects(searchValue ? 1 : currentPage, searchValue);
+  }, [searchValue, refresh]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    fetchProjects(page);
+    fetchProjects(page, searchValue);
   };
 
   return (
