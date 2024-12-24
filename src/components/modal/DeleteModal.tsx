@@ -4,8 +4,8 @@ import { IoClose } from "react-icons/io5";
 
 type Props = {
   closeModal: () => void;
-  id: number;
-  initiateDelete: (id: number) => void;
+  id: string;
+  initiateDelete: (id: string) => void;
 };
 
 export default function DeleteModal({ closeModal, id, initiateDelete }: Props) {

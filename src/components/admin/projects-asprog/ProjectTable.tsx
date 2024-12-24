@@ -13,8 +13,6 @@ export default function ProjectTable() {
   const searchValue = useSearchParams().get("search") || "";
   const [refresh, setRefresh] = useState<boolean>(false);
 
-  const updateProjectStatus = (id: number, isActive: boolean) => {};
-  const removeProject = (id: number) => {};
   const {
     projects,
     fetchProjects,
@@ -23,6 +21,8 @@ export default function ProjectTable() {
     totalPage,
     setTotalPage,
     loading,
+    updateProjectStatus,
+    removeProject,
   } = useProject();
 
   useEffect(() => {

@@ -1,5 +1,9 @@
 "use client";
-import { fetchAll } from "@/services/asprog/projectServices";
+import {
+  changeVisiblility,
+  deleteProject,
+  fetchAll,
+} from "@/services/asprog/projectServices";
 import { ProjectTableProps } from "@/types/asprog";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -24,6 +28,63 @@ export default function useProject() {
     }
   };
 
+  const updateStatus = async (id: string) => {
+    try {
+      const response = await changeVisiblility(id);
+      const updatedStatus = response.data.isPublic;
+
+      setProjects((prevProjects) =>
+        prevProjects.map((project) =>
+          project.creationId === id
+            ? { ...project, isPublic: updatedStatus }
+            : project
+        )
+      );
+    } catch (error: any) {
+      throw error?.response?.data?.message || "Failed to update project status";
+    }
+  };
+
+  const deleteProjectSingle = async (id: string) => {
+    try {
+      await deleteProject(id);
+
+      setProjects((prevProjects) =>
+        prevProjects.filter((project) => project.creationId !== id)
+      );
+    } catch (error: any) {
+      throw error?.response?.data?.message || "Failed to update project status";
+    }
+  };
+
+  const updateProjectStatus = (id: string) => {
+    toast.promise(
+      updateStatus(id),
+      {
+        loading: "Updating Staus...",
+        success: () => `Status changed.`,
+        error: (err) => err,
+      },
+      {
+        id: "toast",
+      }
+    );
+  };
+
+  const removeProject = (id: string) => {
+    toast.promise(
+      deleteProjectSingle(id),
+      {
+        loading: "Deleting Project...",
+        success: () => `Delete Successfully.`,
+        error: (err) => err,
+      },
+      {
+        id: "toast",
+      }
+    );
+  };
+
   return {
     projects,
     fetchProjects,
@@ -33,5 +94,7 @@ export default function useProject() {
     setTotalPage,
     loading,
     setLoading,
+    updateProjectStatus,
+    removeProject,
   };
 }

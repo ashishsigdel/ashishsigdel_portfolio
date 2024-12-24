@@ -8,6 +8,7 @@ import LogoImage from "@/assets/image-placeholder.png";
 import { Modal } from "@/components/modal";
 import DeleteModal from "@/components/modal/DeleteModal";
 import toast from "react-hot-toast";
+import { changeVisiblility } from "@/services/asprog/projectServices";
 
 export default function SingleProject({
   project,
@@ -18,37 +19,17 @@ export default function SingleProject({
 }: {
   project: any;
   index: number;
-  updateProjectStatus: (id: number, isActive: boolean) => void;
-  removeProject: (id: number) => void;
+  updateProjectStatus: (id: string) => void;
+  removeProject: (id: string) => void;
   refresh?: () => void;
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const openDeleteModal = () => setShowDeleteModal(true);
   const closeDeleteModal = () => setShowDeleteModal(false);
 
-  const changeStatus = async (id: number, status: boolean) => {};
-
-  const initiateDelete = async (id: number) => {
-    toast.promise(
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (id % 2 === 0) {
-            resolve("Deleted successfully");
-          } else {
-            reject("Failed to delete");
-          }
-        }, 1500);
-      }),
-      {
-        loading: "Deleting...",
-        success: "Item deleted successfully",
-        error: "Error to delete!",
-      },
-      {
-        id: "toast",
-      }
-    );
+  const initiateDelete = async (id: string) => {
     closeDeleteModal();
+    removeProject(id);
   };
 
   return (
@@ -104,9 +85,9 @@ export default function SingleProject({
           className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor"
         >
           <Switch
-            id={project.id}
+            id={project.creationId}
             status={project.isPublic}
-            changeStatus={changeStatus}
+            changeStatus={updateProjectStatus}
           />
         </td>
 
@@ -129,7 +110,7 @@ export default function SingleProject({
             <DeleteModal
               initiateDelete={initiateDelete}
               closeModal={closeDeleteModal}
-              id={project.id}
+              id={project.creationId}
             />
           </Modal>
         </td>

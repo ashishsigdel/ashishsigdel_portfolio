@@ -6,8 +6,8 @@ const Switch = ({
   changeStatus,
 }: {
   status: boolean;
-  id: number;
-  changeStatus?: (id: number, status: boolean) => void;
+  id: string;
+  changeStatus?: (id: string, status: boolean) => void;
 }) => {
   return (
     <>

@@ -83,3 +83,21 @@ export const fetchUnique = async ({ uId }: { uId: string }) => {
     throw error;
   }
 };
+
+export const changeVisiblility = async (uuid: string) => {
+  try {
+    const response = await myAxios.put(`/creation/update-status/${uuid}`);
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const deleteProject = async (uuid: string) => {
+  try {
+    const response = await myAxios.delete(`/creation/delete/${uuid}`);
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
