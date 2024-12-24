@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { tags } from "@/data/tag";
 // import { projects } from "@/data/projects";
-import { ProjectCard } from "@/components/asprog/browse";
+import { ProjectCard, ProjectCardSkeleton } from "@/components/asprog/browse";
 // import useCreation from "@/hooks/use-creation";
 import { Spinner } from "@/components/common";
 import useBrowse from "./useBrowse";
@@ -80,17 +80,18 @@ export default function Projects() {
       </div>
 
       {loading ? (
-        <div className="mt-20 w-full flex justify-center">
-          <Spinner />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <ProjectCardSkeleton key={i} />
+          ))}
         </div>
       ) : projects.length === 0 ? (
         <div className="mt-20 w-full flex justify-center">No Result</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-          {projects.length > 0 &&
-            projects.map((creation) => (
-              <ProjectCard key={creation.id} project={creation} />
-            ))}
+          {projects.map((creation) => (
+            <ProjectCard key={creation.id} project={creation} />
+          ))}
         </div>
       )}
     </div>
