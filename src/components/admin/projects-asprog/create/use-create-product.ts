@@ -4,7 +4,7 @@ import userImage from "@/assets/image-placeholder.png";
 // import { create } from "@/services/projectService";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
-import { create, fetchUnique } from "@/services/asprog/projectServices";
+import { create, fetchUnique, update } from "@/services/asprog/projectServices";
 
 export default function useCreateProduct() {
   const router = useRouter();
@@ -163,6 +163,45 @@ export default function useCreateProduct() {
     }
   };
 
+  const handleUpdate = async (id: string) => {
+    validateTitle();
+    validateDescription();
+    validateTag();
+    if (
+      title &&
+      description &&
+      tags &&
+      !titleError &&
+      !descriptionError &&
+      !tagsError
+    ) {
+      setLoading(true);
+
+      try {
+        const response = await update(
+          {
+            title,
+            description,
+            tags,
+            resourceLink,
+            demoLink,
+            price: price,
+            actualPrice: actualPrice,
+            coverImage,
+          },
+          id
+        );
+        resetForm();
+        toast.success("Project Created Successfully!");
+        router.push("/asprog/project");
+      } catch (error: any) {
+        toast.error(error.response?.data?.message || "Failed to save project");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   return {
     coverImage,
     setCoverImage,
@@ -196,5 +235,6 @@ export default function useCreateProduct() {
     setCoverImageError,
     loading,
     fetchProject,
+    handleUpdate,
   };
 }

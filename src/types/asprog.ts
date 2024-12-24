@@ -2,7 +2,17 @@ export type ProjectCreate = {
   title: string;
   description: string;
   tags: string[];
-  coverImage: File | string;
+  coverImage: File;
+  resourceLink: string;
+  demoLink?: string;
+  price?: string;
+  actualPrice?: string;
+};
+export type ProjectUpdate = {
+  title: string;
+  description: string;
+  tags: string[];
+  coverImage?: File | null;
   resourceLink: string;
   demoLink?: string;
   price?: string;

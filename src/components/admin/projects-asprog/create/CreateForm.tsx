@@ -43,6 +43,7 @@ export default function CreateForm() {
     setDescriptionError,
     fetchProject,
     coverImageUrlFromServer,
+    handleUpdate,
   } = useCreate();
 
   useEffect(() => {
@@ -95,12 +96,19 @@ export default function CreateForm() {
       <div className="w-full text-end">
         {loading ? (
           <ButtonLoader />
+        ) : projectId ? (
+          <button
+            className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
+            onClick={() => handleUpdate(projectId)}
+          >
+            Update
+          </button>
         ) : (
           <button
             className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
             onClick={handleSubmit}
           >
-            {projectId ? "Update Project" : "Create Project"}
+            Create
           </button>
         )}
       </div>
