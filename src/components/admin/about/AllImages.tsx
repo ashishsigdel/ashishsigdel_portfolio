@@ -9,8 +9,8 @@ import { AddProfileModal } from "@/components/admin/about";
 export default function AllImages() {
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const updateProfileStatus = (id: number, isActive: boolean) => {};
-  const removeProfile = (id: number) => {};
+  const updateProfileStatus = (id: string, isActive: boolean) => {};
+  const removeProfile = (id: string) => {};
 
   const [showModal, setShowModal] = useState<boolean>(false);
 

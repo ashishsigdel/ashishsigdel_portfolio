@@ -18,36 +18,17 @@ export default function SingleLineImage({
 }: {
   image: any;
   index: number;
-  updateProfileStatus: (id: number, isActive: boolean) => void;
-  removeProfile: (id: number) => void;
+  updateProfileStatus: (id: string, isActive: boolean) => void;
+  removeProfile: (id: string) => void;
   refresh?: () => void;
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const openDeleteModal = () => setShowDeleteModal(true);
   const closeDeleteModal = () => setShowDeleteModal(false);
 
-  const changeStatus = async (id: number, status: boolean) => {};
+  const changeStatus = async (id: string, status: boolean) => {};
 
-  const initiateDelete = async (id: number) => {
-    toast.promise(
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (id % 2 === 0) {
-            resolve("Deleted successfully");
-          } else {
-            reject("Failed to delete");
-          }
-        }, 1500);
-      }),
-      {
-        loading: "Deleting...",
-        success: "Item deleted successfully",
-        error: "Error to delete!",
-      },
-      {
-        id: "toast",
-      }
-    );
+  const initiateDelete = async (id: string) => {
     closeDeleteModal();
   };
 

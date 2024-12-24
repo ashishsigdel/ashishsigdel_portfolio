@@ -7,8 +7,8 @@ import { Users } from "@/data/users";
 export default function TagTable() {
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const updateUserStatus = (id: number, isActive: boolean) => {};
-  const removeUser = (id: number) => {};
+  const updateUserStatus = (id: string, isActive: boolean) => {};
+  const removeUser = (id: string) => {};
 
   return (
     <>

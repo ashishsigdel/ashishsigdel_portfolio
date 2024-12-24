@@ -10,7 +10,7 @@ export type userLoginTwoFactor = {
 };
 
 export type User = {
-  id: number;
+  id: string;
   email: string;
   fullName: string;
   role: string;

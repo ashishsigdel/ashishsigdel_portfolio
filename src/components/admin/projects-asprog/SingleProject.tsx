@@ -78,7 +78,7 @@ export default function SingleProject({
           scope="row"
           className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor"
         >
-          {project.createdAt}
+          {new Date(project.createdAt).toLocaleString()}
         </td>
         <td
           scope="row"

@@ -8,8 +8,8 @@ import Link from "next/link";
 
 export default function ProjectTable() {
   const [loading, setLoading] = useState(false);
-  const updateProjectStatus = (id: number, isActive: boolean) => {};
-  const removeProject = (id: number) => {};
+  const updateProjectStatus = (id: string, isActive: boolean) => {};
+  const removeProject = (id: string) => {};
   return (
     <>
       <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">

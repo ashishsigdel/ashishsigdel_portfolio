@@ -18,8 +18,8 @@ export default function SingleInbox({
 }: {
   message: any;
   index: number;
-  updateProfileStatus: (id: number, isActive: boolean) => void;
-  removeProfile: (id: number) => void;
+  updateProfileStatus: (id: string, isActive: boolean) => void;
+  removeProfile: (id: string) => void;
   refresh?: () => void;
 }) {
   const [showViewModal, setShowViewModal] = useState<boolean>(false);
