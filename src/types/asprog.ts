@@ -29,3 +29,13 @@ export type ProjectTableProps = {
   actualPrice?: number;
   createdAt: string;
 };
+
+export type ProjectClient = {
+  title: string;
+  description: string;
+  tags: string;
+  coverPhoto: string;
+  demoLink?: string;
+  price?: string;
+  actualPrice?: string;
+};

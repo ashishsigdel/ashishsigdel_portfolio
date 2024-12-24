@@ -55,26 +55,35 @@ export default function PaidLinkForm({ project }: any) {
   const rating = 4.4;
 
   return (
-    <div className="md:sticky top-52 bg-white dark:bg-gray-800 p-8 bg-opacity-50 z-50 rounded-lg shadow-lg w-full">
+    <div className="md:sticky top-52 p-8 bg-opacity-50 z-50 rounded-lg shadow-lg w-full">
       {/* Price Section */}
       <div className="flex flex-col items-start mb-4">
         <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
           Price:
         </p>
-        <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-          {project.price}
-        </p>
+        <div className="flex items-center gap-2">
+          <p
+            className={`text-2xl text-purple-600 dark:text-purple-400 ${
+              project.actualPrice ? "line-through" : ""
+            } dark:text-gray-400`}
+          >
+            ${project.price}
+          </p>
+          {project.actualPrice && (
+            <p className="text-2xl text-purple-600 dark:text-purple-400">
+              ${project.actualPrice}
+            </p>
+          )}
+        </div>
         <p className="text-xs text-gray-500 dark:text-gray-400">
           Best value pricing!
         </p>
       </div>
 
-      <Link href={project.sourceLink}>
-        <button className="w-full mt-4 px-6 py-[8px] bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700 dark:hover:bg-purple-500 transition-all duration-300 font-geist flex gap-2 items-center justify-center">
-          <Image src={crown} alt="crown icon" className="w-7 h-7" />
-          <p>Get this project</p>
-        </button>
-      </Link>
+      <button className="w-full mt-4 px-6 py-[8px] bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700 dark:hover:bg-purple-500 transition-all duration-300 font-geist flex gap-2 items-center justify-center">
+        <Image src={crown} alt="crown icon" className="w-7 h-7" />
+        <p>Get this project</p>
+      </button>
 
       {/* Ratings Section */}
       <div className="space-y-3 mt-5">

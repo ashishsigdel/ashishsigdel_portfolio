@@ -2,23 +2,31 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { tags } from "@/data/tag";
-import { projects } from "@/data/projects";
+// import { projects } from "@/data/projects";
 import { ProjectCard } from "@/components/asprog/browse";
 // import useCreation from "@/hooks/use-creation";
 import { Spinner } from "@/components/common";
+import useBrowse from "./useBrowse";
 
 export default function Projects() {
-  const [selectedTag, setSelectedTag] = useState("all");
-  const [isLoading, setIsLoading] = useState(false);
-  // const { isLoading, fetchCreations, creations } = useCreation();
+  const { loading, fetchProjects, projects, selectedTag, setSelectedTag } =
+    useBrowse();
 
   const handleTagClick = (tag: string) => {
+    let tagValue = tag === "all" ? "" : tag;
     setSelectedTag(tag);
+    fetchProjects(tagValue);
   };
 
-  // useEffect(() => {
-  //   fetchCreations();
-  // }, []);
+  const hanlgeSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTimeout(() => {
+      fetchProjects(e.target.value);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    fetchProjects("");
+  }, []);
 
   return (
     <div className="mt-10">
@@ -27,6 +35,7 @@ export default function Projects() {
           <input
             type={"text"}
             name="search"
+            onChange={hanlgeSearchChange}
             placeholder="What are you looking for?"
             id="search"
             className="ml-5 w-full h-full py-4 bg-transparent text-[14px] text-gray-600 dark:text-light focus:outline-none"
@@ -70,14 +79,14 @@ export default function Projects() {
         ))}
       </div>
 
-      {isLoading ? (
+      {loading ? (
         <div className="mt-20 w-full flex justify-center">
           <Spinner />
         </div>
       ) : projects.length === 0 ? (
         <div className="mt-20 w-full flex justify-center">No Result</div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {projects.length > 0 &&
             projects.map((creation) => (
               <ProjectCard key={creation.id} project={creation} />

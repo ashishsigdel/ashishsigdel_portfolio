@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: any) {
   }
 
   return (
-    <Link key={project.id} href={`/resources/${project.id}`}>
+    <Link key={project.id} href={`/resources/${project.creationId}`}>
       <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden cursor-pointer group">
         <div
           className="relative w-full h-0"
@@ -31,7 +31,7 @@ export default function ProjectCard({ project }: any) {
           />
         </div>
         <div className="p-4">
-          <h4 className="text-xl font-semibold text-gray-800 dark:text-white">
+          <h4 className="text-[18px] font-semibold text-gray-800 dark:text-white font-poppins">
             {project.title}
           </h4>
           <p
