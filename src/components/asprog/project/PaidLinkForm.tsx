@@ -55,7 +55,7 @@ export default function PaidLinkForm({ project }: any) {
   const rating = 4.4;
 
   return (
-    <div className="md:sticky top-52 p-8 bg-opacity-50 z-50 rounded-lg shadow-lg w-full">
+    <div className="md:sticky top-52 p-8 z-50 rounded-lg w-full">
       {/* Price Section */}
       <div className="flex flex-col items-start mb-4">
         <p className="text-sm font-medium text-gray-500 dark:text-gray-400">

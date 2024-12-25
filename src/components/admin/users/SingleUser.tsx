@@ -1,13 +1,8 @@
 "use client";
-import Image from "next/image";
-import { Switch } from "@/components/common";
-import { BiEdit, BiTrash } from "react-icons/bi";
-import { FaCircle } from "react-icons/fa";
+import { BiTrash } from "react-icons/bi";
 import { useState } from "react";
-import LogoImage from "@/assets/image-placeholder.png";
 import { Modal } from "@/components/modal";
 import DeleteModal from "@/components/modal/DeleteModal";
-import toast from "react-hot-toast";
 
 export default function SingleTag({
   user,
@@ -19,17 +14,16 @@ export default function SingleTag({
   user: any;
   index: number;
   updateUserStatus: (id: string, isActive: boolean) => void;
-  removeUser: (id: string) => void;
+  removeUser: (id: number | string) => void;
   refresh?: () => void;
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const openDeleteModal = () => setShowDeleteModal(true);
   const closeDeleteModal = () => setShowDeleteModal(false);
 
-  const changeStatus = async (id: string, status: boolean) => {};
-
-  const initiateDelete = async (id: string) => {
+  const initiateDelete = async (id: number | string) => {
     closeDeleteModal();
+    removeUser(id);
   };
 
   return (
@@ -59,7 +53,7 @@ export default function SingleTag({
           className={`pr-6 py-4 font-semibold whitespace-nowrap ${
             user.role === "admin"
               ? "text-green-500"
-              : user.role === "editor"
+              : user.role === "watcher"
               ? "text-blue-500"
               : "text-gray-500"
           }`}

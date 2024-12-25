@@ -2,18 +2,10 @@
 import Link from "next/link";
 import { NewsletterUsers, SendEmail } from "@/components/admin/email-manage";
 import { useState } from "react";
+import useNewsletter from "./useNewsletter";
 
 export default function EmailManage() {
-  const [selectedUserIds, setSelectedUserIds] = useState<number[]>([]);
-
-  const handleCheckboxChange = (userId: number) => {
-    setSelectedUserIds(
-      (prevSelected) =>
-        prevSelected.includes(userId)
-          ? prevSelected.filter((id) => id !== userId) // Remove if already selected
-          : [...prevSelected, userId] // Add if not already selected
-    );
-  };
+  const { selectedUserIds, handleCheckboxChange } = useNewsletter();
 
   return (
     <div className="bg-light-white dark:bg-dark-black pb-5 min-h-screen">

@@ -7,7 +7,6 @@ export const login = async (formData: userLogin) => {
       username: formData.username,
       password: formData.password,
     });
-    console.log(response);
 
     return response.data;
   } catch (error: any) {

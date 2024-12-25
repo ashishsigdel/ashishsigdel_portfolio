@@ -28,7 +28,7 @@ export default function SingleLineImage({
 
   const changeStatus = async (id: string, status: boolean) => {};
 
-  const initiateDelete = async (id: string) => {
+  const initiateDelete = async (id: string | number) => {
     closeDeleteModal();
   };
 

@@ -14,7 +14,7 @@ export default function FreeLinkForm() {
     loading,
   } = useProject();
   return (
-    <div className="md:sticky top-32 p-8 bg-opacity-50 z-50 rounded-lg shadow-lg">
+    <div className="md:sticky top-32 p-8 z-50">
       <h1 className="text-3xl font-bold text-center dark:text-gray-100 mb-3">
         Get Free Access!!!
       </h1>

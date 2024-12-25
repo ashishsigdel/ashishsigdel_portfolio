@@ -1,14 +1,34 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SingleUser } from "@/components/admin/users";
 import { Pagination, SingleLineLoading } from "@/components/common";
-import { Users } from "@/data/users";
+// import { Users } from "@/data/users";
+import useUsers from "./useUsers";
+import { useSearchParams } from "next/navigation";
 
 export default function TagTable() {
-  const [loading, setLoading] = useState(false);
+  const searchValue = useSearchParams().get("search") || "";
   const [refresh, setRefresh] = useState<boolean>(false);
   const updateUserStatus = (id: string, isActive: boolean) => {};
-  const removeUser = (id: string) => {};
+
+  const {
+    users,
+    loading,
+    total,
+    currentPage,
+    fetchUsers,
+    setCurrentPage,
+    removeUser,
+  } = useUsers();
+
+  useEffect(() => {
+    fetchUsers(searchValue ? 1 : currentPage, searchValue);
+  }, [searchValue, refresh]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    fetchUsers(page, searchValue);
+  };
 
   return (
     <>
@@ -55,7 +75,7 @@ export default function TagTable() {
                     </td>
                   </tr>
                 </>
-              ) : Users.length === 0 ? (
+              ) : users.length === 0 ? (
                 <tr>
                   <td
                     scope="row"
@@ -67,7 +87,7 @@ export default function TagTable() {
                 </tr>
               ) : (
                 <>
-                  {Users.map((user: any, index) => (
+                  {users.map((user: any, index) => (
                     <SingleUser
                       updateUserStatus={updateUserStatus}
                       user={user}
@@ -82,9 +102,9 @@ export default function TagTable() {
           </table>
         </div>
         <Pagination
-          totalPages={5}
-          currentPage={3}
-          handlePageChange={() => console.log("page change")}
+          totalPages={total}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
         />
       </div>
     </>
