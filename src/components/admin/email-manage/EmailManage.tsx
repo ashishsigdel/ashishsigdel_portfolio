@@ -5,7 +5,19 @@ import { useState } from "react";
 import useNewsletter from "./useNewsletter";
 
 export default function EmailManage() {
-  const { selectedUserIds, handleCheckboxChange } = useNewsletter();
+  const {
+    selectedUserIds,
+    handleCheckboxChange,
+    handleSendEmail,
+    subject,
+    message,
+    setMessage,
+    setSubject,
+    subjectError,
+    messageError,
+    setMessageError,
+    sending,
+  } = useNewsletter();
 
   return (
     <div className="bg-light-white dark:bg-dark-black pb-5 min-h-screen">
@@ -30,7 +42,18 @@ export default function EmailManage() {
             />
           </div>
           <div className="w-full xl:w-[65%] p-2">
-            <SendEmail selectedUserIds={selectedUserIds} />
+            <SendEmail
+              selectedUserIds={selectedUserIds}
+              handleSendEmail={handleSendEmail}
+              subject={subject}
+              message={message}
+              setMessage={setMessage}
+              setSubject={setSubject}
+              subjectError={subjectError}
+              messageError={messageError}
+              setMessageError={setMessageError}
+              sending={sending}
+            />
           </div>
         </div>
       </div>

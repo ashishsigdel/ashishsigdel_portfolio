@@ -33,6 +33,26 @@ export const unsubscribe = async (email: string) => {
     return response.data;
   } catch (error: any) {
     throw error;
-    console.log(error);
+  }
+};
+
+export const sendNewsletter = async ({
+  selectedUserIds,
+  subject,
+  message,
+}: {
+  selectedUserIds: number[];
+  subject: string;
+  message: string;
+}) => {
+  try {
+    const response = await myAxios.post("/newsletter/send", {
+      selectedIds: selectedUserIds,
+      subject,
+      description: message,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
   }
 };

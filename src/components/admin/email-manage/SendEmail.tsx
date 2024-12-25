@@ -3,38 +3,34 @@
 import React, { useState } from "react";
 import { Description } from "@/components/admin/email-manage";
 import toast from "react-hot-toast";
+import useNewsletter from "./useNewsletter";
+import { ButtonLoader } from "@/components/common";
 
 type SendEmailProps = {
   selectedUserIds: number[];
+  handleSendEmail: Function;
+  subject: string;
+  message: string;
+  setMessage: any;
+  setSubject: any;
+  subjectError: string;
+  messageError: string;
+  setMessageError: any;
+  sending: boolean;
 };
 
-export default function SendEmail({ selectedUserIds }: SendEmailProps) {
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [subjectError, setSubjectError] = useState("");
-  const [messageError, setMessageError] = useState<string>("");
-
-  const resetForm = () => {
-    setMessage("");
-    setSubject("");
-  };
-
-  const handleSendEmail = () => {
-    if (!subject) {
-      setSubjectError("Subject is required!");
-      return;
-    }
-    if (!message) {
-      setMessageError("Message is required!");
-      return;
-    }
-
-    console.log(message);
-
-    toast.success("Message sent successfully!");
-    resetForm();
-  };
-
+export default function SendEmail({
+  selectedUserIds,
+  handleSendEmail,
+  subject,
+  message,
+  setMessage,
+  setSubject,
+  subjectError,
+  messageError,
+  setMessageError,
+  sending,
+}: SendEmailProps) {
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full border border-color">
       <div className="flex-col xl:flex xl:flex-row">
@@ -76,13 +72,16 @@ export default function SendEmail({ selectedUserIds }: SendEmailProps) {
                 setDescriptionError={setMessageError}
                 setDescription={setMessage}
               />
-
-              <button
-                type="submit"
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-500"
-              >
-                Send Email
-              </button>
+              {sending ? (
+                <ButtonLoader bgColor="indigo-600" />
+              ) : (
+                <button
+                  type="submit"
+                  className="bg-indigo-600 px-5 py-2.5 rounded-lg text-white font-semibold"
+                >
+                  Send Email
+                </button>
+              )}
             </form>
             <p className="text-sm text-gray-500 mt-4">
               {selectedUserIds.length > 0
