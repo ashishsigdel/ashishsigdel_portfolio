@@ -71,7 +71,7 @@ export default function Resources() {
           {/* Submit Button */}
           <div className="mb-6 w-full text-center">
             {isLoading ? (
-              <ButtonLoader />
+              <ButtonLoader bgColor="purple-500" />
             ) : (
               <button
                 type="submit"

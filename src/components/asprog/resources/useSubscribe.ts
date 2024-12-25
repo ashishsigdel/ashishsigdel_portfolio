@@ -38,6 +38,8 @@ export default function useSubscribe() {
 
         const response = await subscribe(email, fullName);
         toast.success(response?.message || "Subscribed successfully");
+        // setEmail("");
+        // setFullName("");
       } catch (error: any) {
         toast.error(error?.response?.data?.message || "Something went wrong");
       } finally {

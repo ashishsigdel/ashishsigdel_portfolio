@@ -7,8 +7,6 @@ import { useState } from "react";
 import LogoImage from "@/assets/image-placeholder.png";
 import { Modal } from "@/components/modal";
 import DeleteModal from "@/components/modal/DeleteModal";
-import toast from "react-hot-toast";
-import { changeVisiblility } from "@/services/asprog/projectServices";
 
 export default function SingleProject({
   project,

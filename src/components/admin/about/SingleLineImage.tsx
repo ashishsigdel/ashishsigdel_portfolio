@@ -12,9 +12,6 @@ import toast from "react-hot-toast";
 export default function SingleLineImage({
   image,
   index,
-  updateProfileStatus,
-  removeProfile,
-  refresh,
 }: {
   image: any;
   index: number;
