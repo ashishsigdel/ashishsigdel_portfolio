@@ -22,4 +22,5 @@ export type UserAdmin = {
   email: string;
   role: string;
   newsletter?: boolean;
+  twoFactorEnable?: boolean;
 };

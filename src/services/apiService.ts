@@ -52,7 +52,6 @@ myAxios.interceptors.response.use(
       "/auth/register",
       "/reset-password/forgot-password",
       "/reset-password/verify-otp",
-      "/reset-password/update-password",
       "/auth/verify",
       "/auth/resend-otp",
     ];

@@ -1,12 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import userImage from "@/assets/ashish-profile.jpg";
-import Link from "next/link";
+import { ButtonLoader } from "@/components/common";
 
-export default function Profile() {
-  const [name, setName] = useState("Ashish Sigdel");
-  const [email, setEmail] = useState("a.asis.sigdel01@gmail.com");
+export default function Profile({
+  user,
+  setEmail,
+  email,
+  setFullName,
+  fullName,
+  updateUser,
+  updating,
+}: any) {
+  const [fullNameError, setFullNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const validateFullName = () => {
+    if (!fullName) {
+      setFullNameError("Full Name is required");
+    }
+  };
+
+  const validateEmail = () => {
+    if (!email) {
+      setEmailError("Email is required");
+    }
+  };
+  const update = (e: any) => {
+    e.preventDefault();
+    validateFullName();
+    validateEmail();
+    updateUser();
+  };
   return (
     <div className="mb-[15px] rounded-[5px] border-[1px] border-solid border-color p-[15px] bg-white dark:bg-black py-8">
       <div className="w-full px-4 sm:px-6 md:px-8 border-b-[1px] border-color pb-4 mb-8">
@@ -27,25 +53,34 @@ export default function Profile() {
           </div>
           <div className="mt-4 w-full">
             <h4 className="text-[14px] tracking-[0.02rem] text-gray-500">
-              Ashish Sigdel
+              {user?.fullName}
             </h4>
             <h4 className="text-[14px] tracking-[0.02rem] text-gray-500">
-              a.asis.sigdel01@gmail.com
+              {user?.email}
+            </h4>
+            <h4 className="text-[14px] tracking-[0.02rem] text-gray-500">
+              Role: {user?.role}
             </h4>
           </div>
         </div>
-        <div className="flex-1 w-full">
+        <form onSubmit={update} className="flex-1 w-full">
           <div className="flex flex-col gap-x-2 mb-4">
             <label className="text-sm text-dark-black dark:text-light-white font-normal">
               Full Name
             </label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background focus:bg-form-background-focus focus:dark:bg-dark-form-background-focus text-form-color dark:text-dark-form-color focus:outline-none border-[1px] border-color`}
               placeholder="Name"
+              onBlur={validateFullName}
             />
+            {fullNameError && (
+              <span className="text-danger text-[12px] font-normal tracking-[0] mt-1 italic leading-[1] w-full">
+                {fullNameError}
+              </span>
+            )}
           </div>
           <div className="flex flex-col gap-x-2 mb-4">
             <label className="text-sm text-dark-black dark:text-light-white font-normal">
@@ -57,15 +92,27 @@ export default function Profile() {
               onChange={(e) => setEmail(e.target.value)}
               className={`w-full py-[10px] px-5 items-center rounded-lg bg-form-background dark:bg-dark-form-background focus:bg-form-background-focus focus:dark:bg-dark-form-background-focus text-form-color dark:text-dark-form-color focus:outline-none border-[1px] border-color`}
               placeholder="Email"
+              onBlur={validateEmail}
             />
+            {emailError && (
+              <span className="text-danger text-[12px] font-normal tracking-[0] mt-1 italic leading-[1] w-full">
+                {emailError}
+              </span>
+            )}
           </div>
-          <button
-            type="submit"
-            className="bg-skin text-white px-4 py-2 rounded-md hover:opacity-90"
-          >
-            Update
-          </button>
-        </div>
+          <div className="w-fit">
+            {updating ? (
+              <ButtonLoader />
+            ) : (
+              <button
+                type="submit"
+                className="bg-skin text-white px-4 py-2 rounded-md hover:opacity-90"
+              >
+                Update Profile
+              </button>
+            )}
+          </div>
+        </form>
       </div>
     </div>
   );

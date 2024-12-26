@@ -49,3 +49,54 @@ export const getAllSubscriber = async ({
     throw error;
   }
 };
+
+export const getProfile = async () => {
+  try {
+    const response = await myAxios.get(`/user/get`);
+
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const update = async (email: string, fullName: string) => {
+  try {
+    const response = await myAxios.put("/user/update", {
+      email,
+      fullName,
+    });
+
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const changePassword = async (
+  oldPassword: string,
+  password: string,
+  confirmPassword: string
+) => {
+  try {
+    const response = await myAxios.put("/user/update-password", {
+      oldPassword,
+      password,
+      confirmPassword,
+    });
+
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const toggle2FA = async () => {
+  try {
+    const response = await myAxios.put("/user/toggletwofactor", {});
+
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
