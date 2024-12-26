@@ -14,6 +14,7 @@ export default function useNewsletter() {
 
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+
   const [subjectError, setSubjectError] = useState("");
   const [messageError, setMessageError] = useState<string>("");
 

@@ -35,12 +35,6 @@ export default function EmailManage() {
       </div>
       <div className="px-6 mb-4">
         <div className="flex-col xl:flex xl:flex-row">
-          <div className="w-full xl:w-[35%] p-2">
-            <NewsletterUsers
-              selectedUserIds={selectedUserIds}
-              handleCheckboxChange={handleCheckboxChange}
-            />
-          </div>
           <div className="w-full xl:w-[65%] p-2">
             <SendEmail
               selectedUserIds={selectedUserIds}
@@ -53,6 +47,12 @@ export default function EmailManage() {
               messageError={messageError}
               setMessageError={setMessageError}
               sending={sending}
+            />
+          </div>
+          <div className="w-full xl:w-[35%] p-2">
+            <NewsletterUsers
+              selectedUserIds={selectedUserIds}
+              handleCheckboxChange={handleCheckboxChange}
             />
           </div>
         </div>
