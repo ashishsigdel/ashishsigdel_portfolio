@@ -1,9 +1,6 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaFingerprint, FaSkiing } from "react-icons/fa";
-import { FaDesktop } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
 import { RiApps2Fill, RiContactsBook3Fill } from "react-icons/ri";
 

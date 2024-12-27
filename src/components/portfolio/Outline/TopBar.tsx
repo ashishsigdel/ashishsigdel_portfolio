@@ -5,7 +5,6 @@ import logo from "@/assets/logo/coding.svg";
 import { FiList } from "react-icons/fi";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
-import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import { Leftwindow } from "../utils";
 

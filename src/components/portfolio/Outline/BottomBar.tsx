@@ -1,6 +1,3 @@
-import Image from "next/image";
-import logo from "@/assets/logo/coding.svg";
-import { FiList } from "react-icons/fi";
 import { IoMdSettings } from "react-icons/io";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
