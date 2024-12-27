@@ -33,6 +33,7 @@ const config: Config = {
         "light-white": "#efefef",
         "form-background": "#efefef",
         "dark-form-background": "#0d1117",
+        "portfolio-primary": "#047ada",
       },
     },
   },

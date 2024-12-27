@@ -1,0 +1,25 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #047ada;
+  border-radius: 10px;
+  height: 50%; /* Set to 50% of the container height */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #047ada;
+  border-radius: 10px;
+  min-height: 50px; /* Minimum height */
+  max-height: 50%; /* Maximum height as percentage */
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+}
+
+html {
+  /* scrollbar-width: thin; */
+  scrollbar-color: #047ada rgba(255, 255, 255, 0);
+}
