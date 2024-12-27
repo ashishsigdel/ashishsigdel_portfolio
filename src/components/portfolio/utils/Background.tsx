@@ -15,7 +15,7 @@ export default function Background() {
       </div>
 
       {/* Floating 3D brackets */}
-      <div className="absolute top-1/4 left-[20rem] opacity-80 text-9xl text-gray-700 animate-rotate-slow floating-3d shadow-md">
+      <div className="absolute top-1/4 left-32 sm:left-40 md:left-52 lg:left-72 opacity-80 text-9xl text-gray-700 animate-rotate-slow floating-3d shadow-md">
         &#123;
       </div>
       <div className="absolute bottom-1/3 right-1/4 opacity-80 text-8xl text-gray-600 animate-rotate-slower floating-3d">

@@ -14,6 +14,10 @@ const config: Config = {
       fontFamily: {
         poppins: ["var(--font-poppins)", ...defaultTheme.fontFamily.sans],
         geist: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
+        "edu-au-vic": [
+          "var(--font-edu-au-vic)",
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

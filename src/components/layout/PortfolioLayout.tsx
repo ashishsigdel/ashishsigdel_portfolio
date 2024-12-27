@@ -1,5 +1,5 @@
 import React from "react";
-import { Outline } from "@/components/portfolio/Outline";
+import { Outline } from "@/components/portfolio/outline";
 import { Background } from "../portfolio/utils";
 
 export default function PortfolioLayout({
