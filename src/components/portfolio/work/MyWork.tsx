@@ -12,7 +12,7 @@ export default function MyWork() {
       </div>
       <div className="flex flex-col gap-7 ">
         {whatido.map((work, index) => (
-          <WorkCard work={work} index={index} />
+          <WorkCard key={index} work={work} index={index} />
         ))}
       </div>
     </div>

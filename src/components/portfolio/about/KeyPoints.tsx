@@ -26,7 +26,7 @@ export default function KeyPoints() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto h-full my-16 px-3">
+    <div className="max-w-7xl mx-auto h-full mt-20 mb-10 px-3">
       <section className="grid grid-3 text-5xl sm:text-6xl md:text-7xl lg:text-8xl gap-y-[15px] sm:gap-y-[20px] md:gap-y-[30px] lg:gap-y-[40px]">
         {["CREATIVE", "DEVELOPER", "ENGINEER", "INNOVATOR", "TECHNOPHILE"].map(
           (text, i) => (

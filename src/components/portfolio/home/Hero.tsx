@@ -16,8 +16,8 @@ export default function Hero() {
         Turing Data into Intelligence, Ideas into Vision.
       </p>
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        <div className="h-[48px] bg-gradient-to-t from-green-500 to-transparent w-[1.5px] mx-auto mt-5"></div>
-        <div className="h-[48px] bg-gradient-to-b from-green-500 to-transparent w-[1.5px] mx-auto"></div>
+        <div className="h-[48px] bg-gradient-to-t from-portfolio-primary to-transparent w-[1.5px] mx-auto mt-5"></div>
+        <div className="h-[48px] bg-gradient-to-b from-portfolio-primary to-transparent w-[1.5px] mx-auto"></div>
       </div>
 
       {/* Floating Symbols */}

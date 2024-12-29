@@ -20,7 +20,7 @@ export default function About() {
     fetchProfile();
   }, []);
   return (
-    <div className="max-w-7xl mx-auto h-full my-16 px-3">
+    <div className="max-w-7xl mx-auto my-16 px-3">
       <div className="w-full text-center my-10 autoShow">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
           About Me

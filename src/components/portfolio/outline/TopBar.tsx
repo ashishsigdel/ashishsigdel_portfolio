@@ -29,7 +29,7 @@ export default function TopBar() {
         </div>
         <div className="mx-auto">
           <p className="text-center font-semibold tracking-wider">
-            Ashish<span className="text-skin">&lt;Sigdel&gt;</span>
+            Ashish<span className="text-portfolio-primary">&lt;Sigdel&gt;</span>
           </p>
         </div>
         <div

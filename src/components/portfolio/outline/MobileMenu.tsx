@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { IoHome } from "react-icons/io5";
 import { RiApps2Fill, RiContactsBook3Fill } from "react-icons/ri";
+import { MenuData } from "@/data/portfolioMenu";
 
 interface propsTypes {
   openNavbar: Boolean;
@@ -23,50 +24,25 @@ const MobileMenu: React.FC<propsTypes> = ({ openNavbar, handleOpenNav }) => {
       } z-[9999]`}
     >
       <ul className="flex flex-col gap-6 w-full">
-        <Link
-          href={"/"}
-          className={`mx-auto ${
-            isActive("/") ? "text-primary" : "text-white/90"
-          }`}
-        >
-          <li
-            className="text-[18px] cursor-pointer flex items-center gap-3 "
-            onClick={handleOpenNav}
+        {MenuData.map((menu) => (
+          <Link
+            key={menu.id}
+            href={menu.link}
+            className={`mx-auto ${
+              isActive(menu.link)
+                ? "text-portfolio-primary font-semibold"
+                : "text-white/90"
+            }`}
           >
-            <IoHome />
-            Home
-          </li>
-        </Link>
-
-        <Link
-          href={"/portfolio"}
-          className={`mx-auto ${
-            isActive("/portfolio") ? "text-primary" : "text-white/90"
-          }`}
-        >
-          <li
-            className="text-[18px] cursor-pointer flex items-center gap-3 mx-auto"
-            onClick={handleOpenNav}
-          >
-            <RiApps2Fill />
-            My Portfolio
-          </li>
-        </Link>
-
-        <Link
-          href={"/contact"}
-          className={`mx-auto ${
-            isActive("/contact") ? "text-primary" : "text-white/90"
-          }`}
-        >
-          <li
-            className="text-[18px] cursor-pointer flex items-center gap-3 mx-auto"
-            onClick={handleOpenNav}
-          >
-            <RiContactsBook3Fill />
-            Contact Me
-          </li>
-        </Link>
+            <li
+              className="text-[18px] cursor-pointer flex items-center gap-3 "
+              onClick={handleOpenNav}
+            >
+              <menu.icon />
+              {menu.name}
+            </li>
+          </Link>
+        ))}
       </ul>
     </div>
   );

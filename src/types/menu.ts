@@ -1,3 +1,4 @@
+import { ElementType } from "react";
 import { IconType } from "react-icons";
 
 export type Menu = {
@@ -5,5 +6,5 @@ export type Menu = {
   name: string;
   link: string;
   subMenu?: Menu[];
-  icon?: IconType;
+  icon: ElementType;
 };

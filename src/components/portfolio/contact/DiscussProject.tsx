@@ -62,7 +62,7 @@ export default function DiscussProject() {
           </div>
           <div className="flex flex-col sm:flex-row p-10 gap-10 items-center">
             <motion.div
-              className="mx-10"
+              className="mx-3 sm:mx-5 md:mx-7 lg:mx-10"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={
                 isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }
@@ -78,7 +78,7 @@ export default function DiscussProject() {
               />
             </motion.div>
             <div className="flex flex-col">
-              <p className="text-3xl sm:text-4xl md:text-5xl">
+              <p className="text-3xl sm:text-4xl md:text-5xl min-h-[60px]">
                 <TypewriterText
                   text="Let's work together on your next project"
                   inView={isInView}
@@ -86,7 +86,7 @@ export default function DiscussProject() {
               </p>
               <Link
                 href={"/contact"}
-                className="relative overflow-hidden py-3 px-4 border border-color hover:border-portfolio-primary/80 transition-all duration-500 w-fit my-8 rounded-md font-geist group"
+                className="relative overflow-hidden py-3 px-4 border border-color hover:border-portfolio-primary/80 transition-all duration-500 w-fit my-8 rounded-md font-geist group mx-auto sm:mx-0"
               >
                 <span className="relative z-10 flex gap-4 items-center">
                   Let&#39;s-get-in-touch{" "}
