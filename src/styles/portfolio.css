@@ -71,11 +71,23 @@ html {
   }
 }
 
-.autoBLur {
-  animation: autoBLurAnimation linear both;
-  animation-timeline: view();
+.autoBlur {
+  filter: blur(30px);
+  transition: filter 1s ease;
 }
-@keyframes autoBLurAnimation {
+
+.autoBlur.in-view {
+  filter: blur(0px);
+}
+
+@supports (animation-timeline: view()) {
+  .autoBlur {
+    animation: autoBlurAnimation linear both;
+    animation-timeline: view();
+  }
+}
+
+@keyframes autoBlurAnimation {
   0% {
     filter: blur(30px);
   }
