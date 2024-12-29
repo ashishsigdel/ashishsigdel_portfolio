@@ -4,9 +4,9 @@ import React from "react";
 
 export default function ILove() {
   return (
-    <div className="w-full max-w-[18rem] bg-black/50 rounded-ss-md rounded-ee-md backdrop-blur-sm  text-gray-300 border border-white/15 cursor-grab">
+    <div className="w-full max-w-[18rem] rounded-ss-md rounded-ee-md backdrop-blur-sm  text-gray-300 border border-white/15 cursor-grabbing  hover:scale-105 transition-all duration-500">
       <div className="p-2 border-b border-white/15">
-        <span>i-loves</span>
+        <span className="font-geist">i-loves</span>
       </div>
       <div className="p-2 md:p-5 flex flex-col gap-2">
         {[

@@ -24,9 +24,9 @@ const socialLinks: SocialLinks = {
 
 export default function MeOnline() {
   return (
-    <div className="w-full max-w-[15rem] bg-black/50 rounded-ss-md rounded-ee-md backdrop-blur-sm text-gray-300 border border-white/15 h-fit cursor-grab">
+    <div className="w-full max-w-[15rem] rounded-ss-md rounded-ee-md backdrop-blur-sm text-gray-300 border border-white/15 h-fit cursor-grabbing  hover:scale-105 transition-all duration-500">
       <div className="p-2 border-b border-white/15">
-        <span>me-online</span>
+        <span className="font-geist">me-online</span>
       </div>
       <div className="p-3 md:p-5 flex flex-col gap-2">
         {Object.entries(socialLinks).map(([key, value], index) => (

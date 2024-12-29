@@ -4,11 +4,11 @@ import React from "react";
 
 export default function AboutMe() {
   return (
-    <div className="w-full max-w-2xl lg:max-w-3xl mx-auto bg-black/50 rounded-ss-md rounded-ee-md backdrop-blur-sm  text-gray-300 border border-white/15 h-fit cursor-grab">
-      <div className="p-2 border-b border-white/15">
-        <span>about-me</span>
+    <div className="w-full max-w-2xl lg:max-w-3xl mx-auto rounded-ss-md rounded-ee-md backdrop-blur-sm  text-gray-300 border border-white/15 h-fit cursor-grabbing  hover:scale-105 transition-all duration-500">
+      <div className="p-2 border-b border-white/15 ">
+        <span className="font-geist">about-me</span>
       </div>
-      <div className="p-3 md:p-5 flex flex-col gap-2 m-0">
+      <div className="p-3 md:p-5 flex flex-col gap-2 m-0 ">
         <p className="m-0">
           <span className="text-gray-500 mr-1">01.</span>
           Hello, Nice to meet you! I&#39;m Ashish, a{" "}

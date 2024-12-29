@@ -8,7 +8,7 @@ export default function PortfolioLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full h-[100vh] overflow-hidden relative text-white">
+    <div className="w-full h-[100vh] overflow-hidden relative text-white ">
       <Background />
       <Outline>{children}</Outline>
     </div>

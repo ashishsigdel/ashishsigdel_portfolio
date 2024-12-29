@@ -26,20 +26,22 @@ export default function KeyPoints() {
   }, []);
 
   return (
-    <section className="grid grid-3 text-[3em] sm:text-[4em] md:text-[5em] lg:text-[6em] gap-y-[15px] sm:gap-y-[20px] md:gap-y-[30px] lg:gap-y-[40px]">
-      {["CREATIVE", "DEVELOPER", "ENGINEER", "INNOVATOR", "TECHNOPHILE"].map(
-        (text, i) => (
-          <div
-            key={i}
-            ref={(el) => {
-              elementsRef.current[i] = el!;
-            }}
-            className="autoBlur"
-          >
-            {text}
-          </div>
-        )
-      )}
-    </section>
+    <div className="max-w-7xl mx-auto h-full my-16 px-3">
+      <section className="grid grid-3 text-5xl sm:text-6xl md:text-7xl lg:text-8xl gap-y-[15px] sm:gap-y-[20px] md:gap-y-[30px] lg:gap-y-[40px]">
+        {["CREATIVE", "DEVELOPER", "ENGINEER", "INNOVATOR", "TECHNOPHILE"].map(
+          (text, i) => (
+            <div
+              key={i}
+              ref={(el) => {
+                elementsRef.current[i] = el!;
+              }}
+              className="autoBlur"
+            >
+              {text}
+            </div>
+          )
+        )}
+      </section>
+    </div>
   );
 }
