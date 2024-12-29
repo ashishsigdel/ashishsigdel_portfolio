@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Odibee+Sans&display=swap");
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -22,4 +24,66 @@
 html {
   /* scrollbar-width: thin; */
   scrollbar-color: #047ada rgba(255, 255, 255, 0);
+}
+
+.fontlibre {
+  font-family: "Libre Baskerville", sans-serif;
+}
+
+.grid {
+  display: grid;
+  font-family: "Libre Baskerville", sans-serif;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(var(--row), 100px);
+  margin-top: 50px;
+}
+
+.grid-3 {
+  --row: 6;
+}
+.grid-3 div {
+  grid-column: 2/ 6;
+  text-wrap: nowrap;
+}
+.grid-3 div:nth-child(even) {
+  text-align: right;
+}
+.grid-3 div:nth-child(5) {
+  grid-column: 1/ 6;
+}
+.grid-3 div:nth-child(4) {
+  grid-column: 1/ 7;
+}
+
+.autoShow {
+  animation: autoShowAnimation both;
+  animation-timeline: view(70% 5%);
+}
+
+@keyframes autoShowAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(200px) scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.autoBLur {
+  animation: autoBLurAnimation linear both;
+  animation-timeline: view();
+}
+@keyframes autoBLurAnimation {
+  0% {
+    filter: blur(30px);
+  }
+  45%,
+  55% {
+    filter: blur(0px);
+  }
+  100% {
+    filter: blur(30px);
+  }
 }

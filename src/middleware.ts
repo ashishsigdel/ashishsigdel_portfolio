@@ -5,9 +5,6 @@ import { subdomains } from "./data/subdomains";
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const user = {
-    name: "Ashish",
-  };
 
   const host = request.headers.get("host");
   const subdomain = host?.split(".")[0];
@@ -21,12 +18,6 @@ export function middleware(request: NextRequest) {
   }
 
   const isValid = isValidSlug(subdomain);
-
-  if (subdomain === "admin" && !user) {
-    return NextResponse.redirect(
-      new URL(`${url.protocol}//auth.${BASE_DOMAIN}`)
-    );
-  }
 
   if (!isValid) {
     return NextResponse.redirect(

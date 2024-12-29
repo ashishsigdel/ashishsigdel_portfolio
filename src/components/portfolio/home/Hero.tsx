@@ -5,10 +5,10 @@ export default function Hero() {
   return (
     <div className="h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-5 relative">
       <span className="text-sm text-white/60 -mt-10 mb-10 uppercase">Home</span>
-      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins">
+      <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-poppins">
         Hi, I&#39;m Ashish
       </h1>
-      <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins">
+      <h3 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-poppins lg:leading-[105px]">
         <span className="text-blue-500">AI </span>Explorer, Creative <br />
         <span className="text-blue-500">Developer</span>
       </h3>

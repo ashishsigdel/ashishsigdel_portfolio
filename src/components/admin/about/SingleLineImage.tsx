@@ -12,6 +12,8 @@ import toast from "react-hot-toast";
 export default function SingleLineImage({
   image,
   index,
+  updateProfileStatus,
+  removeProfile,
 }: {
   image: any;
   index: number;
@@ -23,9 +25,8 @@ export default function SingleLineImage({
   const openDeleteModal = () => setShowDeleteModal(true);
   const closeDeleteModal = () => setShowDeleteModal(false);
 
-  const changeStatus = async (id: string, status: boolean) => {};
-
   const initiateDelete = async (id: string) => {
+    removeProfile(id);
     closeDeleteModal();
   };
 
@@ -44,7 +45,7 @@ export default function SingleLineImage({
               width={98}
               height={98}
               alt={"profile"}
-              src={LogoImage}
+              src={image.profileURL || LogoImage}
               className="max-h-[98px] max-w-[98px] object-cover rounded-md"
               priority={true}
               quality={100}
@@ -57,8 +58,8 @@ export default function SingleLineImage({
         >
           <Switch
             id={image.id}
-            status={image.isActive}
-            changeStatus={changeStatus}
+            status={image.isEnable}
+            changeStatus={updateProfileStatus}
           />
         </td>
         <td

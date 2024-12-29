@@ -1,21 +1,39 @@
 "use client";
-import React, { useState } from "react";
-import { profile } from "@/data/dashboard";
+import React, { useEffect, useState } from "react";
+// import { profile } from "@/data/dashboard";
 import SingleLineImage from "./SingleLineImage";
 import { Pagination, SingleLineLoading } from "@/components/common";
 import { Modal } from "@/components/modal";
 import { AddProfileModal } from "@/components/admin/about";
+import useProfile from "./useProfile";
 
 export default function AllImages() {
-  const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const updateProfileStatus = (id: string, isActive: boolean) => {};
-  const removeProfile = (id: string) => {};
+
+  const {
+    profiles,
+    fetchAllProfile,
+    loading,
+    currentPage,
+    totalPage,
+    setCurrentPage,
+    updateProfileStatus,
+    removeProfile,
+  } = useProfile();
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
+
+  useEffect(() => {
+    fetchAllProfile(1);
+  }, []);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    fetchAllProfile(page);
+  };
   return (
     <>
       <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
@@ -69,7 +87,7 @@ export default function AllImages() {
                     </td>
                   </tr>
                 </>
-              ) : profile.length === 0 ? (
+              ) : profiles.length === 0 ? (
                 <tr>
                   <td
                     scope="row"
@@ -81,7 +99,7 @@ export default function AllImages() {
                 </tr>
               ) : (
                 <>
-                  {profile.map((image: any, index) => (
+                  {profiles.map((image: any, index) => (
                     <SingleLineImage
                       updateProfileStatus={updateProfileStatus}
                       image={image}
@@ -96,9 +114,9 @@ export default function AllImages() {
           </table>
         </div>
         <Pagination
-          totalPages={5}
-          currentPage={3}
-          handlePageChange={() => console.log("page change")}
+          totalPages={totalPage}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
         />
         <Modal isOpen={showModal}>
           <AddProfileModal closeModal={closeModal} setRefresh={setRefresh} />

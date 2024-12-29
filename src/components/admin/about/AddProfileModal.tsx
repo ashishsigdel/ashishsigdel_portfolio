@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 import imagePlaceholder from "@/assets/image-placeholder.png";
 import { SingleLineLoading } from "@/components/common";
 import toast from "react-hot-toast";
+import { create } from "@/services/admin/profileServices";
 // import { createProfile } from "@/services/profileService";
 
 type Props = {
@@ -67,12 +68,15 @@ export default function AddProfileModal({
     }
     setIsLoading(true);
     try {
-      //   const response = await createProfile(ImageForm);
+      const response = await create(ImageForm);
+      console.log(response);
+
       closeModal();
       toast.success("Profile created successfully.");
       setRefresh(true);
-    } catch (error) {
-      console.error("Error creating profile:", error);
+    } catch (error: any) {
+      console.log("Error creating profile:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong.");
     } finally {
       setIsLoading(false);
     }

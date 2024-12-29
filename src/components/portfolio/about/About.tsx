@@ -2,17 +2,26 @@
 import {
   AboutMe,
   ILove,
+  KeyPoints,
   MeOnline,
   Portrait,
 } from "@/components/portfolio/about";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { getActive } from "@/services/portfolio/profileService";
+import useProfile from "./useProfile";
 
 export default function About() {
   const constrainRef = useRef(null);
+
+  const { profile, fetchProfile } = useProfile();
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
   return (
     <div className="max-w-7xl mx-auto h-full my-16 px-3">
-      <div className="w-full text-center my-10">
+      <div className="w-full text-center my-10 autoShow">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
           About Me
         </h1>
@@ -37,7 +46,7 @@ export default function About() {
           dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
           className="lg:relative top-[10rem] left-[5rem]"
         >
-          <Portrait />
+          <Portrait profile={profile} />
         </motion.div>
         <motion.div
           drag
@@ -58,6 +67,7 @@ export default function About() {
           <ILove />
         </motion.div>
       </div>
+      <KeyPoints />
     </div>
   );
 }
