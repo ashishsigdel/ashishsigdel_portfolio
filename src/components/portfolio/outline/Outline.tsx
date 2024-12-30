@@ -5,19 +5,20 @@ import LeftBar from "./LeftBar";
 import BottomBar from "./BottomBar";
 
 export default function Outline({ children }: { children: React.ReactNode }) {
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsVisible(true);
+  //   }, 1000);
+  // }, []);
   return (
     <div
-      className={`w-screen h-[100dvh] p-2 z-[999] transition-transform duration-700 ease-out ${
-        isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
-      }`}
+      className={`w-screen h-[100dvh] p-2 z-[999] transition-transform duration-700 ease-out `}
     >
+      {/* ${
+        isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
+      } */}
       <div className="w-full h-full border border-white/20 rounded-md flex flex-col overflow-hidden">
         <TopBar />
         <div className="flex overflow-y-auto h-full">

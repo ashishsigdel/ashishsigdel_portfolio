@@ -17,18 +17,18 @@ const CertificationCard = ({ certification }: CertificateProps) => {
   return (
     <div className="group relative overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl backdrop-blur-md border border-color">
       {/* Image Container */}
-      <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+      <div className="relative h-40 w-full overflow-hidden bg-gray-100">
         <Image
           src={certification.image}
           alt={certification.name}
-          className="object-contain transition-transform duration-300 group-hover:scale-105"
+          className="object-contain transition-transform duration-300 group-hover:scale-105 px-3"
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
       {/* Content Container */}
-      <div className="p-6">
+      <div className="px-5 py-3">
         <h3 className="mb-2 text-xl font-bold text-white/90 transition-colors duration-300 group-hover:text-blue-600">
           {certification.name}
         </h3>
@@ -37,7 +37,7 @@ const CertificationCard = ({ certification }: CertificateProps) => {
         </p>
 
         {/* Button Container with proper spacing */}
-        <div className="flex justify-start mb-4">
+        <div className="flex justify-start">
           <Link
             href={certification.Link}
             className="relative overflow-hidden py-3 px-4 border border-gray-400 hover:border-portfolio-primary/80 transition-all duration-500 rounded-md font-geist group inline-block"
