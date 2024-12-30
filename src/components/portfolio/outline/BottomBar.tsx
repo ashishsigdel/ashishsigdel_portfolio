@@ -11,31 +11,31 @@ export default function TopBar() {
       <div className="pr-[20px] h-full flex justify-center items-center gap-3">
         <div className="group relative flex flex-col justify-center items-center cursor-pointer hover:text-primary text-white/60">
           <FaLinkedin />
-          <span className="absolute -top-16 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
+          <span className="absolute -top-10 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
             Linkedin
           </span>
         </div>
         <div className="group relative flex flex-col justify-center items-center cursor-pointer hover:text-primary text-white/60">
           <FaInstagram />
-          <span className="absolute -top-16 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
+          <span className="absolute -top-10 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
             Instagram
           </span>
         </div>
         <div className="group relative flex flex-col justify-center items-center cursor-pointer hover:text-primary text-white/60">
           <FaFacebook />
-          <span className="absolute -top-16 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
+          <span className="absolute -top-10 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
             Facebook
           </span>
         </div>
         <div className="group relative flex flex-col justify-center items-center cursor-pointer hover:text-primary text-white/60">
           <FaGithub />
-          <span className="absolute -top-16 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
+          <span className="absolute -top-10 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
             Github
           </span>
         </div>
         <div className="group relative flex flex-col justify-center items-center cursor-pointer hover:text-primary text-white/60">
           <FaXTwitter />
-          <span className="absolute -top-16 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
+          <span className="absolute -top-10 opacity-0 group-hover:-top-8 group-hover:opacity-100 bg-white text-black text-xs rounded py-1 px-2 transition-all duration-300 whitespace-nowrap z-[999]">
             X
           </span>
         </div>

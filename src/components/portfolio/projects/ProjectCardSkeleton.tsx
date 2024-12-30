@@ -2,9 +2,9 @@ import React from "react";
 
 export default function ProjectCardSkeleton() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden animate-pulse cursor-pointer lg:w-72">
+    <div className="bg-black/30 border border-white/20 rounded-lg overflow-hidden animate-pulse cursor-pointer lg:w-72">
       <div
-        className="relative w-full h-0 bg-gray-300 dark:bg-gray-700"
+        className="relative w-full h-0 bg-white/10"
         style={{ paddingBottom: "56.25%" }}
       />
       <div className="p-4">
