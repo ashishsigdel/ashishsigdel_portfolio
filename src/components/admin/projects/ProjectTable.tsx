@@ -1,15 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { projectsMe } from "@/data/dashboard";
 import { SingleProject } from "@/components/admin/projects";
 import { Pagination, SingleLineLoading } from "@/components/common";
 import Search from "@/components/common/Search";
 import Link from "next/link";
+import useProject from "./useProject";
+import { useSearchParams } from "next/navigation";
 
 export default function ProjectTable() {
-  const [loading, setLoading] = useState(false);
-  const updateProjectStatus = (id: string, isActive: boolean) => {};
-  const removeProject = (id: string) => {};
+  const searchValue = useSearchParams().get("search") || "";
+  const [refresh, setRefresh] = useState<boolean>(false);
+
+  const {
+    projects,
+    fetchProjects,
+    currentPage,
+    setCurrentPage,
+    totalPage,
+    setTotalPage,
+    loading,
+    updateProjectStatus,
+    removeProject,
+  } = useProject();
+
+  useEffect(() => {
+    fetchProjects(searchValue ? 1 : currentPage, searchValue);
+  }, [searchValue, refresh]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    fetchProjects(page, searchValue);
+  };
   return (
     <>
       <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
@@ -64,7 +86,7 @@ export default function ProjectTable() {
                     </td>
                   </tr>
                 </>
-              ) : projectsMe.length === 0 ? (
+              ) : projects.length === 0 ? (
                 <tr>
                   <td
                     scope="row"
@@ -76,7 +98,7 @@ export default function ProjectTable() {
                 </tr>
               ) : (
                 <>
-                  {projectsMe.map((project: any, index) => (
+                  {projects.map((project: any, index) => (
                     <SingleProject
                       updateProjectStatus={updateProjectStatus}
                       project={project}
@@ -91,9 +113,9 @@ export default function ProjectTable() {
           </table>
         </div>
         <Pagination
-          totalPages={5}
-          currentPage={3}
-          handlePageChange={() => console.log("page change")}
+          totalPages={totalPage}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
         />
       </div>
     </>

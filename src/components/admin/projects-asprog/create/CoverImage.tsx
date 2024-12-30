@@ -62,7 +62,7 @@ export default function CoverImage({
             <>
               <Image
                 src={imagePreview ? imagePreview : coverImageUrlFromServer}
-                height={1000}
+                height={500}
                 width={200}
                 className="object-cover rounded-md w-full border-[1px] border-solid border-[#eee] dark:border-gray-500"
                 alt="Cover Image"

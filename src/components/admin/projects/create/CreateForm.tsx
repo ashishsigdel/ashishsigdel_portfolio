@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CoverImage,
   LinkInformation,
@@ -41,7 +41,17 @@ export default function CreateForm() {
     tagsError,
     loading,
     setDescriptionError,
+    fetchProject,
+    coverImageUrlFromServer,
+    previewImagesUrlFromServer,
+    handleUpdate,
   } = useCreate();
+
+  useEffect(() => {
+    if (projectId) {
+      fetchProject(projectId);
+    }
+  }, []);
 
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full border border-color">
@@ -66,11 +76,13 @@ export default function CreateForm() {
             setPreviewImages={setPreviewImages}
             setPreviewImagesError={setPreviewImagesError}
             previewImagesError={previewImagesError}
+            previewImagesUrlFromServer={previewImagesUrlFromServer}
           />
         </div>
         <div className="w-full xl:w-[35%] p-2">
           <CoverImage
             coverImage={coverImage}
+            coverImageUrlFromServer={coverImageUrlFromServer}
             setCoverImage={setCoverImage}
             setCoverImageError={setCoverImageError}
             coverImageError={coverImageError}
@@ -86,18 +98,23 @@ export default function CreateForm() {
       </div>
 
       <div className="w-full text-end">
-        <button
-          className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
-          onClick={handleSubmit}
-        >
-          {loading ? (
-            <ButtonLoader />
-          ) : projectId ? (
-            "Update Project"
-          ) : (
-            "Create Project"
-          )}
-        </button>
+        {loading ? (
+          <ButtonLoader />
+        ) : projectId ? (
+          <button
+            className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
+            onClick={() => handleUpdate(projectId)}
+          >
+            Update
+          </button>
+        ) : (
+          <button
+            className="py-1.5 px-3 bg-skin text-[14px] font-normal text-white rounded-md my-4"
+            onClick={handleSubmit}
+          >
+            Create
+          </button>
+        )}
       </div>
     </div>
   );

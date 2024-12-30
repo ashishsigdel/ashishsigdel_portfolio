@@ -18,7 +18,7 @@ export default function SingleProject({
 }: {
   project: any;
   index: number;
-  updateProjectStatus: (id: string, isActive: boolean) => void;
+  updateProjectStatus: (id: string) => void;
   removeProject: (id: string) => void;
   refresh?: () => void;
 }) {
@@ -26,10 +26,9 @@ export default function SingleProject({
   const openDeleteModal = () => setShowDeleteModal(true);
   const closeDeleteModal = () => setShowDeleteModal(false);
 
-  const changeStatus = async (id: string, status: boolean) => {};
-
   const initiateDelete = async (id: string) => {
     closeDeleteModal();
+    removeProject(id);
   };
 
   return (
@@ -72,8 +71,8 @@ export default function SingleProject({
         >
           <Switch
             id={project.id}
-            status={project.isActive}
-            changeStatus={changeStatus}
+            status={project.isEnable}
+            changeStatus={updateProjectStatus}
           />
         </td>
 

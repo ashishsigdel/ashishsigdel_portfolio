@@ -9,6 +9,7 @@ export default function PreviewImages({
   setPreviewImages,
   previewImagesError,
   setPreviewImagesError,
+  previewImagesUrlFromServer,
 }: any) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -116,6 +117,22 @@ export default function PreviewImages({
 
       {/* Preview Images */}
       <div className="flex flex-wrap gap-3">
+        {previewImagesUrlFromServer.length > 0 &&
+          previewImagesUrlFromServer.map((image: any) => (
+            <div
+              key={image.id}
+              className="relative pb-10 pt-5 px-4 sm:px-6 md:px-8"
+            >
+              <Image
+                src={image.previewUrl}
+                alt={`Preview ${image.id}`}
+                width={200}
+                height={200}
+                className="object-cover rounded-md border border-color w-[200px] h-[200px]"
+                onClick={() => openLightBox(image)}
+              />
+            </div>
+          ))}
         {previewUrls.map((image, index) => (
           <div key={index} className="relative pb-10 pt-5 px-4 sm:px-6 md:px-8">
             <Image
