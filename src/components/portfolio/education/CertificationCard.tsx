@@ -15,7 +15,7 @@ interface CertificateProps {
 
 const CertificationCard = ({ certification }: CertificateProps) => {
   return (
-    <div className="group relative overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl backdrop-blur-md border border-color">
+    <div className="relative overflow-hidden rounded-lg shadow-md transition-all duration-300 backdrop-blur-md border border-white/20 w-full">
       {/* Image Container */}
       <div className="relative h-40 w-full overflow-hidden bg-gray-100">
         <Image
@@ -29,7 +29,7 @@ const CertificationCard = ({ certification }: CertificateProps) => {
 
       {/* Content Container */}
       <div className="px-5 py-3">
-        <h3 className="mb-2 text-xl font-bold text-white/90 transition-colors duration-300 group-hover:text-blue-600">
+        <h3 className="mb-1 text-xl font-bold text-white/90 transition-colors duration-300 group-hover:text-blue-600">
           {certification.name}
         </h3>
         <p className="mb-4 text-gray-300">
@@ -40,7 +40,7 @@ const CertificationCard = ({ certification }: CertificateProps) => {
         <div className="flex justify-start">
           <Link
             href={certification.Link}
-            className="relative overflow-hidden py-3 px-4 border border-gray-400 hover:border-portfolio-primary/80 transition-all duration-500 rounded-md font-geist group inline-block"
+            className="relative overflow-hidden py-2 px-3 border border-gray-400 hover:border-portfolio-primary/80 transition-all duration-500 rounded-md font-geist group inline-block"
           >
             <span className="relative z-10 flex items-center gap-4 text-gray-300 group-hover:text-white transition-colors duration-500 font-geist">
               go-there
