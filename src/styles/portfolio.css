@@ -30,7 +30,7 @@ html {
   font-family: "Libre Baskerville", sans-serif;
 }
 
-.grid {
+.blur-text {
   display: grid;
   font-family: "Libre Baskerville", sans-serif;
   grid-template-columns: repeat(6, 1fr);
