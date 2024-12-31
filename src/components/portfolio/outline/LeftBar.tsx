@@ -1,14 +1,13 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IoHome } from "react-icons/io5";
 import { MenuData } from "@/data/portfolioMenu";
 
 export default function LeftBar() {
   const pathname = usePathname();
 
   const isActive = (page: string) => {
-    return page === pathname;
+    return page === "/" + pathname.split("/")[1];
   };
 
   return (

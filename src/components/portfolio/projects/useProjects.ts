@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchAll } from "@/services/portfolio/projectService";
+import { fetchAll, fetchUnique } from "@/services/portfolio/projectService";
 import { ProjectTableProps } from "@/types/asprog";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -11,6 +11,7 @@ export default function useProjects() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [selectedTag, setSelectedTag] = useState("all");
+  const [project, setProject] = useState({});
 
   const fetchProjects = async (page: number, search: string) => {
     try {
@@ -19,6 +20,18 @@ export default function useProjects() {
       setProjects(response.data.projects || []);
       setCurrentPage(response.data.currentPage);
       setTotalPage(response.data.totalPages);
+    } catch (error) {
+      toast.error("Failed to fetch projects");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchProject = async (id: number) => {
+    try {
+      setLoading(true);
+      const response = await fetchUnique(id);
+      setProject(response.data);
     } catch (error) {
       toast.error("Failed to fetch projects");
     } finally {
@@ -37,5 +50,7 @@ export default function useProjects() {
     setLoading,
     selectedTag,
     setSelectedTag,
+    fetchProject,
+    project,
   };
 }

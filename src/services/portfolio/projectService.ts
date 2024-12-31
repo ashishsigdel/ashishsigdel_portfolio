@@ -18,3 +18,12 @@ export const fetchAll = async ({
     throw error;
   }
 };
+
+export const fetchUnique = async (id: number) => {
+  try {
+    const response = await myAxios.get(`/project/get-by-id/${id}`);
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};

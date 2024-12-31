@@ -2,8 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import useContact from "./useContact";
-import { MdArrowForward, MdMail } from "react-icons/md";
-import { FaCheck } from "react-icons/fa";
+import { MdMail } from "react-icons/md";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { IoReload } from "react-icons/io5";
 import { Spinner } from "@/components/common";
