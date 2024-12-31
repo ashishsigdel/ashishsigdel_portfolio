@@ -1,9 +1,8 @@
 import { Menu } from "@/types/menu";
 import { FaGraduationCap } from "react-icons/fa";
 import { FiPenTool } from "react-icons/fi";
-import { IoGitNetwork, IoHome } from "react-icons/io5";
+import { IoHome, IoMail } from "react-icons/io5";
 import { LuFolderGit2, LuMessageCircle } from "react-icons/lu";
-import { PiArticleNyTimesBold } from "react-icons/pi";
 
 export const MenuData: Menu[] = [
   {
@@ -34,6 +33,6 @@ export const MenuData: Menu[] = [
     id: 5,
     name: "Contact",
     link: "/contact",
-    icon: LuMessageCircle,
+    icon: IoMail,
   },
 ];
