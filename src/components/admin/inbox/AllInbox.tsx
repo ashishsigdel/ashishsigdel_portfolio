@@ -1,15 +1,34 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { messages } from "@/data/dashboard";
 import SingleLineImage from "./SingleInbox";
 import { Pagination, SingleLineLoading } from "@/components/common";
 import SingleInbox from "./SingleInbox";
+import useInbox from "./useInbox";
 
 export default function AllInbox() {
-  const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState<boolean>(false);
   const updateProfileStatus = (id: string, isActive: boolean) => {};
   const removeProfile = (id: string) => {};
+
+  const {
+    inbox,
+    loading,
+    getAll,
+    currentPage,
+    setCurrentPage,
+    totalPage,
+    updateSeenStatus,
+  } = useInbox();
+
+  useEffect(() => {
+    getAll(1);
+  }, []);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    getAll(page);
+  };
 
   return (
     <>
@@ -58,7 +77,7 @@ export default function AllInbox() {
                     </td>
                   </tr>
                 </>
-              ) : messages.length === 0 ? (
+              ) : inbox.length === 0 ? (
                 <tr>
                   <td
                     scope="row"
@@ -70,9 +89,9 @@ export default function AllInbox() {
                 </tr>
               ) : (
                 <>
-                  {messages.map((message: any, index) => (
+                  {inbox.map((message: any, index) => (
                     <SingleInbox
-                      updateProfileStatus={updateProfileStatus}
+                      updateSeenStatus={updateSeenStatus}
                       message={message}
                       index={index}
                       key={message.id}
@@ -85,9 +104,9 @@ export default function AllInbox() {
           </table>
         </div>
         <Pagination
-          totalPages={5}
-          currentPage={3}
-          handlePageChange={() => console.log("page change")}
+          totalPages={totalPage}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
         />
       </div>
     </>

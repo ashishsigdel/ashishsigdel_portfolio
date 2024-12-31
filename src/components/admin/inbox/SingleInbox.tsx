@@ -8,22 +8,28 @@ import LogoImage from "@/assets/image-placeholder.png";
 import { Modal } from "@/components/modal";
 import { ViewModal } from "@/components/admin/inbox";
 import toast from "react-hot-toast";
+import { GoDotFill } from "react-icons/go";
 
 export default function SingleInbox({
   message,
   index,
-  updateProfileStatus,
+  updateSeenStatus,
   removeProfile,
   refresh,
 }: {
   message: any;
   index: number;
-  updateProfileStatus: (id: string, isActive: boolean) => void;
+  updateSeenStatus: (id: number) => void;
   removeProfile: (id: string) => void;
   refresh?: () => void;
 }) {
   const [showViewModal, setShowViewModal] = useState<boolean>(false);
-  const openViewModal = () => setShowViewModal(true);
+  const openViewModal = () => {
+    if (!message.seen) {
+      updateSeenStatus(message.id);
+    }
+    setShowViewModal(true);
+  };
   const closeViewModal = () => setShowViewModal(false);
 
   return (
@@ -31,26 +37,37 @@ export default function SingleInbox({
       <tr className="border-b border-dashed border-color ">
         <td
           scope="row"
-          className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor "
+          className={`pr-6 py-4 whitespace-nowrap text-graycolor ${
+            message.seen ? "font-normal" : "font-semibold"
+          }`}
         >
           {index + 1}
         </td>
         <td
           scope="row"
-          className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor "
+          className={`pr-6 py-4 whitespace-nowrap text-graycolor ${
+            message.seen ? "font-normal" : "font-semibold"
+          }`}
         >
-          {message.fullName}
+          <div className="flex gap-2 items-center">
+            {message.fullName}
+            {!message.seen && <GoDotFill className="text-blue-500" size={20} />}
+          </div>
         </td>
         <td
           scope="row"
-          className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor "
+          className={`pr-6 py-4 whitespace-nowrap text-graycolor ${
+            message.seen ? "font-normal" : "font-semibold"
+          }`}
         >
           {message.email}
         </td>
 
         <td
           scope="row"
-          className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor"
+          className={`pr-6 py-4 whitespace-nowrap text-graycolor ${
+            message.seen ? "font-normal" : "font-semibold"
+          }`}
         >
           {message.createdAt}
         </td>

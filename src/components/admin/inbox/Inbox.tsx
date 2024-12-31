@@ -1,12 +1,4 @@
 import Link from "next/link";
-import {
-  NewMessage,
-  RecentMessages,
-  RecentUsers,
-  TotalAsprogProjects,
-  TotalProjects,
-  TotalUsers,
-} from "@/components/admin/dashboard";
 import { AllInbox } from "@/components/admin/inbox";
 
 export default function Inbox() {
