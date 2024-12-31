@@ -5,7 +5,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
-const SidebarLink = ({ menu, fullbar }: { menu: Menu; fullbar: boolean }) => {
+const SidebarLink = ({
+  menu,
+  fullbar,
+  newMessage,
+}: {
+  menu: Menu;
+  fullbar: boolean;
+  newMessage: number;
+}) => {
   const pathname = usePathname();
 
   const checkPath = menu.link.split("/")[1];
@@ -17,8 +25,6 @@ const SidebarLink = ({ menu, fullbar }: { menu: Menu; fullbar: boolean }) => {
   const handleSubMenu = () => {
     setSubMenu(!subMenu);
   };
-
-  let newMessage = Number(localStorage.getItem("newMessage")) | 0;
 
   return (
     <>

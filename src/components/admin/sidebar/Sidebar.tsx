@@ -15,6 +15,8 @@ export default function Sidebar() {
     setOpenFullSidebar(!openFullSidebar);
   };
 
+  let newMessage = Number(localStorage.getItem("newMessage")) | 0;
+
   return (
     <div
       className={`sidebar sticky top-0 z-[999] bg-white dark:bg-black min-h-screen ${
@@ -47,6 +49,7 @@ export default function Sidebar() {
                 key={menu.id}
                 menu={menu}
                 fullbar={openFullSidebar}
+                newMessage={newMessage}
               />
             );
           })}

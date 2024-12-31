@@ -35,13 +35,16 @@ export default function useInbox() {
 
   const updateSeenStatus = async (id: number) => {
     try {
-      const response = await updateSeen(id);
-
       setInbox((prevInbox) =>
         prevInbox.map((inbox) =>
           inbox.id === id ? { ...inbox, seen: true } : inbox
         )
       );
+      localStorage.setItem(
+        "newMessage",
+        (Number(localStorage.getItem("newMessage")) - 1).toString()
+      );
+      const response = await updateSeen(id);
     } catch (error: any) {
       console.log(error?.response?.data?.message || "Something went wrong!");
     } finally {
