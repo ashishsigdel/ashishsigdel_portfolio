@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import {
   NewMessage,
@@ -7,8 +8,14 @@ import {
   TotalProjects,
   TotalUsers,
 } from "@/components/admin/dashboard";
+import useDashboard from "./useDashboard";
 
 export default function Dashboard() {
+  const { dashbordData, loading } = useDashboard();
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
   return (
     <div className="bg-light-white dark:bg-dark-black pb-5">
       <div className="px-6 w-full flex justify-between items-center ">
@@ -26,26 +33,26 @@ export default function Dashboard() {
       <div className="px-6 mb-4">
         <div className="flex flex-wrap gap-4 justify-center">
           <div className="flex-1 min-w-[300px] md:min-w-[500px] ">
-            <TotalProjects />
+            <TotalProjects total={dashbordData.totalPortfolio} />
           </div>
           <div className="flex-1 min-w-[300px] md:min-w-[500px] ">
-            <NewMessage />
+            <NewMessage total={dashbordData.newMessages} />
           </div>
           <div className="flex-1 min-w-[300px] md:min-w-[500px] ">
-            <TotalAsprogProjects />
+            <TotalAsprogProjects total={dashbordData.totalCreation} />
           </div>
           <div className="flex-1 min-w-[300px] md:min-w-[500px] ">
-            <TotalUsers />
+            <TotalUsers total={dashbordData.totalUsers} />
           </div>
         </div>
       </div>
       <div className="px-6 mb-4">
         <div className="flex flex-wrap gap-4 justify-center">
           <div className="flex-1 min-w-[300px] md:min-w-[500px] ">
-            <RecentMessages />
+            <RecentMessages messages={dashbordData.recentMessages} />
           </div>
           <div className="flex-1 min-w-[300px] md:min-w-[500px] ">
-            <RecentUsers />
+            <RecentUsers users={dashbordData.recentUsers} />
           </div>
         </div>
       </div>

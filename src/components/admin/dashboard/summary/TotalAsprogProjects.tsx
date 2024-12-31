@@ -1,6 +1,6 @@
 import { AiFillProduct } from "react-icons/ai";
 
-export default function TotalAsprogProjects() {
+export default function TotalAsprogProjects({ total }: { total: number }) {
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       {/* Header Section */}
@@ -27,7 +27,7 @@ export default function TotalAsprogProjects() {
           <p className="text-gray-600 dark:text-gray-300 text-sm">
             asProg-Projects
           </p>
-          <p className="text-3xl font-bold">3</p>
+          <p className="text-3xl font-bold">{total}</p>
         </div>
       </div>
 

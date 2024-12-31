@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import { messages } from "@/data/dashboard";
+// import { messages } from "@/data/dashboard";
 
-export default function RecentMessages() {
+export default function RecentMessages({ messages }: { messages: any }) {
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       <div className="flex justify-between items-center">
@@ -12,7 +12,7 @@ export default function RecentMessages() {
             List of messages received recently
           </span>
         </div>
-        <Link href={"/portfolio/contact"}>
+        <Link href={"/inbox"}>
           <div className="py-2 px-3 bg-blue-500 text-[14px] font-normal text-white rounded-md">
             View All Messages
           </div>
@@ -34,32 +34,34 @@ export default function RecentMessages() {
             </tr>
           </thead>
           <tbody>
-            {messages.map((message, index) => (
-              <tr
-                key={message.id}
-                className="border-b border-dashed border-color hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-sm px-2"
-              >
-                <td
-                  scope="row"
-                  className="pr-6 py-4 font-normal whitespace-nowrap  text-gray-600 dark:text-gray-400"
+            {messages &&
+              messages.length > 0 &&
+              messages.map((message: any, index: number) => (
+                <tr
+                  key={message.id}
+                  className="border-b border-dashed border-color hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-sm px-2"
                 >
-                  {index + 1}
-                </td>
-                <td
-                  scope="row"
-                  className="pr-6 py-4 font-normal whitespace-nowrap text-gray-600 dark:text-gray-400"
-                >
-                  <p>{message.fullName}</p>
-                  <p>{message.email}</p>
-                </td>
-                <td
-                  scope="row"
-                  className="pr-6 h-14 py-4 font-normal line-clamp-2 text-gray-600 dark:text-gray-400"
-                >
-                  <p>{message.message}</p>
-                </td>
-              </tr>
-            ))}
+                  <td
+                    scope="row"
+                    className="pr-6 py-4 font-normal whitespace-nowrap  text-gray-600 dark:text-gray-400"
+                  >
+                    {index + 1}
+                  </td>
+                  <td
+                    scope="row"
+                    className="pr-6 py-4 font-normal whitespace-nowrap text-gray-600 dark:text-gray-400"
+                  >
+                    <p>{message.fullName}</p>
+                    <p>{message.email}</p>
+                  </td>
+                  <td
+                    scope="row"
+                    className="pr-6 h-14 py-4 font-normal line-clamp-2 text-gray-600 dark:text-gray-400"
+                  >
+                    <p>{message.message}</p>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

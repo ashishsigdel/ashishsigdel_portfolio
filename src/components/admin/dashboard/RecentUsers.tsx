@@ -1,10 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import { messages } from "@/data/dashboard";
 import Image from "next/image";
 import defaultImage from "@/assets/image-placeholder.png";
 
-export default function RecentUserqs() {
+export default function RecentUsers({ users }: { users: any }) {
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       <div className="flex justify-between items-center">
@@ -36,38 +35,40 @@ export default function RecentUserqs() {
             </tr>
           </thead>
           <tbody>
-            {messages.map((message, index) => (
-              <tr
-                key={message.id}
-                className="border-b border-dashed border-color hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-sm px-2"
-              >
-                <td
-                  scope="row"
-                  className="pr-6 py-4 font-normal whitespace-nowrap  text-gray-600 dark:text-gray-400"
+            {users &&
+              users.length > 0 &&
+              users.map((user: any, index: number) => (
+                <tr
+                  key={user.id}
+                  className="border-b border-dashed border-color hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-sm px-2"
                 >
-                  {index + 1}
-                </td>
-                <td
-                  scope="row"
-                  className="pr-6 py-4 font-normal whitespace-nowrap text-gray-600 dark:text-gray-400"
-                >
-                  <div className="flex space-x-3 items-center">
-                    <Image
-                      src={defaultImage}
-                      alt="Profilepic"
-                      className="w-10 h-10 object-cover rounded-md"
-                    ></Image>
-                    <p>{message.fullName}</p>
-                  </div>
-                </td>
-                <td
-                  scope="row"
-                  className="pr-6 py-4 font-normal whitespace-nowrap text-gray-600 dark:text-gray-400"
-                >
-                  <p>{message.email}</p>
-                </td>
-              </tr>
-            ))}
+                  <td
+                    scope="row"
+                    className="pr-6 py-4 font-normal whitespace-nowrap  text-gray-600 dark:text-gray-400"
+                  >
+                    {index + 1}
+                  </td>
+                  <td
+                    scope="row"
+                    className="pr-6 py-4 font-normal whitespace-nowrap text-gray-600 dark:text-gray-400"
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <Image
+                        src={defaultImage}
+                        alt="Profilepic"
+                        className="w-10 h-10 object-cover rounded-md"
+                      ></Image>
+                      <p>{user.fullName}</p>
+                    </div>
+                  </td>
+                  <td
+                    scope="row"
+                    className="pr-6 py-4 font-normal whitespace-nowrap text-gray-600 dark:text-gray-400"
+                  >
+                    <p>{user.email}</p>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

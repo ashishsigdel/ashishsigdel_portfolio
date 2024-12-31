@@ -1,6 +1,6 @@
 import { AiFillAppstore } from "react-icons/ai";
 
-export default function TotalProjects() {
+export default function TotalProjects({ total }: { total: number }) {
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       {/* Header Section */}
@@ -27,7 +27,7 @@ export default function TotalProjects() {
           <p className="text-gray-600 dark:text-gray-300 text-sm">
             Total Projects
           </p>
-          <p className="text-3xl font-bold">7</p>
+          <p className="text-3xl font-bold">{total}</p>
         </div>
       </div>
 

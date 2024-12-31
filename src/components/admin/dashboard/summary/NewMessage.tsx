@@ -1,6 +1,6 @@
 import { AiFillMessage } from "react-icons/ai";
 
-export default function NewMessage() {
+export default function NewMessage({ total }: { total: number }) {
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       {/* Header Section */}
@@ -27,7 +27,7 @@ export default function NewMessage() {
           <p className="text-gray-600 dark:text-gray-300 text-sm">
             New Messages
           </p>
-          <p className="text-3xl font-bold">9</p>
+          <p className="text-3xl font-bold">{total}</p>
         </div>
       </div>
 

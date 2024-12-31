@@ -1,6 +1,6 @@
 import { FaUsers } from "react-icons/fa";
 
-export default function TotalUsers() {
+export default function TotalUsers({ total }: { total: number }) {
   return (
     <div className="bg-white dark:bg-black shadow rounded-lg p-6 w-full">
       {/* Header Section */}
@@ -27,7 +27,7 @@ export default function TotalUsers() {
           <p className="text-gray-600 dark:text-gray-300 text-sm">
             Total Users
           </p>
-          <p className="text-3xl font-bold">57</p>
+          <p className="text-3xl font-bold">{total}</p>
         </div>
       </div>
 

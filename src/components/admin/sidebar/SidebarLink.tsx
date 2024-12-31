@@ -2,7 +2,7 @@
 import { Menu } from "@/types/menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 const SidebarLink = ({ menu, fullbar }: { menu: Menu; fullbar: boolean }) => {
@@ -18,6 +18,8 @@ const SidebarLink = ({ menu, fullbar }: { menu: Menu; fullbar: boolean }) => {
     setSubMenu(!subMenu);
   };
 
+  let newMessage = Number(localStorage.getItem("newMessage")) | 0;
+
   return (
     <>
       <div className="relative">
@@ -27,13 +29,22 @@ const SidebarLink = ({ menu, fullbar }: { menu: Menu; fullbar: boolean }) => {
             pathname.split("/")[1] === checkPath && "bg-gray-500/[.2]"
           } `}
         >
-          <div className="flex gap-3 py-[10px] items-center cursor-pointer">
+          <div className="flex gap-3 py-[10px] items-center cursor-pointer relative w-full">
             {menu.icon && (
               <menu.icon className="text-2xl opacity-60 text-dark-black dark:text-light-white hover:text-black dark:hover:text-white" />
             )}
             {fullbar && (
               <span className="font-semibold overflow-hidden whitespace-nowrap">
                 {menu.name}
+              </span>
+            )}
+            {menu.name === "Inbox" && newMessage > 0 && (
+              <span
+                className={`absolute right-[-5px] ${
+                  !fullbar && "top-[-1px]"
+                }  bg-blue-500 text-white h-5 w-5 flex items-center justify-center rounded-full text-xs`}
+              >
+                {newMessage}
               </span>
             )}
           </div>
