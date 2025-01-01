@@ -9,12 +9,17 @@ import {
   TotalUsers,
 } from "@/components/admin/dashboard";
 import useDashboard from "./useDashboard";
+import { Loader } from "@/utils";
 
 export default function Dashboard() {
   const { dashbordData, loading } = useDashboard();
 
   if (loading) {
-    return <div>Loading</div>;
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-80px)] w-full relative">
+        <Loader />
+      </div>
+    );
   }
   return (
     <div className="bg-light-white dark:bg-dark-black pb-5">
