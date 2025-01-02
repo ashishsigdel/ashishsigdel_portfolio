@@ -1,10 +1,20 @@
+"use client";
 import React from "react";
 import "@/styles/background.css";
 import { Floating } from "../utils";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <div className="h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-5 relative">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{
+        duration: 0.7,
+        ease: "easeInOut",
+      }}
+      className="h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-5 relative"
+    >
       <span className="text-sm text-white/60 -mt-10 mb-10 uppercase">
         Education
       </span>
@@ -24,6 +34,6 @@ export default function Hero() {
       </div>
 
       <Floating />
-    </div>
+    </motion.div>
   );
 }
