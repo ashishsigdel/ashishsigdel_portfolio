@@ -4,11 +4,16 @@ import TopBar from "./TopBar";
 import LeftBar from "./LeftBar";
 import BottomBar from "./BottomBar";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Outline({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
   return (
     <motion.div
-      initial={{ scale: 0.8, opacity: 0 }}
+      initial={
+        pathname === "/" ? { scale: 0.8, opacity: 0 } : { scale: 1, opacity: 1 }
+      }
       animate={{ scale: 1, opacity: 1 }}
       transition={{
         duration: 0.5,
