@@ -1,18 +1,11 @@
 "use client";
 import { deleteUser, getAll } from "@/services/admin/userServices";
+import { UserListAmdin } from "@/types/user";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function useUsers() {
-  const [users, setUsers] = useState<
-    {
-      id: number;
-      fullName: string;
-      email: string;
-      role: string;
-      newsletter?: boolean;
-    }[]
-  >([]);
+  const [users, setUsers] = useState<UserListAmdin[]>([]);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);

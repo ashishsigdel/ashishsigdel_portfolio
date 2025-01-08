@@ -3,6 +3,9 @@ import { BiTrash } from "react-icons/bi";
 import { useState } from "react";
 import { Modal } from "@/components/modal";
 import DeleteModal from "@/components/modal/DeleteModal";
+import { MdVerified } from "react-icons/md";
+import { UserListAmdin } from "@/types/user";
+import { RiErrorWarningFill } from "react-icons/ri";
 
 export default function SingleTag({
   user,
@@ -11,7 +14,7 @@ export default function SingleTag({
   removeUser,
   refresh,
 }: {
-  user: any;
+  user: UserListAmdin;
   index: number;
   updateUserStatus: (id: string, isActive: boolean) => void;
   removeUser: (id: number | string) => void;
@@ -37,9 +40,28 @@ export default function SingleTag({
         </td>
         <td
           scope="row"
-          className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor "
+          className="pr-6 py-4 font-semibold whitespace-nowrap text-graycolor"
         >
-          {user.fullName}
+          <div className="flex gap-x-2 items-center">
+            {user.fullName}
+            {user.validEmail ? (
+              <MdVerified
+                className="cursor-pointer"
+                size={18}
+                color={
+                  user.role === "admin" || user.role === "watcher"
+                    ? "green"
+                    : "#047ada"
+                }
+              />
+            ) : (
+              <RiErrorWarningFill
+                className="cursor-pointer"
+                size={18}
+                color={"red"}
+              />
+            )}
+          </div>
         </td>
         <td
           scope="row"

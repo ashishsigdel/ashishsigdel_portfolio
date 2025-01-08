@@ -24,3 +24,12 @@ export type UserAdmin = {
   newsletter?: boolean;
   twoFactorEnable?: boolean;
 };
+
+export type UserListAmdin = {
+  id: string;
+  fullName: string;
+  email: string;
+  role: string;
+  newsletter: boolean;
+  validEmail: boolean;
+};
