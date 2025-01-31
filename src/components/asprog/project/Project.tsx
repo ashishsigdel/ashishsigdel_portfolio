@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { FaGlobe } from "react-icons/fa";
+import { FaDownload, FaGlobe } from "react-icons/fa";
 import Image from "next/image";
 import { projects } from "@/data/projects";
 import FreeLinkForm from "./FreeLinkForm";
@@ -66,6 +66,11 @@ export default function Project() {
             />
           )}
         </div>
+        <div className="my-5 flex items-center gap-x-4">
+          {" "}
+          <FaDownload /> {project.totalDownload} Downloads
+        </div>
+
         <div className="description-container">
           <div
             className="description-content"

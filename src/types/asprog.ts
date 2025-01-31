@@ -38,4 +38,5 @@ export type ProjectClient = {
   demoLink?: string;
   price?: string;
   actualPrice?: string;
+  totalDownload?: number;
 };

@@ -35,9 +35,12 @@ export default function ProjectCard({ project }: any) {
             {project.title}
           </h4>
           <p
-            className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2"
+            className="text-sm text-gray-700 dark:text-gray-300 mt-2 line-clamp-2"
             dangerouslySetInnerHTML={{ __html: project.description }}
           ></p>
+          <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+            {project.totalDownload} downloads
+          </p>
         </div>
       </div>
     </Link>
