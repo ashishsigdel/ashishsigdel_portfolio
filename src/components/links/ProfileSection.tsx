@@ -16,7 +16,7 @@ export default function ProfileSection() {
         alt="Ashish-sigdel"
       />
       <Link
-        href="https://me.ashishsigdel.com.np"
+        href="https://ashishsigdel.com.np"
         className="px-4 py-3 flex items-center justify-between bg-gray-200 dark:bg-gray-900 w-full rounded-lg text-dark-black dark:text-light-white font-semibold gap-x-5 font-geist text-[16px border border-black/10 dark:border-white/10 mt-5 md:mt-10 cursor-pointer"
       >
         <div className="flex gap-3 items-center">

@@ -51,7 +51,7 @@ export const asProgLinks: {
   },
   {
     name: "Newsletter",
-    link: "https://resources.ashishsigdel.com.np",
+    link: "https://asprog.ashishsigdel.com.np/resources",
     icon: letter,
   },
 ];
