@@ -98,15 +98,17 @@ export default function ProjectTable() {
                 </tr>
               ) : (
                 <>
-                  {projects.map((project: any, index) => (
-                    <SingleProject
-                      updateProjectStatus={updateProjectStatus}
-                      project={project}
-                      index={index}
-                      key={project.id}
-                      removeProject={removeProject}
-                    />
-                  ))}
+                  {projects &&
+                    projects.length > 0 &&
+                    projects.map((project: any, index) => (
+                      <SingleProject
+                        updateProjectStatus={updateProjectStatus}
+                        project={project}
+                        index={index}
+                        key={project.id}
+                        removeProject={removeProject}
+                      />
+                    ))}
                 </>
               )}
             </tbody>

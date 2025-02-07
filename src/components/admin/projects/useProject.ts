@@ -30,13 +30,13 @@ export default function useProject() {
 
   const updateStatus = async (id: string) => {
     try {
+      const response = await changeVisiblility(id);
+      const updatedStatus = response.data.isEnable;
       setProjects((prevProjects) =>
         prevProjects.map((project) =>
           project.id === id ? { ...project, isEnable: updatedStatus } : project
         )
       );
-      const response = await changeVisiblility(id);
-      const updatedStatus = response.data.isEnable;
     } catch (error: any) {
       throw error?.response?.data?.message || "Failed to update project status";
     }
