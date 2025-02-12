@@ -4,7 +4,7 @@ import { Header } from "@/components/asprog/header";
 import { Footer } from "@/components/asprog/footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://127.0.0.1:3000"),
+  metadataBase: new URL("https://asprog.ashishsigdel.com.np"),
 
   title: "AsProg",
   description: "AsProg Webpage",
@@ -12,14 +12,14 @@ export const metadata: Metadata = {
     "asprog, asProg, as, prog, ashis, ashish, sigdel, sgdl, asis sgdl, portfolio, asprog, as, asr, aspro, prog, programming, ashishprogramming, asisprog, asishsigdel",
   openGraph: {
     type: "website",
-    url: "https://127.0.0.1:3000",
-    siteName: "AsProg | Links",
-    title: "AsProg | Links",
+    url: "https://asprog.ashishsigdel.com.np",
+    siteName: "AsProg Official",
+    title: "AsProg Official",
     description: "AsProg Webpage",
     images: "/favicon.ico",
   },
   twitter: {
-    site: "@ashishsigdel",
+    site: "@_ashishsigdel_",
     card: "summary_large_image",
     description: "AsProg Webpage",
     title: "AsProg | Links",
