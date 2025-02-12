@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     siteName: "AsProg Official",
     title: "AsProg Official",
     description: "AsProg Webpage",
-    images: "/favicon.ico",
+    images: "/banner.jpg",
   },
   twitter: {
     site: "@_ashishsigdel_",
     card: "summary_large_image",
     description: "AsProg Webpage",
-    title: "AsProg | Links",
-    images: "/favicon.ico",
+    title: "AsProg Official",
+    images: "/banner.jpg",
   },
 };
 
