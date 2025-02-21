@@ -50,7 +50,8 @@ export default function Footer() {
         </div>
         <div className="mt-10 text-sm text-white/90 w-full">
           <p className="text-center">
-            &copy; Ashish Sigdel 2024 - All Right Reserved!
+            &copy; Ashish Sigdel {new Date().getFullYear()} - All Right
+            Reserved!
           </p>
         </div>
       </div>

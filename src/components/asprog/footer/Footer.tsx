@@ -14,11 +14,13 @@ export default function Footer() {
           <FooterLinks />
         </div>
         <div className="mt-12 pb-6 px-10 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm text-gray-500">&copy; 2024 asProg.</p>
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} asProg.
+          </p>
           <p className="text-sm text-gray-500">
             Developed by:{" "}
             <Link
-              href={"https://facebook.com"}
+              href={"https://ashishsigdel.com.np"}
               className="underline font-medium hover:text-gray-700 dark:hover:text-gray-300"
             >
               Ashish Sigdel

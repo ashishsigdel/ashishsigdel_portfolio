@@ -34,6 +34,13 @@ export const socialLinks: {
   },
 ];
 
+export const links = {
+  github: "https://github.com/ashishsigdel",
+  linkedin: "https://www.linkedin.com/in/aasisigdel/",
+  instagram: "https://www.instagram.com/aasissigdel/",
+  facebook: "https://www.facebook.com/ashish.sgdl.9/",
+};
+
 export const asProgLinks: {
   name: string;
   link: string;
