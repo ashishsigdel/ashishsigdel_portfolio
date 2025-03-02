@@ -8,14 +8,17 @@ import { SidebarLink } from "@/components/admin/sidebar";
 import logosmall from "@/assets/logo-small.svg";
 import logofull from "@/assets/logo.svg";
 import { MenuData } from "@/data/menudata";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export default function Sidebar() {
   const [openFullSidebar, setOpenFullSidebar] = useState<boolean>(true);
   const handleOpenfullSidebar = () => {
     setOpenFullSidebar(!openFullSidebar);
   };
-
-  let newMessage = Number(localStorage.getItem("newMessage")) | 0;
+  const newMessageCount = useSelector(
+    (state: RootState) => state.messageCount.count
+  );
 
   return (
     <div
@@ -49,7 +52,7 @@ export default function Sidebar() {
                 key={menu.id}
                 menu={menu}
                 fullbar={openFullSidebar}
-                newMessage={newMessage}
+                newMessage={newMessageCount}
               />
             );
           })}

@@ -14,6 +14,8 @@ const SidebarLink = ({
   fullbar: boolean;
   newMessage: number;
 }) => {
+  console.log(newMessage);
+
   const pathname = usePathname();
 
   const checkPath = menu.link.split("/")[1];
