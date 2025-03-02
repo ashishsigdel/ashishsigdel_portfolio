@@ -1,9 +1,12 @@
 "use client";
+import { decrement } from "@/redux/features/messageCountSlice";
 import { fetchAll, updateSeen } from "@/services/admin/inboxServices";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 export default function useInbox() {
+  const dispatch = useDispatch();
   const [inbox, setInbox] = useState<
     {
       id: number;
@@ -40,11 +43,11 @@ export default function useInbox() {
           inbox.id === id ? { ...inbox, seen: true } : inbox
         )
       );
-      localStorage.setItem(
-        "newMessage",
-        (Number(localStorage.getItem("newMessage")) - 1).toString()
-      );
+
       const response = await updateSeen(id);
+      if (response.data) {
+        dispatch(decrement());
+      }
     } catch (error: any) {
       console.log(error?.response?.data?.message || "Something went wrong!");
     } finally {
