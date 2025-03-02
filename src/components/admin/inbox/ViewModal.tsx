@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useRef, useState } from "react";
+import he from "he";
 import { IoClose } from "react-icons/io5";
 type Props = {
   closeModal: () => void;
@@ -7,7 +8,7 @@ type Props = {
 
 export default function ViewModal({ closeModal, message }: Props) {
   return (
-    <div className="relative z-[50] max-w-[500px] min-w-[300px] w-full rounded-lg bg-white shadow-xl dark:bg-black">
+    <div className="relative z-[50] bg-white dark:bg-black border border-color rounded-lg shadow-3xl w-full max-w-2xl mt-100">
       <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-color">
         <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">
           Full Message Detail
@@ -39,29 +40,42 @@ export default function ViewModal({ closeModal, message }: Props) {
               {message.email}
             </p>
           </div>
-          <div>
-            <h5 className="text-sm font-medium text-gray-900 dark:text-white">
-              Company
-            </h5>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {message.company ? message.company : "-"}
-            </p>
+          <div className="flex flex-wrap gap-10 items-center">
+            <div>
+              <h5 className="text-sm font-medium text-gray-900 dark:text-white">
+                Company
+              </h5>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {message.company ? message.company : "-"}
+              </p>
+            </div>
+            <div className="">
+              <h5 className="text-sm font-medium text-gray-900 dark:text-white">
+                Received At
+              </h5>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {new Date(message.createdAt).toLocaleString("en-US", {
+                  month: "long",
+                  day: "2-digit",
+                  year: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                })}
+              </p>
+            </div>
           </div>
           <div className="mx-2">
             <h5 className="text-sm font-medium text-gray-900 dark:text-white">
               Message
             </h5>
-            <p className="text-sm text-gray-500 dark:text-gray-400 whitespace-pre-wrap bg-white dark:bg-black border border-color rounded-lg px-3 py-2 font-geist">
-              {message.message}
-            </p>
-          </div>
-          <div className="">
-            <h5 className="text-sm font-medium text-gray-900 dark:text-white">
-              Received At
-            </h5>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {message.createdAt}
-            </p>
+            <div className="description-container">
+              <div
+                className="description-content"
+                dangerouslySetInnerHTML={{
+                  __html: he.decode(message.message),
+                }}
+              ></div>
+            </div>
           </div>
         </div>
       </div>
