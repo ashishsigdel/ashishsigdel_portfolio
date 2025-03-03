@@ -19,6 +19,12 @@ export const MenuData: Menu[] = [
     link: "/",
     icon: AiTwotoneAppstore,
   },
+  {
+    id: 9,
+    name: "Profie",
+    link: "/portfolio/about",
+    icon: FaFingerprint,
+  },
 
   {
     id: 8,

@@ -33,3 +33,11 @@ export type UserListAmdin = {
   newsletter: boolean;
   validEmail: boolean;
 };
+
+export type UserListStudyHere = {
+  id: string;
+  fullName: string;
+  email: string;
+  role: string;
+  profilePic: string;
+};

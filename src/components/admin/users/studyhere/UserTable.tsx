@@ -55,9 +55,6 @@ export default function TagTable() {
                 <th scope="col" className="pr-6 py-3 whitespace-nowrap">
                   Role
                 </th>
-                <th scope="col" className="pr-6 py-3 whitespace-nowrap">
-                  Action
-                </th>
               </tr>
             </thead>
             <tbody>
