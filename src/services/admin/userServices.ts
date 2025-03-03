@@ -19,6 +19,25 @@ export const getAll = async ({
     throw error;
   }
 };
+export const getAllStudyhere = async ({
+  page = 1,
+  limit = 10,
+  search = "",
+}: {
+  page: number;
+  limit: number;
+  search?: string;
+}) => {
+  try {
+    const response = await myAxios.get(
+      `/user/get-all-studyhere?page=${page}&limit=${limit}&search=${search}`
+    );
+
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
 
 export const deleteUser = async (id: number | string) => {
   try {

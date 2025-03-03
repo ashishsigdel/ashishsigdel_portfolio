@@ -19,50 +19,29 @@ export const MenuData: Menu[] = [
     link: "/",
     icon: AiTwotoneAppstore,
   },
+
   {
-    id: 2,
-    name: "Portfolio",
-    link: "/portfolio/about",
-    icon: FaGlobe,
-    subMenu: [
-      {
-        id: 1,
-        name: "About",
-        link: "/portfolio/about",
-        icon: FaFingerprint,
-      },
-      {
-        id: 2,
-        name: "Project",
-        link: "/portfolio/project",
-        icon: GrAppsRounded,
-      },
-    ],
+    id: 8,
+    name: "Projects",
+    link: "/portfolio/project",
+    icon: GrAppsRounded,
   },
   {
     id: 3,
-    name: "AsProg",
+    name: "Projects",
     link: "/asprog/project",
     icon: FaYoutube,
-    subMenu: [
-      {
-        id: 1,
-        name: "Project",
-        link: "/asprog/project",
-        icon: GrAppsRounded,
-      },
-      {
-        id: 2,
-        name: "Tags",
-        link: "/asprog/tags",
-        icon: FaTag,
-      },
-    ],
   },
   {
     id: 4,
     name: "Users",
     link: "/users",
+    icon: FaUsers,
+  },
+  {
+    id: 2,
+    name: "StudyHere",
+    link: "/studyhere",
     icon: FaUsers,
   },
   {
