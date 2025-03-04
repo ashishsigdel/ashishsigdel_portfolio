@@ -1,8 +1,15 @@
-import { Menu } from "@/types/menu";
+import { ElementType } from "react";
 import { FaGraduationCap } from "react-icons/fa";
 import { FiPenTool } from "react-icons/fi";
 import { IoHome, IoMail } from "react-icons/io5";
 import { LuFolderGit2, LuMessageCircle } from "react-icons/lu";
+
+interface Menu {
+  id: number;
+  name: string;
+  link: string;
+  icon: ElementType;
+}
 
 export const MenuData: Menu[] = [
   {
