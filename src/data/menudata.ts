@@ -1,55 +1,71 @@
 import { Menu } from "@/types/menu";
 import { AiTwotoneAppstore } from "react-icons/ai";
 import { CiSettings } from "react-icons/ci";
-import {
-  FaFingerprint,
-  FaGlobe,
-  FaTag,
-  FaUsers,
-  FaYoutube,
-} from "react-icons/fa";
+import { DiYeoman } from "react-icons/di";
+import { FaFingerprint, FaUsers, FaYoutube } from "react-icons/fa";
 import { GrAppsRounded } from "react-icons/gr";
-import { MdOutlineAlternateEmail } from "react-icons/md";
+import { IoMdBook } from "react-icons/io";
+import { MdDashboard, MdOutlineAlternateEmail } from "react-icons/md";
 import { RiBook2Fill } from "react-icons/ri";
 
 export const MenuData: Menu[] = [
   {
     id: 1,
     name: "Dashboard",
-    link: "/",
-    icon: AiTwotoneAppstore,
+    icon: MdDashboard,
   },
   {
     id: 9,
-    name: "Profie",
-    link: "/portfolio/about",
-    icon: FaFingerprint,
-  },
-
-  {
-    id: 8,
-    name: "Projects",
-    link: "/portfolio/project",
-    icon: GrAppsRounded,
+    name: "Portfolio",
+    icon: DiYeoman,
+    subMenu: [
+      {
+        id: 9,
+        name: "Profie",
+        link: "/portfolio/about",
+        icon: FaFingerprint,
+      },
+      {
+        id: 8,
+        name: "Projects",
+        link: "/portfolio/project",
+        icon: GrAppsRounded,
+      },
+    ],
   },
   {
     id: 3,
-    name: "Projects",
-    link: "/asprog/project",
+    name: "AsProg",
     icon: FaYoutube,
+    subMenu: [
+      {
+        id: 3,
+        name: "Projects",
+        link: "/asprog/project",
+        icon: AiTwotoneAppstore,
+      },
+    ],
   },
   {
     id: 4,
     name: "Users",
-    link: "/users",
     icon: FaUsers,
+    subMenu: [
+      {
+        id: 4,
+        name: "Asprog",
+        link: "/users",
+        icon: FaYoutube,
+      },
+      {
+        id: 2,
+        name: "StudyHere",
+        link: "/studyhere",
+        icon: IoMdBook,
+      },
+    ],
   },
-  {
-    id: 2,
-    name: "StudyHere",
-    link: "/studyhere",
-    icon: FaUsers,
-  },
+
   {
     id: 7,
     name: "Inbox",

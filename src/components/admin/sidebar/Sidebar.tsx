@@ -1,12 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { LuArrowLeftToLine, LuArrowRightToLine } from "react-icons/lu";
 import { useState } from "react";
 import { SidebarLink } from "@/components/admin/sidebar";
-import logosmall from "@/assets/logo-small.svg";
-import logofull from "@/assets/logo.svg";
 import { MenuData } from "@/data/menudata";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -28,12 +25,21 @@ export default function Sidebar() {
     >
       <div className="border-b border-dashed border-color w-full h-20 hidden md:flex items-center">
         <div className="pl-6 w-full overflow-hidden">
-          <Link href="/dashboard" className="h-[25px] overflow-hidden">
-            {openFullSidebar ? (
-              <Image src={logofull} alt="ashish" width={150} height={30} />
-            ) : (
-              <Image src={logosmall} alt="ashish" width={30} height={30} />
-            )}
+          <Link href="#" className="h-[25px] overflow-hidden relative">
+            <div
+              className={`transition-all duration-300 ease-in-out ${
+                openFullSidebar ? "opacity-100 w-auto" : "opacity-0 w-0"
+              } absolute`}
+            >
+              <span className="font-bold text-gray-500 text-xl">Dashboard</span>
+            </div>
+            <div
+              className={`transition-all duration-300 ease-in-out ${
+                openFullSidebar ? "opacity-0 w-0" : "opacity-100 w-auto"
+              }`}
+            >
+              <span className="font-bold text-gray-500 text-xl">D</span>
+            </div>
           </Link>
         </div>
         <div
@@ -45,7 +51,7 @@ export default function Sidebar() {
       </div>
 
       <div className="my-6 px-3">
-        <div className="flex flex-col my-4">
+        <div className="flex flex-col my-5">
           {MenuData.map((menu) => {
             return (
               <SidebarLink
