@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { SingleUser } from "@/components/admin/users";
+import { SingleUser } from "@/components/admin/users/studyhere";
 import { Pagination, SingleLineLoading } from "@/components/common";
 // import { Users } from "@/data/users";
 import useUsers from "./useUsers";
