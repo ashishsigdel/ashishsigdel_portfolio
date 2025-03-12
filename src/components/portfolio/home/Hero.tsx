@@ -164,20 +164,8 @@ export default function Hero() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-5 relative overflow-hidden"
+      className="min-h-[720px] h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-5 relative overflow-hidden"
     >
-      <motion.div
-        variants={portfolioLabelVariants}
-        initial="initial"
-        animate="animate"
-        whileHover="hover"
-        className="absolute top-10 left-10 sm:left-20"
-      >
-        <motion.span className="px-4 py-1 rounded-full text-xs uppercase tracking-wider text-white/80 border border-white/20 backdrop-blur-sm transition-colors duration-300">
-          01. Home
-        </motion.span>
-      </motion.div>
-
       {/* Main content with staggered reveal */}
       <motion.div
         variants={containerVariants}
@@ -186,7 +174,8 @@ export default function Hero() {
         className="max-w-5xl mx-auto"
       >
         {/* Name with character animation */}
-        <div className="overflow-hidden py-2">
+        <div className="overflow-hidden py-2 space-y-5">
+          <span className="text-sm text-white/60 uppercase">Home</span>
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-poppins flex justify-center">
             {mounted &&
               nameChars.map((char, index) => (
