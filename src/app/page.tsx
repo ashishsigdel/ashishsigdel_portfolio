@@ -21,19 +21,19 @@ export default function page() {
   }, []);
   return (
     <>
-      {isVisible ? (
-        <PortfolioLayout>
-          <Hero />
-          <About />
-          <KeyPoints />
-          <MyWork />
-          <TechBehind />
-          <DiscussProject />
-          <Footer />
-        </PortfolioLayout>
-      ) : (
-        <PreLoading />
-      )}
+      {/* {isVisible ? ( */}
+      <PortfolioLayout>
+        <Hero />
+        <About />
+        <KeyPoints />
+        <MyWork />
+        <TechBehind />
+        <DiscussProject />
+        <Footer />
+      </PortfolioLayout>
+      {/* ) : ( */}
+      {/* <PreLoading /> */}
+      {/* )} */}
     </>
   );
 }

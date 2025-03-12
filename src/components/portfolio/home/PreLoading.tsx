@@ -15,7 +15,7 @@ export default function PreLoading() {
     return () => clearTimeout(timeout);
   }, []);
   return (
-    <div className="h-[100vh] overflow-hidden relative text-white flex flex-col items-center justify-center px-5">
+    <div className="h-[100vh] overflow-hidden relative text-white flex flex-col items-center justify-center px-10">
       <Background />
       <div
         className={`border rounded-md w-[30rem] border-white/20 h-[40px] flex items-center justify-between relative ${
