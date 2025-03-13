@@ -5,6 +5,7 @@ import LeftBar from "./LeftBar";
 import BottomBar from "./BottomBar";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import RightDots from "./RightDots";
 
 export default function Outline({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -23,13 +24,14 @@ export default function Outline({ children }: { children: React.ReactNode }) {
     >
       <div className="w-full h-full border border-white/20 rounded-md flex flex-col overflow-hidden">
         <TopBar />
-        <div className="flex overflow-y-auto h-full">
+        <div className="flex overflow-y-auto h-full relative">
           <div className="h-full">
             <LeftBar />
           </div>
           <div className="w-full mx-auto overflow-y-auto h-full">
             {children}
           </div>
+          <RightDots />
         </div>
         <BottomBar />
       </div>

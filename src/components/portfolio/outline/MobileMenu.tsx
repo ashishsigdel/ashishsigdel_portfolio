@@ -2,8 +2,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { IoHome } from "react-icons/io5";
-import { RiApps2Fill, RiContactsBook3Fill } from "react-icons/ri";
 import { MenuData } from "@/data/portfolioMenu";
 
 interface propsTypes {
