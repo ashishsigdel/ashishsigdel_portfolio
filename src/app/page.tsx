@@ -10,18 +10,8 @@ import { TechBehind } from "@/components/portfolio/tech";
 import { Footer } from "@/components/portfolio/footer";
 
 export default function page() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, []);
   return (
     <>
-      {/* {isVisible ? ( */}
       <PortfolioLayout>
         <Hero />
         <About />
@@ -31,9 +21,6 @@ export default function page() {
         <DiscussProject />
         <Footer />
       </PortfolioLayout>
-      {/* ) : ( */}
-      {/* <PreLoading /> */}
-      {/* )} */}
     </>
   );
 }

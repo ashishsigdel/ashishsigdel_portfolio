@@ -67,3 +67,41 @@
   transform-style: preserve-3d;
   transform: rotateX(20deg) rotateY(15deg);
 }
+
+/* Light beam effect */
+@keyframes beam {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+.light-beam {
+  animation: beam 15s ease-in-out infinite;
+}
+
+/* Pulsing glow effect */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    filter: blur(20px) brightness(0.8);
+  }
+  50% {
+    filter: blur(25px) brightness(1.2);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Subtle text shadow for better contrast */
+.stroke-text {
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+}
