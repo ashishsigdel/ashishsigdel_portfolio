@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import "@/styles/background.css";
-import { Floating } from "../utils";
 import Scroll from "./Scroll";
-import Link from "next/link";
 import StepIndicator from "./StepIndicator";
+import HeroButtons from "./HeroButtons";
 
 export default function Hero() {
   const controls = useAnimation();
@@ -39,12 +38,13 @@ export default function Hero() {
     }),
   };
 
-  const aiText = "AI ";
-  const explorerText = " Explorer, Creative";
+  const aiText = "AI";
+  const explorerText = " Explorer, Creative ";
   const developerText = "Developer";
 
   const aiChars = aiText.split("");
   const explorerChars = explorerText.split("");
+
   const developerChars = developerText.split("");
 
   const titleRevealVariants = {
@@ -110,32 +110,6 @@ export default function Hero() {
     },
   };
 
-  const buttonVariants = {
-    initial: { scale: 1 },
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.3, ease: "easeOut" },
-    },
-    tap: { scale: 0.98 },
-  };
-
-  const portfolioLabelVariants = {
-    initial: { opacity: 0, x: -20 },
-    animate: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: 0.6,
-        duration: 0.7,
-        ease: "easeOut",
-      },
-    },
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.3 },
-    },
-  };
-
   const taglineVariants = {
     initial: { width: "0%" },
     animate: {
@@ -165,7 +139,7 @@ export default function Hero() {
           className="max-w-5xl mx-auto"
         >
           {/* Name with character animation */}
-          <div className="overflow-hidden py-2 space-y-5">
+          <div className="overflow-hidden py-2 space-y-5 ">
             <span className="text-sm text-white/60 uppercase">Home</span>
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-poppins flex justify-center">
               {mounted &&
@@ -201,7 +175,7 @@ export default function Hero() {
                 className="inline-block"
               >
                 {/* AI with character animation */}
-                <span className="text-blue-500">
+                <span className="text-blue-500 whitespace-nowrap">
                   {mounted &&
                     aiChars.map((char, index) => (
                       <motion.span
@@ -218,38 +192,37 @@ export default function Hero() {
                         }}
                         className="cursor-default inline-block"
                       >
-                        {char}
+                        {char === " " ? "\u00A0" : char}
                       </motion.span>
                     ))}
                 </span>
-                <span> </span>
 
                 {/* Explorer, Creative with character animation */}
-                {mounted &&
-                  explorerChars.map((char, index) => (
-                    <motion.span
-                      key={`explorer-${index}`}
-                      custom={index}
-                      variants={titleCharVariants}
-                      initial="initial"
-                      animate="animate"
-                      whileHover={{
-                        y: -5,
-                        color: "#3B82F6",
-                        transition: { duration: 0.2 },
-                      }}
-                      className={`${
-                        char === " " ? "mx-1" : ""
-                      } cursor-default inline-block`}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
+                <span className="whitespace-nowrap">
+                  {mounted &&
+                    explorerChars.map((char, index) => (
+                      <motion.span
+                        key={`explorer-${index}`}
+                        custom={index}
+                        variants={titleCharVariants}
+                        initial="initial"
+                        animate="animate"
+                        whileHover={{
+                          y: -5,
+                          color: "#3B82F6",
+                          transition: { duration: 0.2 },
+                        }}
+                        className="cursor-default inline-block"
+                      >
+                        {char === " " ? "\u00A0" : char}
+                      </motion.span>
+                    ))}
+                </span>
               </motion.span>
               <br />
 
               {/* Developer with character animation */}
-              <span className="text-blue-500">
+              <span className="text-blue-500 whitespace-nowrap">
                 {mounted &&
                   developerChars.map((char, index) => (
                     <motion.span
@@ -291,32 +264,10 @@ export default function Hero() {
               </motion.p>
             </motion.div>
           </div>
-
-          {/* Enhanced action button with hover effect */}
-          <motion.div variants={itemVariants} className="mt-10">
-            <Link href={"/projects"}>
-              <motion.button
-                variants={buttonVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-                className="px-8 py-3 rounded-full text-sm font-medium bg-blue-500 bg-opacity-10 border border-blue-500/30 transition-all duration-300 relative overflow-hidden group"
-              >
-                <span className="relative z-10">Explore Projects</span>
-                <motion.span
-                  className="absolute inset-0 bg-blue-500 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "0%" }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                />
-              </motion.button>
-            </Link>
-          </motion.div>
+          <HeroButtons />
         </motion.div>
 
         <Scroll />
-
-        <Floating />
       </motion.div>
     </div>
   );

@@ -54,12 +54,10 @@ export default function Background() {
 
     // Animation loop
     const animate = () => {
-      // Clear canvas completely on each frame - no trails
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw particles
       particles.forEach((particle) => {
-        // Update particle position with simple directional movement
         particle.x += particle.speed * particle.directionX;
         particle.y += particle.speed * particle.directionY;
 
@@ -108,8 +106,6 @@ export default function Background() {
         context.globalAlpha = 1;
       });
 
-      // NO connections between particles
-
       requestAnimationFrame(animate);
     };
 
@@ -122,16 +118,18 @@ export default function Background() {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
-      {/* Main background gradient */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-black via-gray-900 to-green-900" />
+      <div
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          background: `radial-gradient(circle at top center, rgba(100, 149, 237, 0.2), rgba(4, 5, 10, 1))`,
+        }}
+      />
 
-      {/* Canvas for animated light particles */}
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full opacity-40"
       />
 
-      {/* Horizontal moving "Ashish" */}
       <div className="absolute text-[30rem] font-extrabold text-white/[0.02] top-[100px] whitespace-nowrap animate-scroll font-geist">
         Ashish Dev
       </div>
