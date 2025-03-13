@@ -13,7 +13,7 @@ export default function RightDots() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1400); // Show loading animation for 800ms
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);

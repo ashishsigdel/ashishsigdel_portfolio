@@ -29,7 +29,7 @@ export default function Scroll() {
       initial="initial"
       animate={["animate", "pulse"]}
       whileHover={{ scale: 1.1, y: 5 }}
-      className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer"
+      className="flex flex-col items-center cursor-pointer mt-5"
     >
       <motion.span
         className="text-xs text-white/50 mb-2"

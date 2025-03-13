@@ -32,7 +32,7 @@ export default function HeroButtons() {
   return (
     <motion.div
       variants={itemVariants}
-      className="mt-10 flex items-center justify-center"
+      className="mt-10 flex flex-col sm:flex-row gap-x-3 gap-y-4 items-center justify-center"
     >
       <Link href={"/projects"} className="relative inline-block">
         <motion.button
@@ -46,7 +46,7 @@ export default function HeroButtons() {
           <span className="relative z-10">Explore Projects</span>
         </motion.button>
       </Link>
-      <Link href={"/contact"} className="relative inline-block ml-3">
+      <Link href={"/contact"} className="relative inline-block">
         <motion.button
           variants={buttonVariants}
           initial="initial"

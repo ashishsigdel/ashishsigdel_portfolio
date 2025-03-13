@@ -5,12 +5,11 @@ import "@/styles/background.css";
 import Scroll from "./Scroll";
 import StepIndicator from "./StepIndicator";
 import HeroButtons from "./HeroButtons";
+import Eager from "./Eager";
 
 export default function Hero() {
   const controls = useAnimation();
-
-  const [refInView, inView] = useState(true);
-
+  const [inView, setInView] = useState(true);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -23,28 +22,13 @@ export default function Hero() {
   }, [controls, inView]);
 
   const nameText = "Hi, I'm Ashish";
-  const nameChars = nameText.split("");
-
-  const letterVariants = {
-    initial: { y: 100, opacity: 0 },
-    animate: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.215, 0.61, 0.355, 1],
-        delay: 0.3 + i * 0.04,
-      },
-    }),
-  };
-
   const aiText = "AI";
   const explorerText = " Explorer, Creative ";
   const developerText = "Developer";
 
+  const nameChars = nameText.split("");
   const aiChars = aiText.split("");
   const explorerChars = explorerText.split("");
-
   const developerChars = developerText.split("");
 
   const titleRevealVariants = {
@@ -123,50 +107,55 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full overflow-x-hidden">
+      <Eager />
       <StepIndicator />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="min-h-[720px] h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-5 relative overflow-hidden"
+        className="min-h-[600px] h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-4 md:px-5 relative overflow-hidden"
       >
+        <div className="text-xs sm:text-sm text-white/60 uppercase">Home</div>
         {/* Main content with staggered reveal */}
         <motion.div
           variants={containerVariants}
           initial="initial"
           animate={controls}
-          className="max-w-5xl mx-auto"
+          className="w-full max-w-5xl mx-auto px-2 sm:px-4"
         >
           {/* Name with character animation */}
-          <div className="overflow-hidden py-2 space-y-5 ">
-            <span className="text-sm text-white/60 uppercase">Home</span>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-poppins flex justify-center">
+          <div className="overflow-hidden py-2 space-y-10">
+            <span className=""></span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-poppins flex flex-wrap justify-center">
               {mounted &&
                 nameChars.map((char, index) => (
                   <motion.span
                     key={`name-${index}`}
                     custom={index}
-                    variants={letterVariants}
+                    variants={titleCharVariants}
                     initial="initial"
                     animate="animate"
                     whileHover={{
                       y: -5,
-                      color: "#3B82F6",
                       scale: 1.05,
+                      textShadow: "0 0 8px rgba(59, 130, 246, 0.8)",
                       transition: { duration: 0.2 },
                     }}
-                    className={`${char === " " ? "mx-4" : ""} cursor-default`}
+                    className="cursor-default inline-block"
                   >
-                    {char}
+                    {char === " " ? "\u00A0" : char}
                   </motion.span>
                 ))}
             </h1>
           </div>
 
           {/* Professional title with character-by-character animations */}
-          <motion.div variants={itemVariants} className="overflow-hidden">
-            <h3 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-poppins lg:leading-[105px]">
+          <motion.div
+            variants={itemVariants}
+            className="overflow-hidden mt-1 sm:mt-2"
+          >
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-poppins lg:leading-[1.2]">
               <motion.span
                 variants={titleRevealVariants}
                 custom={1.2}
@@ -198,7 +187,7 @@ export default function Hero() {
                 </span>
 
                 {/* Explorer, Creative with character animation */}
-                <span className="whitespace-nowrap">
+                <span className="whitespace-normal sm:whitespace-nowrap">
                   {mounted &&
                     explorerChars.map((char, index) => (
                       <motion.span
@@ -219,7 +208,7 @@ export default function Hero() {
                     ))}
                 </span>
               </motion.span>
-              <br />
+              <br className="block sm:hidden" />
 
               {/* Developer with character animation */}
               <span className="text-blue-500 whitespace-nowrap">
@@ -247,27 +236,31 @@ export default function Hero() {
           </motion.div>
 
           {/* Tagline with typing effect */}
-          <div className="relative mt-5 h-6 flex justify-center">
+          <div className="relative mt-3 sm:mt-5 h-6 flex justify-center">
             <motion.div
               variants={taglineVariants}
               initial="initial"
               animate="animate"
-              className="overflow-hidden whitespace-nowrap absolute left-0 right-0 mx-auto max-w-fit"
+              className="overflow-hidden absolute left-0 right-0 mx-auto max-w-fit px-2"
             >
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 2.3, duration: 0.5 }}
-                className="text-sm text-gray-300 font-geist"
+                transition={{ delay: 2.0, duration: 0.5 }}
+                className="text-xs sm:text-sm text-gray-400 font-geist"
               >
                 Turning Data into Intelligence, Ideas into Vision.
               </motion.p>
             </motion.div>
           </div>
-          <HeroButtons />
+          <div className="mt-8 sm:mt-12">
+            <HeroButtons />
+          </div>
         </motion.div>
 
-        <Scroll />
+        <div className="mx-auto absolute bottom-10 left-1/2 -translate-x-1/2">
+          <Scroll />
+        </div>
       </motion.div>
     </div>
   );
