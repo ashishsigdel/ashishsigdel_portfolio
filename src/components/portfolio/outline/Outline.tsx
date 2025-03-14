@@ -6,7 +6,6 @@ import BottomBar from "./BottomBar";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import RightDots from "./RightDots";
-import StepIndicator from "./StepIndicator";
 import Quiting from "./Quiting";
 
 export default function Outline({ children }: { children: React.ReactNode }) {
@@ -50,7 +49,6 @@ export default function Outline({ children }: { children: React.ReactNode }) {
           toggleQuiting={toggleQuiting}
         />
         <div className="flex overflow-y-auto h-full relative">
-          <StepIndicator width={width} />
           {quiting && <Quiting />}
           <div className="h-full">
             <LeftBar />

@@ -6,6 +6,7 @@ import Scroll from "./Scroll";
 import HeroButtons from "./HeroButtons";
 import Eager from "./Eager";
 import Link from "next/link";
+import StepIndicator from "./StepIndicator";
 
 export default function Hero() {
   const controls = useAnimation();
@@ -109,6 +110,7 @@ export default function Hero() {
   return (
     <div className="relative w-full overflow-x-hidden">
       <Eager />
+      <StepIndicator />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
