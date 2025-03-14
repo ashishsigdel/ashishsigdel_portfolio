@@ -7,6 +7,9 @@ import HeroButtons from "./HeroButtons";
 import Eager from "./Eager";
 import Link from "next/link";
 import StepIndicator from "./StepIndicator";
+import QuoteCircles from "@/assets/2nd-quote-circles.svg";
+import QuoteBGBlur from "@/assets/2nd-quote-bg-blur.svg";
+import Image from "next/image";
 
 export default function Hero() {
   const controls = useAnimation();
@@ -117,6 +120,18 @@ export default function Hero() {
         transition={{ duration: 0.8 }}
         className="min-h-[600px] h-[calc(100dvh-96px)] flex flex-col justify-center text-center px-4 md:px-5 relative overflow-hidden"
       >
+        <div className="flex flex-col items-center justify-center absolute left-1/2 transform -translate-x-1/2 scale-150">
+          <div className="-z-1 relative">
+            <Image
+              src={QuoteCircles}
+              alt="Quote Circles"
+              className="opacity-60"
+            />
+          </div>
+          <div className="absolute z-[1]">
+            <Image src={QuoteBGBlur} alt="Quote BG Blur" />
+          </div>
+        </div>
         <div className="text-xs sm:text-sm text-white/60 uppercase">Home</div>
         {/* Main content with staggered reveal */}
         <motion.div
