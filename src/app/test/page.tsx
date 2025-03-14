@@ -1,6 +1,6 @@
 "use client";
 import { PortfolioLayout } from "@/components/layout";
-import { Hero, PreLoading } from "@/components/portfolio/home";
+import { Hero } from "@/components/portfolio/home";
 import React, { useEffect, useState } from "react";
 import "@/styles/portfolio.css";
 import { About, KeyPoints } from "@/components/portfolio/about";

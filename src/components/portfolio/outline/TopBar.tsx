@@ -8,7 +8,15 @@ import { MdClose } from "react-icons/md";
 import MobileMenu from "./MobileMenu";
 import { Leftwindow } from "../utils";
 
-export default function TopBar() {
+export default function TopBar({
+  width,
+  toggleWidth,
+  toggleQuiting,
+}: {
+  width: string;
+  toggleWidth: () => void;
+  toggleQuiting: () => void;
+}) {
   const [openNavbar, setOpenNavbar] = useState<boolean>(false);
 
   const handleOpenNav = () => {
@@ -42,7 +50,11 @@ export default function TopBar() {
             <FiList className="text-xl cursor-pointer" />
           )}
         </div>
-        <Leftwindow />
+        <Leftwindow
+          width={width}
+          toggleWidth={toggleWidth}
+          toggleQuiting={toggleQuiting}
+        />
       </div>
       <div className="w-full relative">
         <MobileMenu openNavbar={openNavbar} handleOpenNav={handleOpenNav} />

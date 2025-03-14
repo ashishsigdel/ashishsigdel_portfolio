@@ -1,8 +1,7 @@
 import { ElementType } from "react";
-import { FaGraduationCap } from "react-icons/fa";
-import { FiPenTool } from "react-icons/fi";
-import { IoHome, IoMail } from "react-icons/io5";
-import { LuFolderGit2, LuMessageCircle } from "react-icons/lu";
+import { BiSolidBot, BiSolidMessageSquareDots } from "react-icons/bi";
+import { HiOutlineFingerPrint } from "react-icons/hi";
+import { IoHome } from "react-icons/io5";
 
 interface Menu {
   id: number;
@@ -20,26 +19,22 @@ export const MenuData: Menu[] = [
   },
   {
     id: 2,
-    name: "Education",
-    link: "/education",
-    icon: FaGraduationCap,
+    name: "About",
+    link: "/about",
+    icon: HiOutlineFingerPrint,
   },
+
   {
     id: 3,
     name: "Projects",
     link: "/projects",
-    icon: LuFolderGit2,
+    icon: BiSolidBot,
   },
-  //   {
-  //     id: 4,
-  //     name: "Blog",
-  //     link: "/blog",
-  //     icon: FiPenTool,
-  //   },
+
   {
     id: 5,
     name: "Contact",
     link: "/contact",
-    icon: IoMail,
+    icon: BiSolidMessageSquareDots,
   },
 ];

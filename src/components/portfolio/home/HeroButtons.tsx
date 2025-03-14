@@ -1,11 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  BiSolidBot,
-  BiSolidMessageSquareDetail,
-  BiSolidMessageSquareDots,
-} from "react-icons/bi";
+import { BiSolidBot, BiSolidMessageSquareDots } from "react-icons/bi";
 
 export default function HeroButtons() {
   const itemVariants = {

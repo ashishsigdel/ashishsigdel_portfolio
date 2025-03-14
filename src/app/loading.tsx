@@ -6,7 +6,7 @@ export default function Loading() {
   return (
     <div className="h-[100vh] overflow-hidden relative text-white flex flex-col items-center justify-center px-10">
       <Background />
-      <div className="border rounded-md w-[100%] border-white/20 h-[40px] flex items-center justify-between relative ">
+      <div className="border rounded-md w-[100%] max-w-xl border-white/20 h-[40px] flex items-center justify-between relative ">
         <div className="w-[40px] h-full flex justify-center items-center border-r border-white/20 overflow-hidden">
           <Image
             src={logo}

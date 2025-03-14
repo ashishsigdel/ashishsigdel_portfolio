@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import "@/styles/background.css";
 import Scroll from "./Scroll";
-import StepIndicator from "./StepIndicator";
 import HeroButtons from "./HeroButtons";
 import Eager from "./Eager";
+import Link from "next/link";
 
 export default function Hero() {
   const controls = useAnimation();
@@ -109,7 +109,6 @@ export default function Hero() {
   return (
     <div className="relative w-full overflow-x-hidden">
       <Eager />
-      <StepIndicator />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -151,11 +150,8 @@ export default function Hero() {
           </div>
 
           {/* Professional title with character-by-character animations */}
-          <motion.div
-            variants={itemVariants}
-            className="overflow-hidden mt-1 sm:mt-2"
-          >
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-poppins lg:leading-[1.2]">
+          <motion.div variants={itemVariants} className="overflow-hidden">
+            <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-poppins">
               <motion.span
                 variants={titleRevealVariants}
                 custom={1.2}
@@ -258,9 +254,12 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <div className="mx-auto absolute bottom-10 left-1/2 -translate-x-1/2">
+        <Link
+          href={"#about"}
+          className="mx-auto absolute bottom-5 left-1/2 -translate-x-1/2"
+        >
           <Scroll />
-        </div>
+        </Link>
       </motion.div>
     </div>
   );
