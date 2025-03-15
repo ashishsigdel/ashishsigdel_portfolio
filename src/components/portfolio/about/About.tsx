@@ -2,71 +2,58 @@
 import {
   AboutMe,
   ILove,
-  KeyPoints,
   MeOnline,
   Portrait,
 } from "@/components/portfolio/about";
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { getActive } from "@/services/portfolio/profileService";
-import useProfile from "./useProfile";
+import SectionTitle from "../utils/SectionTitle";
 
 export default function About() {
-  const constrainRef = useRef(null);
-
-  const { profile, fetchProfile } = useProfile();
-
-  useEffect(() => {
-    fetchProfile();
-  }, []);
   return (
-    <div id="#about" className="max-w-7xl mx-auto my-16 px-3">
-      <div className="w-full text-center my-10 autoShow">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
-          About Me
-        </h1>
+    <section
+      id="#about"
+      className="min-h-screen bg-gradient-to-b from-black to-transparent mt-10"
+    >
+      <div className="py-8 md:py-10 px-4 min-[1200px]:px-14 max-w-7xl mx-auto">
+        <SectionTitle title="About Me" />
+        <div className="relative mt-16 flex flex-col-reverse lg:flex-row gap-4 lg:justify-around justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className=""
+          >
+            <AboutMe />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className=""
+          >
+            <Portrait />
+          </motion.div>
+        </div>
+        <div className="flex justify-evenly lg:justify-normal gap-4 mt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="bottom-[4rem] left-[10rem] lg:relative"
+          >
+            <MeOnline />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="lg:relative left-[18rem] bottom-[2rem]"
+          >
+            <ILove />
+          </motion.div>
+        </div>
       </div>
-      <div
-        ref={constrainRef}
-        className="relative flex flex-wrap space-y-4 space-x-3 justify-center lg:justify-normal"
-      >
-        <motion.div
-          drag
-          dragConstraints={constrainRef}
-          dragElastic={0.2} // Lower elasticity for slower drag
-          dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }} // Adjust damping for control
-          className="lg:relative left-[9rem]"
-        >
-          <AboutMe />
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={constrainRef}
-          dragElastic={0.2}
-          dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
-          className="lg:relative top-[10rem] left-[5rem]"
-        >
-          <Portrait profile={profile} />
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={constrainRef}
-          dragElastic={0.2}
-          dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
-          className="bottom-[4rem] left-[10rem] lg:relative"
-        >
-          <MeOnline />
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={constrainRef}
-          dragElastic={0.2}
-          dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
-          className="lg:relative left-[18rem] bottom-[2rem]"
-        >
-          <ILove />
-        </motion.div>
-      </div>
-    </div>
+    </section>
   );
 }

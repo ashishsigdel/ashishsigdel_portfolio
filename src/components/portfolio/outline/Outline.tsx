@@ -48,16 +48,16 @@ export default function Outline({ children }: { children: React.ReactNode }) {
           toggleWidth={toggleWidth}
           toggleQuiting={toggleQuiting}
         />
-        <div className="flex overflow-y-auto h-full relative">
+        <header className="flex overflow-y-auto h-full relative">
           {quiting && <Quiting />}
-          <div className="h-full">
+          <nav className="h-full">
             <LeftBar />
-          </div>
+          </nav>
           <div className="w-full mx-auto overflow-y-auto h-full">
             {children}
           </div>
           <RightDots />
-        </div>
+        </header>
         <BottomBar />
       </div>
       <div

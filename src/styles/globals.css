@@ -82,3 +82,7 @@ body {
     padding: 15px;
   }
 }
+
+.about-text-html .highlight {
+  @apply text-portfolio-primary/80;
+}
