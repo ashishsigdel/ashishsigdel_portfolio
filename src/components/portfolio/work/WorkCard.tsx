@@ -22,7 +22,7 @@ export default function WorkCard({ work, index }: WorkProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.2 }}
-      className={`w-full border border-gray-200 dark:border-gray-700 px-4 py-8 md:p-8 rounded-xl overflow-hidden relative transition-all duration-300 ease-in-out shadow-lg bg-white dark:bg-gray-900 ${
+      className={`w-full border border-gray-200 dark:border-gray-700 px-4 py-8 md:p-8 rounded-ss-md rounded-ee-md overflow-hidden relative transition-all duration-300 ease-in-out shadow-lg bg-white dark:bg-gray-900 ${
         index % 2 !== 0
           ? "flex flex-col md:flex-row-reverse"
           : "flex flex-col md:flex-row"

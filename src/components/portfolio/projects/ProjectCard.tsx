@@ -80,7 +80,7 @@ export default function ProjectCard({ project }: any) {
   return (
     <Link href={`/projects/${project.id}`}>
       <motion.div
-        className="border border-white/20 rounded-lg overflow-hidden cursor-pointer backdrop-blur-sm bg-black/5 dark:bg-white/5"
+        className="border border-white/20 rounded-lg overflow-hidden cursor-pointer backdrop-blur-sm bg-black/5 dark:bg-white/5 max-w-[400px] mx-auto"
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
