@@ -1,13 +1,8 @@
 export const tags = [
-  "Nodejs",
-  "Nextjs",
-  "React Native",
-  "Tailwind",
-  "Firebase",
-  "Expo",
-  "RapidAPI",
-  "Python",
   "Machine Learning",
+  "App Development",
+  "Web Development",
+  "Research",
 ];
 
 export const tagAdmin = [

@@ -5,7 +5,6 @@ import {
   MeOnline,
   Portrait,
 } from "@/components/portfolio/about";
-import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SectionTitle from "../utils/SectionTitle";
 
@@ -13,7 +12,7 @@ export default function About() {
   return (
     <section
       id="#about"
-      className="min-h-screen bg-gradient-to-b from-black to-transparent mt-10"
+      className="min-h-screen bg-gradient-to-b from-gray-950 to-transparent mt-10"
     >
       <div className="py-8 md:py-10 px-4 min-[1200px]:px-14 max-w-7xl mx-auto">
         <SectionTitle title="About Me" />

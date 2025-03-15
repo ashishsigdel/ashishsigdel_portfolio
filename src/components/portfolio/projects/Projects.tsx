@@ -6,6 +6,7 @@ import useProjects from "./useProjects";
 import ProjectCardSkeleton from "./ProjectCardSkeleton";
 import ProjectCard from "./ProjectCard";
 import { Pagination } from "@/components/common";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 
 export default function Projects() {
   const [refresh, setRefresh] = useState<boolean>(false);
@@ -44,10 +45,19 @@ export default function Projects() {
   };
 
   return (
-    <div className="mt-10 max-w-7xl mx-auto px-3 flex flex-col lg:flex-row gap-x-5 min-h-[70%] mb-24">
-      <div className="w-full lg:w-1/4 lg:border-r border-white/20 pr-4 mt-8">
-        <h3 className="text-center text-3xl font-semibold">Explore Projects</h3>
-        <form className="max-w-3xl mx-auto mt-10">
+    <motion.div
+      className="flex flex-col lg:flex-row gap-x-5 min-h-[70%]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="w-full lg:w-1/4 lg:border-r border-white/20 pr-4 mt-8"
+        initial={{ x: -100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <form className="max-w-3xl mx-auto">
           <div className="flex items-center justify-center border-solid rounded-md border border-white/20 transition-all duration-[0.3s] ease-in-out">
             <input
               type={"text"}
@@ -55,10 +65,9 @@ export default function Projects() {
               onChange={hanlgeSearchChange}
               placeholder="Search..."
               id="search"
-              className="ml-4 w-full h-full py-4 bg-transparent text-[14px] focus:outline-none"
+              className="ml-4 w-full h-full py-3.5 bg-transparent text-[14px] focus:outline-none"
             />
-
-            <div className="w-11 h-10  rounded-full flex items-center justify-center mr-3">
+            <div className="w-11 h-10 rounded-full flex items-center justify-center mr-3">
               <button type="button" className="text-white">
                 <FaSearch />
               </button>
@@ -66,7 +75,12 @@ export default function Projects() {
           </div>
         </form>
 
-        <div className="flex flex-wrap justify-center gap-4 mt-[6rem]">
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 mt-10 md:mt-[6rem]"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           {/* All Tag */}
           <div
             onClick={() => handleTagClick("all")}
@@ -93,12 +107,17 @@ export default function Projects() {
               {tag}
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="w-full lg:w-3/4">
+      <motion.div
+        className="w-full lg:w-3/4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:min-h-[580px]">
             {Array.from({ length: 6 }).map((_, i) => (
               <ProjectCardSkeleton key={i} />
             ))}
@@ -106,11 +125,23 @@ export default function Projects() {
         ) : projects.length === 0 ? (
           <div className="mt-20 w-full flex justify-center">No Result</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {projects.map((creation) => (
-              <ProjectCard key={creation.id} project={creation} />
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:min-h-[580px]"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {projects.map((creation, index) => (
+              <motion.div
+                key={creation.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
+              >
+                <ProjectCard project={creation} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
         <div className="mt-12"></div>
         <Pagination
@@ -118,7 +149,7 @@ export default function Projects() {
           currentPage={currentPage}
           handlePageChange={handlePageChange}
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

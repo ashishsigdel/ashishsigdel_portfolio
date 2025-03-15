@@ -6,6 +6,7 @@ import { MyWork } from "@/components/portfolio/work";
 import { DiscussProject } from "@/components/portfolio/contact";
 import { TechBehind } from "@/components/portfolio/tech";
 import { Footer } from "@/components/portfolio/footer";
+import { MyProjects } from "@/components/portfolio/projects";
 
 export default function page() {
   return (
@@ -14,6 +15,7 @@ export default function page() {
         <Hero />
         <About />
         <MyWork />
+        <MyProjects />
         <TechBehind />
         <DiscussProject />
         <Footer />
