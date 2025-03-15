@@ -70,7 +70,6 @@ export default function ProjectCard({ project }: any) {
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.15 * i,
         duration: 0.5,
         ease: "easeOut",
       },
