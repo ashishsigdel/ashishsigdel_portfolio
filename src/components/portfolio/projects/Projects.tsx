@@ -46,42 +46,24 @@ export default function Projects() {
 
   return (
     <motion.div
-      className="flex flex-col lg:flex-row gap-x-5 min-h-[70%]"
+      className="flex flex-col gap-x-5"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="w-full lg:w-1/4 lg:border-r border-white/20 pr-4 mt-8"
+        className="w-full border-white/20"
         initial={{ x: -100, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
       >
-        <form className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-center border-solid rounded-md border border-white/20 transition-all duration-[0.3s] ease-in-out">
-            <input
-              type={"text"}
-              name="search"
-              onChange={hanlgeSearchChange}
-              placeholder="Search..."
-              id="search"
-              className="ml-4 w-full h-full py-3.5 bg-transparent text-[14px] focus:outline-none"
-            />
-            <div className="w-11 h-10 rounded-full flex items-center justify-center mr-3">
-              <button type="button" className="text-white">
-                <FaSearch />
-              </button>
-            </div>
-          </div>
-        </form>
-
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mt-10 md:mt-[6rem]"
+          className="flex flex-wrap justify-center gap-4 mt-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {/* All Tag */}
           <div
             onClick={() => handleTagClick("all")}
             className={`cursor-pointer px-4 py-2 rounded-md text-sm font-medium ${
@@ -93,7 +75,6 @@ export default function Projects() {
             All
           </div>
 
-          {/* Dynamic Tags */}
           {tags.map((tag, index) => (
             <div
               key={index}
@@ -111,7 +92,7 @@ export default function Projects() {
       </motion.div>
 
       <motion.div
-        className="w-full lg:w-3/4"
+        className="w-full"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -126,7 +107,7 @@ export default function Projects() {
           <div className="mt-20 w-full flex justify-center">No Result</div>
         ) : (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:min-h-[580px]"
+            className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}

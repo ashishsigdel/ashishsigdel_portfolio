@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProjectCardSkeleton() {
   return (
-    <div className="bg-black/30 border border-white/20 rounded-lg overflow-hidden animate-pulse cursor-pointer lg:w-72">
+    <div className="bg-black/30 border border-white/20 rounded-lg overflow-hidden animate-pulse cursor-pointer">
       <div
         className="relative w-full h-0 bg-white/10"
         style={{ paddingBottom: "56.25%" }}

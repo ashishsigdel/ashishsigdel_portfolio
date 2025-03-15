@@ -3,10 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion"; // Import motion from framer-motion
+import { useMediaQuery } from "react-responsive"; // Import for responsive design
 
 export default function ProjectCard({ project }: any) {
   const [isClient, setIsClient] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Check if device is mobile
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     setIsClient(true);
@@ -71,10 +75,6 @@ export default function ProjectCard({ project }: any) {
         ease: "easeOut",
       },
     }),
-    hover: {
-      color: "#ffffff", // This assumes portfolio-primary is a shade of blue
-      transition: { duration: 0.2 },
-    },
   };
 
   return (
@@ -84,7 +84,7 @@ export default function ProjectCard({ project }: any) {
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
-        whileHover="hover"
+        whileHover={isMobile ? undefined : "hover"}
         viewport={{ once: true, amount: 0.25 }}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
@@ -97,6 +97,7 @@ export default function ProjectCard({ project }: any) {
             <motion.div
               className="w-full h-full"
               variants={imageVariants}
+              whileHover={isMobile ? undefined : "hover"}
               transition={{ duration: 0.5 }}
             >
               <Image
@@ -108,16 +109,33 @@ export default function ProjectCard({ project }: any) {
               />
             </motion.div>
 
-            {/* Overlay gradient on hover */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0"
-              animate={{ opacity: isHovered ? 0.8 : 0 }}
+              className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+              initial={{ opacity: isMobile ? 0.8 : 0 }}
+              animate={{ opacity: isMobile || isHovered ? 0.8 : 0 }}
               transition={{ duration: 0.3 }}
             />
           </motion.div>
         </div>
 
         <motion.div className="p-4">
+          {/* Tags */}
+          <motion.div
+            className="flex flex-wrap gap-2 my-2 mb-4 min-h-[64px]"
+            variants={textVariants}
+            custom={0}
+          >
+            {project.tags &&
+              project.tags.split(",").map((tag: string, index: number) => (
+                <span
+                  key={index}
+                  className="px-2 py-1 text-xs rounded-md bg-portfolio-primary/20 border border-portfolio-primary/30 text-portfolio-primary h-fit"
+                >
+                  {tag}
+                </span>
+              ))}
+          </motion.div>
+
           <motion.h4
             className="text-[18px] font-semibold text-gray-800 dark:text-white font-poppins line-clamp-1"
             variants={textVariants}
@@ -133,20 +151,16 @@ export default function ProjectCard({ project }: any) {
             custom={2}
           />
 
-          {/* Animated "View Project" indicator */}
+          {/* "View Project" always visible, arrow animates on hover */}
           <motion.div
             className="mt-4 flex items-center text-xs text-portfolio-primary"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{
-              opacity: isHovered ? 1 : 0,
-              x: isHovered ? 0 : -10,
-            }}
-            transition={{ duration: 0.3 }}
+            variants={textVariants}
+            custom={3}
           >
             <span>View Project</span>
             <motion.span
               className="ml-1"
-              animate={{ x: isHovered ? 5 : 0 }}
+              animate={{ x: isHovered && !isMobile ? 5 : 0 }}
               transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
             >
               →
