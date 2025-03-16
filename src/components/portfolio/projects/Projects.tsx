@@ -1,15 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import { tags } from "@/data/tag";
 import useProjects from "./useProjects";
 import ProjectCardSkeleton from "./ProjectCardSkeleton";
 import ProjectCard from "./ProjectCard";
 import { Pagination } from "@/components/common";
-import { motion } from "framer-motion"; // Import motion from framer-motion
+import { motion } from "framer-motion";
+import useGetActive from "../outline/useGetActive";
 
 export default function Projects() {
-  const [refresh, setRefresh] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState("");
   const {
     loading,
@@ -21,11 +20,13 @@ export default function Projects() {
     currentPage,
     totalPage,
   } = useProjects();
+  const { scrollToSection } = useGetActive();
 
   const handleTagClick = (tag: string) => {
     let tagValue = tag === "all" ? "" : tag;
     setSelectedTag(tag);
     fetchProjects(1, tagValue);
+    scrollToSection("projects");
   };
 
   const hanlgeSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +43,7 @@ export default function Projects() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     fetchProjects(page, searchTerm);
+    scrollToSection("projects");
   };
 
   return (

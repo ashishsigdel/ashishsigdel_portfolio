@@ -111,7 +111,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative w-full overflow-x-hidden">
+    <div id="home" className="relative w-full overflow-x-hidden">
       <Eager />
       <StepIndicator />
       <motion.div

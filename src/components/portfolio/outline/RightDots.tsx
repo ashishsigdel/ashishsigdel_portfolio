@@ -1,15 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { MenuData } from "@/data/portfolioMenu";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import useGetActive from "./useGetActive";
 
 export default function RightDots() {
-  const pathname = usePathname();
+  const { isActive, scrollToSection } = useGetActive();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate loading and then show content
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -80,13 +78,13 @@ export default function RightDots() {
             }}
           >
             {MenuData.map((menu, index) => {
-              const isActive = pathname === menu.link;
-
               return (
-                <Link href={menu.link} key={menu.id}>
+                <div onClick={() => scrollToSection(menu.link)} key={menu.id}>
                   <motion.div
                     className={`group flex items-center justify-center gap-2 w-4 h-4 border rounded-full transition-all ${
-                      isActive ? "border-portfolio-primary" : "border-[#595959]"
+                      isActive(menu.link)
+                        ? "border-portfolio-primary"
+                        : "border-[#595959]"
                     } hover:border-white`}
                     variants={{
                       hidden: {
@@ -115,7 +113,9 @@ export default function RightDots() {
                   >
                     <motion.div
                       className={`w-2 h-2 rounded-full transition-all ${
-                        isActive ? "bg-portfolio-primary" : "bg-[#595959]"
+                        isActive(menu.link)
+                          ? "bg-portfolio-primary"
+                          : "bg-[#595959]"
                       } group-hover:bg-white`}
                       variants={{
                         hover: {
@@ -125,7 +125,7 @@ export default function RightDots() {
                       }}
                     />
                   </motion.div>
-                </Link>
+                </div>
               );
             })}
           </motion.div>

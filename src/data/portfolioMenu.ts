@@ -1,5 +1,9 @@
 import { ElementType } from "react";
-import { BiSolidBot, BiSolidMessageSquareDots } from "react-icons/bi";
+import {
+  BiSolidBot,
+  BiSolidHeart,
+  BiSolidMessageSquareDots,
+} from "react-icons/bi";
 import { HiOutlineFingerPrint } from "react-icons/hi";
 import { IoHome } from "react-icons/io5";
 
@@ -14,27 +18,33 @@ export const MenuData: Menu[] = [
   {
     id: 1,
     name: "Home",
-    link: "/",
+    link: "home",
     icon: IoHome,
   },
   {
     id: 2,
     name: "About",
-    link: "/about",
+    link: "about",
     icon: HiOutlineFingerPrint,
+  },
+  {
+    id: 4,
+    name: "Services",
+    link: "services",
+    icon: BiSolidHeart,
   },
 
   {
     id: 3,
     name: "Projects",
-    link: "/projects",
+    link: "projects",
     icon: BiSolidBot,
   },
 
   {
     id: 5,
     name: "Contact",
-    link: "/contact",
+    link: "contact",
     icon: BiSolidMessageSquareDots,
   },
 ];

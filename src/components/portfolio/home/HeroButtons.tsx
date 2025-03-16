@@ -2,8 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BiSolidBot, BiSolidMessageSquareDots } from "react-icons/bi";
+import useGetActive from "../outline/useGetActive";
 
 export default function HeroButtons() {
+  const { scrollToSection } = useGetActive();
   const itemVariants = {
     initial: { y: -20, opacity: 0 },
     animate: {
@@ -30,7 +32,10 @@ export default function HeroButtons() {
       variants={itemVariants}
       className="mt-10 flex flex-col sm:flex-row gap-x-3 gap-y-4 items-center justify-center"
     >
-      <Link href={"/projects"} className="relative inline-block">
+      <div
+        onClick={() => scrollToSection("projects")}
+        className="relative inline-block"
+      >
         <motion.button
           variants={buttonVariants}
           initial="initial"
@@ -41,8 +46,11 @@ export default function HeroButtons() {
           <BiSolidBot size={18} />
           <span className="relative z-10">Explore Projects</span>
         </motion.button>
-      </Link>
-      <Link href={"/contact"} className="relative inline-block">
+      </div>
+      <div
+        onClick={() => scrollToSection("contact")}
+        className="relative inline-block"
+      >
         <motion.button
           variants={buttonVariants}
           initial="initial"
@@ -53,7 +61,7 @@ export default function HeroButtons() {
           <span className="relative z-10">Send Message</span>
           <BiSolidMessageSquareDots size={18} />
         </motion.button>
-      </Link>
+      </div>
     </motion.div>
   );
 }

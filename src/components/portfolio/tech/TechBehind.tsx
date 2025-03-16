@@ -40,7 +40,7 @@ export default function TechBehind() {
   const isInView = useInView(ref, { once: false, amount: 0.2 });
 
   return (
-    <section className="mt-10 pb-8">
+    <section className="">
       <div className="py-8 md:py-10 px-4 min-[1200px]:px-14 max-w-7xl mx-auto">
         <SectionTitle title="Made With" />
         <div className="relative mt-10 max-w-3xl mx-auto">

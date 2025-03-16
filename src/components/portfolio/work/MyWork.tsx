@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function MyWork() {
   return (
-    <section id="#about" className="min-h-screen mt-10">
+    <section id="services" className="min-h-screen mt-10">
       <div className="py-8 md:py-10 px-4 min-[1200px]:px-14 max-w-7xl mx-auto">
         <SectionTitle title="What I Do?" />
         <div className="relative mt-16 space-y-6 lg:justify-around justify-center">

@@ -1,13 +1,10 @@
-"use client";
-
 import SectionTitle from "../utils/SectionTitle";
-import { motion } from "framer-motion";
 import Projects from "./Projects";
 
 export default function MyProjects() {
   return (
     <section
-      id="#projects"
+      id="projects"
       className="min-h-screen mt-10 bg-gradient-to-t from-gray-950 to-transparent pb-8"
     >
       <div className="py-8 md:py-10 px-2 min-[1200px]:px-14 max-w-7xl mx-auto">

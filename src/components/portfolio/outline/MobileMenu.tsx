@@ -1,8 +1,7 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 import { MenuData } from "@/data/portfolioMenu";
+import useGetActive from "./useGetActive";
 
 interface propsTypes {
   openNavbar: Boolean;
@@ -10,11 +9,7 @@ interface propsTypes {
 }
 
 const MobileMenu: React.FC<propsTypes> = ({ openNavbar, handleOpenNav }) => {
-  const pathname = usePathname();
-
-  const isActive = (page: string) => {
-    return page === pathname;
-  };
+  const { isActive, scrollToSection } = useGetActive();
 
   return (
     <div
@@ -28,9 +23,9 @@ const MobileMenu: React.FC<propsTypes> = ({ openNavbar, handleOpenNav }) => {
     >
       <ul className="flex flex-col gap-6 w-full">
         {MenuData.map((menu) => (
-          <Link
+          <div
             key={menu.id}
-            href={menu.link}
+            onClick={() => scrollToSection(menu.link)}
             className={`mx-auto ${
               isActive(menu.link)
                 ? "text-portfolio-primary font-semibold"
@@ -44,7 +39,7 @@ const MobileMenu: React.FC<propsTypes> = ({ openNavbar, handleOpenNav }) => {
               <menu.icon />
               {menu.name}
             </li>
-          </Link>
+          </div>
         ))}
       </ul>
     </div>

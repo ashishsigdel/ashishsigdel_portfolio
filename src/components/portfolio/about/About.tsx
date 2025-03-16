@@ -11,7 +11,7 @@ import SectionTitle from "../utils/SectionTitle";
 export default function About() {
   return (
     <section
-      id="#about"
+      id="about"
       className="min-h-screen bg-gradient-to-b from-gray-950 to-transparent mt-10"
     >
       <div className="py-8 md:py-10 px-4 min-[1200px]:px-14 max-w-7xl mx-auto">
