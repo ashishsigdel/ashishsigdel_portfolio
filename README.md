@@ -1,9 +1,4 @@
-## Official page of
+## Official website for
 
 # ashishsigdel portfolio
 
-# asprog website
-
-# links
-
-# admin dashboard
