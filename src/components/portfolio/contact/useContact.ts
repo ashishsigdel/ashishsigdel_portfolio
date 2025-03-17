@@ -1,6 +1,6 @@
 "use client";
 import { sendMessage } from "@/services/portfolio/contactService";
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function useContact() {
   const [fullName, setFullName] = useState("");
