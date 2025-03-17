@@ -98,6 +98,7 @@ export default function useContact() {
       }
     }
   };
+
   return {
     fullName,
     setFullName,

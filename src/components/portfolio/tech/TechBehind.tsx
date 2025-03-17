@@ -41,7 +41,7 @@ export default function TechBehind() {
 
   return (
     <section className="">
-      <div className="py-8 md:py-10 px-4 min-[1200px]:px-14 max-w-7xl mx-auto">
+      <div className="px-4 min-[1200px]:px-14 max-w-7xl mx-auto">
         <SectionTitle title="Made With" />
         <div className="relative mt-10 max-w-3xl mx-auto">
           <motion.div
