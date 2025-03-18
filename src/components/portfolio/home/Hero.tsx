@@ -271,12 +271,9 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <Link
-          href={"#about"}
-          className="mx-auto absolute bottom-5 left-1/2 -translate-x-1/2"
-        >
+        <div className="mx-auto absolute bottom-5 left-1/2 -translate-x-1/2">
           <Scroll />
-        </Link>
+        </div>
       </motion.div>
     </div>
   );
