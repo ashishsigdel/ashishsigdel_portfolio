@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { easeOut, motion, useAnimation } from "framer-motion";
 import "@/styles/background.css";
 import Scroll from "./Scroll";
 import HeroButtons from "./HeroButtons";
 import Eager from "./Eager";
-import Link from "next/link";
 import StepIndicator from "./StepIndicator";
 import QuoteCircles from "@/assets/2nd-quote-circles.svg";
 import QuoteBGBlur from "@/assets/2nd-quote-bg-blur.svg";
@@ -55,7 +54,7 @@ export default function Hero() {
       transition: {
         duration: 0.5,
         ease: [0.215, 0.61, 0.355, 1],
-        delay: 1.4 + i * 0.03,
+        delay: 0.6 + i * 0.03,
       },
     }),
   };
@@ -132,7 +131,17 @@ export default function Hero() {
             <Image src={QuoteBGBlur} alt="Quote BG Blur" />
           </div>
         </div>
-        <div className="text-xs sm:text-sm text-white/60 uppercase">Home</div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            ease: "easeOut",
+            delay: 0.6,
+          }}
+          className="text-xs sm:text-sm text-white/60 uppercase"
+        >
+          Home
+        </motion.div>
         {/* Main content with staggered reveal */}
         <motion.div
           variants={containerVariants}
@@ -140,7 +149,7 @@ export default function Hero() {
           animate={controls}
           className="w-full max-w-5xl mx-auto px-2 sm:px-4"
         >
-          {/* Name with character animation */}
+          {/* Hi I'm ashish */}
           <div className="overflow-hidden py-2 space-y-10">
             <span className=""></span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-poppins flex flex-wrap justify-center">
@@ -171,7 +180,7 @@ export default function Hero() {
             <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-poppins">
               <motion.span
                 variants={titleRevealVariants}
-                custom={1.2}
+                custom={0.8}
                 initial="initial"
                 animate="animate"
                 className="inline-block"

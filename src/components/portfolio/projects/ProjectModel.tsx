@@ -19,12 +19,12 @@ export default function ProjectModal({ closeModal, project }: Props) {
 
   return (
     <div
-      className={`relative z-50 rounded-lg shadow-xl w-full max-w-6xl border border-gray-700 bg-white dark:bg-gray-900 transition-all duration-300 ${
-        enhanced ? "max-w-full m-3" : "max-w-6xl my-3 lg:my-10 mx-3"
+      className={`relative z-50 rounded-lg shadow-xl w-full max-w-6xl border border-gray-700 bg-gray-900 transition-all duration-300 ${
+        enhanced ? "max-w-full m-3" : "max-w-6xl m-3 lg:my-10 "
       }`}
     >
-      <div className="flex items-center justify-between p-4 md:p-5 border-b border-gray-700 rounded-t bg-gray-100 dark:bg-gray-800">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white truncate">
+      <div className="flex items-center justify-between p-3 md:p-4 border-b border-gray-700 rounded-t bg-gray-800">
+        <h3 className="text-base font-semiboldtext-white truncate">
           {project.title}
         </h3>
         <div className="flex items-center gap-2">
@@ -41,7 +41,7 @@ export default function ProjectModal({ closeModal, project }: Props) {
         <div className="flex flex-col lg:flex-row lg:gap-6">
           <div className="lg:w-3/5 mb-4 lg:mb-0">
             {project.coverPhoto && (
-              <div className="relative rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-md h-auto">
+              <div className="relative rounded-lg overflow-hidden border border-gray-700 shadow-md h-auto">
                 <CoverPhoto coverPhoto={project.coverPhoto} />
               </div>
             )}
