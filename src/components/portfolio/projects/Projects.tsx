@@ -29,13 +29,6 @@ export default function Projects() {
     scrollToSection("projects");
   };
 
-  const hanlgeSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    setTimeout(() => {
-      fetchProjects(1, searchTerm);
-    }, 1500);
-  };
-
   useEffect(() => {
     fetchProjects(1, "");
   }, []);
@@ -117,14 +110,16 @@ export default function Projects() {
             viewport={{ once: true }}
           >
             {projects.map((creation, index) => (
-              <motion.div
-                key={creation.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.1 * index }}
-              >
-                <ProjectCard project={creation} />
-              </motion.div>
+              <div key={creation.id}>
+                <motion.div
+                  key={creation.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.1 * index }}
+                >
+                  <ProjectCard project={creation} />
+                </motion.div>
+              </div>
             ))}
           </motion.div>
         )}

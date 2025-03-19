@@ -1,13 +1,24 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion"; // Import motion from framer-motion
-import { useMediaQuery } from "react-responsive"; // Import for responsive design
+import { useMediaQuery } from "react-responsive";
+import { ProjectClient } from "@/types/projects";
+import { Modal } from "@/components/modal";
+import ProjectModel from "./ProjectModel";
+import Tags from "./project/Tags";
+interface Props {
+  project: ProjectClient;
+}
 
-export default function ProjectCard({ project }: any) {
+export default function ProjectCard({ project }: Props) {
   const [isClient, setIsClient] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   // Check if device is mobile
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -77,8 +88,9 @@ export default function ProjectCard({ project }: any) {
   };
 
   return (
-    <Link href={`/projects/${project.id}`}>
+    <>
       <motion.div
+        onClick={openModal}
         className="border border-white/20 rounded-lg overflow-hidden cursor-pointer backdrop-blur-sm bg-black/5 dark:bg-white/5 max-w-[400px] mx-auto"
         variants={cardVariants}
         initial="hidden"
@@ -124,15 +136,7 @@ export default function ProjectCard({ project }: any) {
             variants={textVariants}
             custom={0}
           >
-            {project.tags &&
-              project.tags.split(",").map((tag: string, index: number) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 text-xs rounded-md bg-portfolio-primary/20 border border-portfolio-primary/30 text-portfolio-primary h-fit"
-                >
-                  {tag}
-                </span>
-              ))}
+            <Tags tags={project.tags} />
           </motion.div>
 
           <motion.h4
@@ -167,6 +171,9 @@ export default function ProjectCard({ project }: any) {
           </motion.div>
         </motion.div>
       </motion.div>
-    </Link>
+      <Modal isOpen={showModal}>
+        <ProjectModel closeModal={closeModal} project={project} />
+      </Modal>
+    </>
   );
 }

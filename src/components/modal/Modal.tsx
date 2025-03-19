@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Modal({
   children,
@@ -17,8 +17,8 @@ export default function Modal({
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 z-[999] overflow-y-scroll flex items-start py-0 sm:py-10 justify-center w-full mx-auto">
-          <div className="fixed top-0 inset-0 bg-gray-800 dark:bg-gray-500 dark:bg-opacity-50 bg-opacity-50 transition-opacity pointer-events-none"></div>
+        <div className="fixed inset-0 z-[999] overflow-y-scroll flex items-start justify-center w-full mx-auto">
+          <div className="fixed top-0 inset-0 bg-black/50 transition-opacity pointer-events-none backdrop:blur-lg"></div>
           {children}
         </div>
       )}

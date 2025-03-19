@@ -42,7 +42,6 @@ body {
 .description-container {
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
-  max-width: 800px;
   @apply text-dark-black dark:text-light-white;
 }
 .description-content h1 {
@@ -53,14 +52,16 @@ body {
   @apply text-2xl;
 }
 .description-content ol {
-  @apply text-xl font-geist my-4 ml-3;
+  counter-reset: list-counter;
 }
 .description-content li {
-  @apply text-[16px] font-poppins;
+  counter-increment: list-counter;
+  list-style: none;
+  position: relative;
 }
 .description-content li::before {
-  content: "✅";
-  @apply pr-2 text-[16px];
+  content: "0" counter(list-counter) ". ";
+  @apply pr-2 text-[16px] font-bold text-portfolio-primary;
 }
 
 .description-content blockquote {
