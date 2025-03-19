@@ -20,7 +20,7 @@ export default function ProjectModal({ closeModal, project }: Props) {
   return (
     <div
       className={`relative z-50 rounded-lg shadow-xl w-full max-w-6xl border border-gray-700 bg-white dark:bg-gray-900 transition-all duration-300 ${
-        enhanced ? "max-w-full m-3" : "max-w-6xl my-10"
+        enhanced ? "max-w-full m-3" : "max-w-6xl my-3 lg:my-10 mx-3"
       }`}
     >
       <div className="flex items-center justify-between p-4 md:p-5 border-b border-gray-700 rounded-t bg-gray-100 dark:bg-gray-800">
