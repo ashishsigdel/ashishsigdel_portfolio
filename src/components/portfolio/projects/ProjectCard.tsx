@@ -68,10 +68,9 @@ export default function ProjectCard({ project }: Props) {
             {project.title}
           </h4>
 
-          <p
-            className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2"
-            dangerouslySetInnerHTML={{ __html: project.description }}
-          />
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
+            {project.shortDescription}
+          </p>
 
           <div className="mt-4 flex items-center text-xs text-portfolio-primary">
             <span>View Project</span>
