@@ -1,6 +1,7 @@
 export type ProjectClient = {
   id: number;
   title: string;
+  shortDescription: string;
   description: string;
   coverPhoto: string;
   githubLink: string;

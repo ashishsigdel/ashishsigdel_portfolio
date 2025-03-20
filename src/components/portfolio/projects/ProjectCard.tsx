@@ -149,10 +149,11 @@ export default function ProjectCard({ project }: Props) {
 
           <motion.p
             className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2"
-            dangerouslySetInnerHTML={{ __html: project.description }}
             variants={textVariants}
             custom={2}
-          />
+          >
+            {project.shortDescription}
+          </motion.p>
 
           {/* "View Project" always visible, arrow animates on hover */}
           <motion.div
