@@ -9,11 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ashish-ui/markup-renderer": "^1.0.9",
     "@reduxjs/toolkit": "^2.4.0",
     "axios": "^1.7.9",
     "crypto-js": "^4.2.0",
     "framer-motion": "^11.15.0",
-    "he": "^1.2.0",
     "jodit-react": "^4.1.2",
     "next": "15.0.3",
     "next-themes": "^0.4.3",
@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
-    "@types/he": "^1.2.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

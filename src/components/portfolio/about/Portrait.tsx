@@ -47,8 +47,8 @@ export default function Portrait() {
           <Image
             src={myPic}
             alt="My Picture"
-            width={400}
-            height={400}
+            width={800}
+            height={800}
             className="w-full aspect-square object-contain pt-4"
             draggable="false"
           />
