@@ -13,7 +13,9 @@ export default function Projects() {
   const {
     loading,
     fetchProjects,
+    preloadPagesInBackground,
     projects,
+    allProjectsForSEO,
     selectedTag,
     setSelectedTag,
     setCurrentPage,
@@ -25,12 +27,13 @@ export default function Projects() {
   const handleTagClick = (tag: string) => {
     let tagValue = tag === "all" ? "" : tag;
     setSelectedTag(tag);
-    fetchProjects(1, tagValue);
+    setSearchTerm(tagValue);
+    preloadPagesInBackground(tagValue);
     scrollToSection("projects");
   };
 
   useEffect(() => {
-    fetchProjects(1, "");
+    preloadPagesInBackground("");
   }, []);
 
   const handlePageChange = (page: number) => {
@@ -130,6 +133,30 @@ export default function Projects() {
           handlePageChange={handlePageChange}
         />
       </motion.div>
+
+      {/* SEO-friendly hidden section with all preloaded projects */}
+      <div className="sr-only">
+        <h2>All Portfolio Projects - Complete List</h2>
+        <div>
+          {allProjectsForSEO.map((project) => (
+            <div key={`seo-${project.id}`}>
+              <h3>{project.title}</h3>
+              <p>{project.shortDescription}</p>
+              <p>{project.description}</p>
+              {project.tags && <div>Tags: {project.tags}</div>}
+              {project.githubLink && (
+                <a href={project.githubLink}>GitHub Repository</a>
+              )}
+              {project.previewLink && (
+                <a href={project.previewLink}>Live Demo</a>
+              )}
+              {project.coverPhoto && (
+                <img src={project.coverPhoto} alt={project.title} />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
     </motion.div>
   );
 }

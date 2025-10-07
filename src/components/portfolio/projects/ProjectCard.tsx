@@ -84,6 +84,9 @@ export default function ProjectCard({ project }: Props) {
       <Modal isOpen={showModal}>
         <ProjectModel closeModal={closeModal} project={project} />
       </Modal>
+      <div className="sr-only">
+        <ProjectModel closeModal={closeModal} project={project} />
+      </div>
     </>
   );
 }

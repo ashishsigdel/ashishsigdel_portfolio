@@ -1,6 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 
-export const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
+export const baseUrl =
+  `${process.env.NEXT_PUBLIC_API_URL}/api/v1` ||
+  "https://api.ashishsigdel.com.np/api/v1";
 
 const myAxios: AxiosInstance = axios.create({
   baseURL: baseUrl,
