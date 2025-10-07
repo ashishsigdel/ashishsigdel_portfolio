@@ -24,12 +24,14 @@ export const metadata: Metadata = {
     title: "Ashish Sigdel - AI, Web & Mobile Developer",
     description:
       "Ashish Sigdel is a skilled AI, web, and mobile developer specializing in Machine learning, Deep learning, React, React Native, Next.js, Node.js, and Python. Explore his portfolio to see innovative projects that blend technology and creativity.",
+    url: "https://ashishsigdel.com.np",
     images: [
       {
-        url: "/og.png",
+        url: "https://ashishsigdel.com.np/og.png",
         width: 1200,
         height: 630,
         alt: "Ashish Sigdel - AI, Web & Mobile Developer",
+        type: "image/png",
       },
     ],
   },
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
     title: "Ashish Sigdel - AI, Web & Mobile Developer",
     description:
       "Ashish Sigdel is a skilled AI, web, and mobile developer specializing in Machine learning, Deep learning, React, React Native, Next.js, Node.js, and Python. Explore his portfolio to see innovative projects that blend technology and creativity.",
-    images: ["/og.png"],
+    images: ["https://ashishsigdel.com.np/og.png"],
   },
 };
 
