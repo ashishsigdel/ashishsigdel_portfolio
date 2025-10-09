@@ -3,8 +3,8 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { RxCross2, RxMinus } from "react-icons/rx";
 
 export default function Leftwindow({
-  width,
-  toggleWidth,
+  // width,
+  // toggleWidth,
   toggleQuiting,
 }: {
   width: string;

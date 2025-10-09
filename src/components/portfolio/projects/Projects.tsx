@@ -7,6 +7,7 @@ import ProjectCard from "./ProjectCard";
 import { Pagination } from "@/components/common";
 import { motion } from "framer-motion";
 import useGetActive from "../outline/useGetActive";
+import Image from "next/image";
 
 export default function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,7 +26,7 @@ export default function Projects() {
   const { scrollToSection } = useGetActive();
 
   const handleTagClick = (tag: string) => {
-    let tagValue = tag === "all" ? "" : tag;
+    const tagValue = tag === "all" ? "" : tag;
     setSelectedTag(tag);
     setSearchTerm(tagValue);
     preloadPagesInBackground(tagValue);
@@ -151,7 +152,12 @@ export default function Projects() {
                 <a href={project.previewLink}>Live Demo</a>
               )}
               {project.coverPhoto && (
-                <img src={project.coverPhoto} alt={project.title} />
+                <Image
+                  width={10}
+                  height={10}
+                  src={project.coverPhoto}
+                  alt={project.title}
+                />
               )}
             </div>
           ))}

@@ -54,9 +54,8 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
-        <body suppressHydrationWarning={true} className="dark:dark-background">
+        <body suppressHydrationWarning={false} className="dark:dark-background">
           <CustomThemeProvider>{children}</CustomThemeProvider>
-
           <ToastUtils />
         </body>
       </html>

@@ -77,7 +77,7 @@ export default function RightDots() {
               },
             }}
           >
-            {MenuData.map((menu, index) => {
+            {MenuData.map((menu) => {
               return (
                 <div onClick={() => scrollToSection(menu.link)} key={menu.id}>
                   <motion.div

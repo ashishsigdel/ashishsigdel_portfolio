@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { MenuData } from "@/data/portfolioMenu";
 import useGetActive from "./useGetActive";
 

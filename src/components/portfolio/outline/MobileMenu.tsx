@@ -4,7 +4,7 @@ import { MenuData } from "@/data/portfolioMenu";
 import useGetActive from "./useGetActive";
 
 interface propsTypes {
-  openNavbar: Boolean;
+  openNavbar: boolean;
   handleOpenNav: () => void;
 }
 

@@ -11,13 +11,13 @@ export default function Leftwindow({
   toggleWidth: () => void;
   minimize: () => void;
 }) {
-  const toggleFullScreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  };
+  // const toggleFullScreen = () => {
+  //   if (!document.fullscreenElement) {
+  //     document.documentElement.requestFullscreen();
+  //   } else {
+  //     document.exitFullscreen();
+  //   }
+  // };
 
   return (
     <div className="absolute right-5 text-white/40">

@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchAll, fetchUnique } from "@/services/portfolio/projectService";
+import { fetchAll } from "@/services/portfolio/projectService";
 import { ProjectClient } from "@/types/projects";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -79,8 +79,8 @@ export default function useProjects() {
         ...prev,
         [cacheKey]: response.data.projects || [],
       }));
-    } catch (error) {
-      toast.error("Failed to fetch projects");
+    } catch (error: any) {
+      toast.error("Failed to fetch projects", error.response?.data?.message);
     } finally {
       setLoading(false);
     }
@@ -100,5 +100,6 @@ export default function useProjects() {
     selectedTag,
     setSelectedTag,
     project,
+    setProject,
   };
 }

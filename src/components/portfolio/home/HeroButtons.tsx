@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { BiSolidBot, BiSolidMessageSquareDots } from "react-icons/bi";
 import useGetActive from "../outline/useGetActive";
 

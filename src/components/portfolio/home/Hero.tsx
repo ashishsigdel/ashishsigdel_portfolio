@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { easeOut, motion, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import "@/styles/background.css";
 import Scroll from "./Scroll";
 import HeroButtons from "./HeroButtons";
@@ -11,8 +11,8 @@ import QuoteBGBlur from "@/assets/2nd-quote-bg-blur.svg";
 import Image from "next/image";
 
 export default function Hero() {
+  const inView = true;
   const controls = useAnimation();
-  const [inView, setInView] = useState(true);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

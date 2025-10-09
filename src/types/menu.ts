@@ -1,5 +1,4 @@
 import { ElementType } from "react";
-import { IconType } from "react-icons";
 
 export type SubMenu = {
   id: number;
