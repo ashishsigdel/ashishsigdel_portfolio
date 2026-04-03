@@ -1,26 +1,161 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Amazon Ember";
+  src: url("/fonts/amazon-ember/Amazon Ember Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  src: url("/fonts/amazon-ember/Amazon Ember.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  src: url("/fonts/amazon-ember/Amazon Ember Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  src: url("/fonts/amazon-ember/Amazon Ember Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent-green: #10b981;
+  --color-accent-blue: #3b82f6;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    "Amazon Ember", var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Glassmorphism helpers */
+.glass {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom utilities */
+.glow-green:focus-within {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  border-color: var(--color-accent-green);
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-left {
+  animation: marquee-left 18s linear infinite;
+}
+
+.marquee-container:hover .marquee-left {
+  animation-play-state: paused;
+}
+
+/* Greeting slide animation - step by step with pause */
+@keyframes greeting-slide {
+  0%,
+  14% {
+    transform: translateY(0);
+  }
+  16.66%,
+  30% {
+    transform: translateY(-20px);
+  }
+  33.33%,
+  47% {
+    transform: translateY(-40px);
+  }
+  50%,
+  64% {
+    transform: translateY(-60px);
+  }
+  66.66%,
+  80% {
+    transform: translateY(-80px);
+  }
+  83.33%,
+  97% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(-120px);
+  }
+}
+
+.greeting-slide-animation {
+  animation: greeting-slide 15s ease-in-out infinite;
+}
+
+@keyframes gradient-sweep {
+  0% {
+    background-position: -150% center;
+  }
+  100% {
+    background-position: 150% center;
+  }
+}
+
+.gradient-sweep-text {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 40%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.6) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-sweep 3s linear infinite;
+}
+
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) skewX(-30deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) skewX(-20deg);
+  }
+}
+
+.animate-spotlight {
+  animation: spotlight 2s ease 0.75s 1 forwards;
 }
