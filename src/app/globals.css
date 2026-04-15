@@ -142,7 +142,7 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-sweep 3s linear infinite;
+  animation: gradient-sweep 8s linear infinite;
 }
 
 @keyframes spotlight {
@@ -158,4 +158,31 @@ body {
 
 .animate-spotlight {
   animation: spotlight 2s ease 0.75s 1 forwards;
+}
+
+@keyframes zoom-out-enter {
+  0% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-zoom-enter {
+  animation: zoom-out-enter 5s cubic-bezier(0.16, 1, 0.3, 1) 2s both;
+}
+.animate-zoom-enter-1 {
+  animation: zoom-out-enter 5s cubic-bezier(0.16, 1, 0.3, 1) 2s both;
+}
+.animate-zoom-enter-2 {
+  animation: zoom-out-enter 5s cubic-bezier(0.16, 1, 0.3, 1) 2s both;
+}
+.animate-zoom-enter-3 {
+  animation: zoom-out-enter 5s cubic-bezier(0.16, 1, 0.3, 1) 2s both;
+}
+.animate-zoom-enter-4 {
+  animation: zoom-out-enter 5s cubic-bezier(0.16, 1, 0.3, 1) 2s both;
 }

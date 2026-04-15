@@ -6,9 +6,11 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import ScrollVideo from "./ScrollVideo";
 import Button from "@/components/ui/Buttons";
+import { TextScramble } from "../ui/text-scramble";
+import { Spotlight } from "../ui/spotlight";
 
 // Increase to make frames change faster. Height auto-adjusts so scroll ends with last frame.
-const SCROLL_SPEED = 2;
+const SCROLL_SPEED = 4;
 
 const greetings = ["Hello", "Bonjour", "Hola", "Namaste", "Ciao", "Olá"];
 
@@ -71,17 +73,20 @@ export default function HeroSection() {
     <div
       ref={scrollContainerRef}
       className="relative"
-      style={{ height: `calc((100 + ${200 / SCROLL_SPEED}) * 1dvh)` }}
+      style={{ height: "100dvh" }}
     >
-      <section
-        className="sticky top-0 [isolation:isolate]"
-        style={{ height: "100dvh" }}
-      >
+      <section className="relative isolate" style={{ height: "100dvh" }}>
+        {/* Spotlight effect */}
+        <Spotlight
+          className="-top-40 left-0 md:left-60 md:-top-20"
+          fill="white"
+        />
         {/* Scroll-animated Background */}
         <ScrollVideo
           className="z-0"
           opacity={1.0}
           scrollContainerRef={scrollContainerRef}
+          scrollSpeed={SCROLL_SPEED}
         />
 
         {/* Dim overlay when nav is hovered */}
@@ -123,7 +128,7 @@ export default function HeroSection() {
                     : "text-white opacity-100",
                 )}
               >
-                {link.name}
+                <TextScramble text={link.name} />
               </Link>
             ))}
           </nav>
@@ -154,7 +159,7 @@ export default function HeroSection() {
               {[...greetings, greetings[0]].map((greeting, index) => (
                 <p
                   key={index}
-                  className="h-5 leading-[20px] text-base text-orange-400 italic"
+                  className="h-5 leading-5 text-base text-orange-400 italic"
                 >
                   {greeting},
                 </p>
@@ -163,20 +168,22 @@ export default function HeroSection() {
           </div>
 
           {/* Name */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            <span className="text-orange-700">I&#39;m</span> Ashish
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
+            <span className="bg-linear-to-bl from-orange-400 to-orange-950 bg-clip-text text-transparent">
+              I&#39;m
+            </span>{" "}
+            Ashish
           </h1>
         </div>
 
         {/* Center Left - Main Heading vertically centered */}
-        <div className="absolute top-[28%] bottom-[38%] md:top-24 md:bottom-12 left-4 md:left-12 z-10 flex flex-col justify-center">
-          <h2 className="text-[2.6rem] sm:text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tight bg-linear-to-tr from-white via-white/50 to-white/0 bg-clip-text text-transparent pb-3 md:pb-7 space-y-3 sm:space-y-0">
+        <div className="absolute top-[28%] bottom-[38%] md:top-24 md:bottom-12 left-4 md:left-12 z-1 flex flex-col justify-center">
+          <h2 className="text-[2.6rem] sm:text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tight bg-linear-to-b from-white via-white/55 to-white/10 bg-clip-text text-transparent pb-3 md:pb-7 space-y-3 sm:space-y-0">
             <span className="block">Building</span>
             <span className="block">Intelligent</span>
             <span className="block">Digital</span>
             <span className="block">Systems</span>
           </h2>
-          {/* Subtext */}
 
           <p className="text-zinc-500 text-sm font-light tracking-wide mt-2 block sm:hidden">
             Turning data into Intelligence, <br /> Idea into Vision.
@@ -187,7 +194,7 @@ export default function HeroSection() {
         </div>
 
         {/* Bottom - Chat Area */}
-        <div className="absolute bottom-6 left-4 right-4 md:bottom-12 md:left-auto md:right-12 md:max-w-md z-10">
+        <div className="absolute bottom-6 left-4 right-4 md:bottom-12 md:left-auto md:right-12 md:w-md z-10">
           {/* Welcome Message or Chat Messages */}
           <div className="mb-4 px-3">
             {messages.length === 0 ? (
@@ -233,7 +240,7 @@ export default function HeroSection() {
                   }
                 }}
                 placeholder="Ask me anything ..."
-                className="min-w-0 flex-1 bg-transparent outline-none text-white font-semibold text-base placeholder:text-white/60 px-6 py-4"
+                className="min-w-0 flex-1 bg-transparent outline-none text-white font-semibold text-base placeholder:text-white/60 px-6 py-2"
               />
               <button
                 type="submit"
@@ -262,7 +269,7 @@ export default function HeroSection() {
           Based on Nepal. 🇳🇵
         </div>
 
-        {/* Mobile Bottom Sheet Nav - outer wrapper clips the sheet when hidden so it doesn't visually overflow below the section */}
+        {/* Mobile Bottom Sheet Nav  */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-50 md:hidden">
           <div
             className={cn(
@@ -285,18 +292,6 @@ export default function HeroSection() {
                   {link.name}
                 </Link>
               ))}
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  const contactSection = document.getElementById("contact");
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-                className="text-lg font-medium py-4 px-4 rounded-lg border border-zinc-700 text-white hover:bg-zinc-900 transition-colors mt-4 text-left"
-              >
-                Contact
-              </button>
             </nav>
           </div>
         </div>

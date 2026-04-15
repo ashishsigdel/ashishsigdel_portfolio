@@ -20,12 +20,14 @@ interface ScrollVideoProps {
   className?: string;
   opacity?: number;
   scrollContainerRef: React.RefObject<HTMLDivElement | null>;
+  scrollSpeed?: number;
 }
 
 export default function ScrollVideo({
   className = "",
   opacity = 1.0,
   scrollContainerRef,
+  scrollSpeed = 1,
 }: ScrollVideoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -104,15 +106,19 @@ export default function ScrollVideo({
         const rect = container.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
 
-        // Calculate progress based on how much of the scroll container has been scrolled
-        // When top of container is at top of viewport, progress = 0
-        // When bottom of container reaches bottom of viewport, progress = 1
         const scrollableDistance = container.offsetHeight - viewportHeight;
-        const scrolled = -rect.top;
-        const progress = Math.min(
-          Math.max(scrolled / scrollableDistance, 0),
-          1,
-        );
+        let progress = 0;
+
+        if (scrollableDistance > 0) {
+          // For tall pinned containers, map full container scroll distance to 0..1.
+          const scrolled = -rect.top;
+          progress = Math.min(Math.max(scrolled / scrollableDistance, 0), 1);
+        } else {
+          // For normal flow sections, animate frames while the section moves out of view.
+          const effectiveDistance = viewportHeight / Math.max(scrollSpeed, 0.1);
+          const scrolled = -rect.top;
+          progress = Math.min(Math.max(scrolled / effectiveDistance, 0), 1);
+        }
 
         const frameIndex = Math.min(
           Math.floor(progress * TOTAL_FRAMES),
