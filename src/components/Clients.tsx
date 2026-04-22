@@ -1,16 +1,6 @@
 "use client";
 
-const clients = [
-  { name: "Windor Group", logo: "https://windor.com.np/logo/logo.png" },
-  {
-    name: "Pokhara Bike Rental",
-    logo: "https://pokharabikerental.com/logo.png",
-  },
-  {
-    name: "Fantasy Battle",
-    logo: "https://i.postimg.cc/ncsLHjbN/logo.png",
-  },
-];
+import { clients } from "@/data/clients";
 
 export default function Clients() {
   return (
