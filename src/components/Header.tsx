@@ -75,7 +75,7 @@ export default function Header() {
                   onMouseEnter={() => setHoveredLink(link.name)}
                   onMouseLeave={() => setHoveredLink(null)}
                   className={cn(
-                    "text-xs @lg:text-sm font-medium px-2 @lg:px-4 transition-all duration-300 relative z-[60]",
+                    "text-xs @lg:text-sm font-medium px-2 @lg:px-4 transition-all duration-300 relative z-60",
                     pathname === link.href
                       ? "text-accent-green"
                       : hoveredLink && hoveredLink !== link.name

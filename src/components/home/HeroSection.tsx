@@ -92,7 +92,7 @@ export default function HeroSection() {
         {/* Dim overlay when nav is hovered */}
         <div
           className={cn(
-            "absolute inset-0 bg-black/30 z-40 pointer-events-none transition-opacity duration-300",
+            "absolute inset-0 bg-black/40 z-40 pointer-events-none transition-opacity duration-300",
             isNavHovered ? "opacity-100" : "opacity-0",
           )}
         />
@@ -128,7 +128,8 @@ export default function HeroSection() {
                     : "text-white opacity-100",
                 )}
               >
-                <TextScramble text={link.name} />
+                {/* <TextScramble text={link.name} /> */}
+                {link.name}
               </Link>
             ))}
           </nav>
@@ -178,18 +179,18 @@ export default function HeroSection() {
 
         {/* Center Left - Main Heading vertically centered */}
         <div className="absolute top-[28%] bottom-[38%] md:top-24 md:bottom-12 left-4 md:left-12 z-1 flex flex-col justify-center">
-          <h2 className="text-[2.6rem] sm:text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tight bg-linear-to-b from-white via-white/55 to-white/10 bg-clip-text text-transparent pb-3 md:pb-7 space-y-3 sm:space-y-0">
+          <h2 className="text-[2.6rem] sm:text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tight bg-linear-to-b from-white via-white/65 to-white/30 bg-clip-text text-transparent pb-3 md:pb-7 space-y-3 sm:space-y-0">
             <span className="block">Building</span>
             <span className="block">Intelligent</span>
             <span className="block">Digital</span>
             <span className="block">Systems</span>
           </h2>
 
-          <p className="text-zinc-500 text-sm font-light tracking-wide mt-2 block sm:hidden">
-            Turning data into Intelligence, <br /> Idea into Vision.
+          <p className="text-zinc-400 text-sm font-medium tracking-wide mt-2 block sm:hidden">
+            AI/ML Engineer +<br /> Full Stack Developer
           </p>
-          <p className="text-zinc-500 text-sm font-light tracking-wide mt-2 hidden sm:inline">
-            Turning data into Intelligence, Idea into Vision.
+          <p className="text-zinc-400 text-sm font-medium tracking-wide mt-2 hidden sm:inline">
+            AI/ML Engineer + Full Stack Developer
           </p>
         </div>
 
@@ -200,12 +201,13 @@ export default function HeroSection() {
             {messages.length === 0 ? (
               <div className="text-left">
                 <p className="text-zinc-300 text-lg font-semibold mb-1">
-                  <span className="text-orange-600">Nice to meet you,</span> pal
-                  <span className="text-orange-600">!</span>
+                  <span className="text-orange-600">
+                    Nice to meet you, Pal!
+                  </span>
                 </p>
                 <p className="text-white text-base md:text-xl leading-snug">
-                  I&#39;m really glad you&#39;re here. So, let&#39;s talk. Just
-                  start typing below and smile.🤓
+                  Explore my work with AI - Just ask about my projects, skills,
+                  or experience.
                 </p>
               </div>
             ) : (
@@ -228,7 +230,7 @@ export default function HeroSection() {
             onSubmit={handleSubmit}
             className="relative w-full touch-manipulation"
           >
-            <div className="relative rounded-full bg-orange-700 flex items-center shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.3)]">
+            <div className="relative rounded-full bg-white/15 backdrop-blur-sm flex items-center shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.3)]">
               <input
                 type="text"
                 value={input}
