@@ -1,17 +1,12 @@
 "use client";
 
-import { ArrowUpRight, Cpu, FormInput, MonitorCheck } from "lucide-react";
+import { ArrowUpRight, Cpu, Globe, MonitorCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function FeaturedProjects() {
-  const router = useRouter();
-
-  const handleBibliookClick = () => {
-    router.push("/bibliook");
-  };
+  const [isBibliookArrowHovered, setIsBibliookArrowHovered] = useState(false);
 
   return (
     <section className="relative w-full pt-24 px-6 overflow-visible">
@@ -36,16 +31,40 @@ export default function FeaturedProjects() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[400px]">
-          {/* Item 1: Agentic Form Builder (Large) */}
+          {/* Item 1: Bibliook */}
           <div className="group col-span-1 md:col-span-2 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500">
-            <div className="absolute top-8 right-8 w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-500 z-10">
-              <ArrowUpRight size={20} />
+            <Link
+              href="https://bibliook.ashishsigdel.com.np"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              aria-label="Open Bibliook website"
+            />
+            <div
+              className={`absolute top-8 right-22 w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center transition-colors duration-500 z-20 cursor-pointer ${
+                isBibliookArrowHovered
+                  ? "text-white"
+                  : "group-hover:bg-white group-hover:text-black"
+              }`}
+            >
+              <Globe size={20} />
             </div>
+            <Link
+              href="/bibliook"
+              onMouseEnter={() => setIsBibliookArrowHovered(true)}
+              onMouseLeave={() => setIsBibliookArrowHovered(false)}
+              onFocus={() => setIsBibliookArrowHovered(true)}
+              onBlur={() => setIsBibliookArrowHovered(false)}
+              className="absolute top-8 right-8 w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-500 z-20 cursor-pointer"
+              aria-label="Open Bibliook detail page"
+            >
+              <ArrowUpRight size={20} />
+            </Link>
             {/* Background design */}
             <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent z-0" />
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent-green/10 rounded-full blur-3xl group-hover:bg-accent-green/20 transition-all duration-500" />
 
-            <div className="relative z-10 flex flex-col gap-4">
+            <div className="relative z-0 flex flex-col gap-4">
               <Image
                 src={"/projects/bibliook-logo.png"}
                 alt="bibliook-logo"
