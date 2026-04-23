@@ -85,7 +85,7 @@ const clientCollaborations = [
 
 export default function Experience() {
   return (
-    <section className="w-full py-24 px-6 border-y border-zinc-900 border-dashed">
+    <section className="w-full py-24 px-6">
       <div className="max-w-7xl mx-auto flex flex-col gap-14">
         <div className="space-y-4">
           <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">
