@@ -1,7 +1,6 @@
 "use client";
 
 import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
 import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
@@ -15,7 +14,6 @@ export default function Home() {
         <HeroSection />
         <Experience />
         <FeaturedProjects />
-        <Projects />
         <Testimonials />
         <Blog />
         <Footer />
