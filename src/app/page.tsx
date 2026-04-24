@@ -6,6 +6,7 @@ import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/home/HeroSection";
 import FeaturedProjects from "@/components/FeaturedProjects";
+import AboutMeFeatured from "@/components/AboutMeFeatured";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <HeroSection />
         <Experience />
         <FeaturedProjects />
+        <AboutMeFeatured />
         <Testimonials />
         <Blog />
         <Footer />

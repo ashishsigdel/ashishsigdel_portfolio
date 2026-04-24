@@ -186,3 +186,305 @@ body {
 .animate-zoom-enter-4 {
   animation: zoom-out-enter 5s cubic-bezier(0.16, 1, 0.3, 1) 2s both;
 }
+
+/* ─── Skills Tree ─────────────────────────────────────────── */
+
+/* Root */
+.st-root {
+  position: relative;
+  width: 100%;
+}
+.st-root.st-desktop {
+  overflow-x: auto;
+  padding: 40px 0;
+}
+.st-root.st-mobile {
+  overflow-x: hidden;
+  padding: 24px 0;
+}
+
+/* SVG overlay */
+.st-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* ── Desktop Grid ── */
+.st-d-grid {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  min-height: 560px;
+  min-width: 1060px;
+  gap: 0;
+}
+.st-d-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 18px;
+}
+.st-d-col-user {
+  width: 72px;
+  margin-right: 20px;
+}
+.st-d-col-front {
+  width: 210px;
+}
+.st-d-col-key {
+  width: 64px;
+  margin: 0 12px;
+}
+.st-d-col-back {
+  width: 280px;
+}
+.st-d-col-ml {
+  flex: 1;
+  width: 240px;
+}
+.st-d-branch-t,
+.st-d-branch-b {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ── Mobile Flow ── */
+.st-m-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 4px;
+}
+.st-m-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.st-m-center {
+  justify-content: center;
+}
+.st-m-triple {
+  gap: 8px;
+  align-items: flex-start;
+}
+.st-m-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.st-m-main {
+  flex: 1.3;
+  min-width: 0;
+}
+
+/* ── Card ── */
+.st-card {
+  background: rgba(12, 12, 18, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  position: relative;
+}
+.st-card:hover {
+  border-color: var(--accent, rgba(255, 255, 255, 0.2));
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--accent, #3b82f6) 18%, transparent),
+    0 8px 32px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+.st-card-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+/* ── Pills ── */
+.st-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.st-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cbd5e1;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  cursor: default;
+  position: relative;
+}
+.st-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.st-pill svg {
+  flex-shrink: 0;
+  color: #94a3b8;
+}
+.st-pill:hover svg {
+  color: #e2e8f0;
+}
+
+/* ── Split layout ── */
+.st-split {
+  display: flex;
+  gap: 10px;
+}
+.st-split-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+.st-split-title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 2px;
+  padding-left: 11px;
+}
+.st-split-divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  align-self: stretch;
+}
+
+/* ── Glyph ── */
+.st-glyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.st-glyph-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(12, 12, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.st-glyph-circle:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.08);
+}
+.st-key-circle {
+  width: 40px;
+  height: 40px;
+}
+.st-glyph-text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Tooltip ── */
+.st-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e5e7eb;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 50;
+  pointer-events: none;
+  animation: st-tip-in 0.12s ease-out;
+}
+.st-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+@keyframes st-tip-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(3px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .st-card {
+    padding: 10px;
+    border-radius: 12px;
+  }
+  .st-card-label {
+    font-size: 8px;
+    margin-bottom: 7px;
+  }
+  .st-pill {
+    font-size: 9.5px;
+    padding: 4px 8px;
+    gap: 5px;
+  }
+  .st-pill span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .st-split {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .st-split-divider {
+    width: 100%;
+    height: 1px;
+  }
+  .st-glyph-circle {
+    width: 44px;
+    height: 44px;
+  }
+  .st-key-circle {
+    width: 34px;
+    height: 34px;
+  }
+}

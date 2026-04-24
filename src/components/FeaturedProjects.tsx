@@ -1,9 +1,81 @@
 "use client";
 
-import { ArrowUpRight, Cpu, Globe, MonitorCheck } from "lucide-react";
+import { ArrowUpRight, Cpu, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
+function RagMomentumIllustration({ hovered }: { hovered: boolean }) {
+  const layerHeights = [
+    8, 9, 10, 11, 12, 14, 18, 24, 36, 54, 80, 114, 156, 206,
+  ];
+
+  return (
+    <svg
+      className="h-full w-full"
+      width="272"
+      height="267"
+      viewBox="0 0 272 267"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <defs>
+        <linearGradient id="rag-front-stroke" x1="30" y1="240" x2="220" y2="40">
+          <stop offset="0" stopColor="#3F434A" />
+          <stop offset="1" stopColor="#787D86" />
+        </linearGradient>
+      </defs>
+
+      {layerHeights.map((height, index) => {
+        const x = 18 + index * 8.4;
+        const y = 178 - index * 10.6;
+        const width = 116;
+        const skewY = 58;
+        const depth = 4;
+        const shiftX = hovered ? index * 0.75 : 0;
+        const shiftY = hovered ? -index * 0.45 : 0;
+        const activeStroke = hovered ? "#A4ACB7" : "url(#rag-front-stroke)";
+        const faceOpacity = hovered ? 0.72 : 0.52;
+
+        return (
+          <g
+            key={index}
+            transform={`translate(${shiftX} ${shiftY})`}
+            style={{
+              transition:
+                "transform 550ms cubic-bezier(0.22, 1, 0.36, 1), filter 400ms ease",
+              transitionDelay: `${index * 18}ms`,
+              filter: hovered ? "brightness(1.18)" : "brightness(1)",
+            }}
+          >
+            <path
+              d={`M ${x} ${y} L ${x + width} ${y + skewY} L ${x + width} ${y + skewY + height} L ${x} ${y + height} Z`}
+              fill="#07080A"
+              fillOpacity={faceOpacity}
+              stroke={activeStroke}
+              strokeWidth="0.75"
+            />
+            <path
+              d={`M ${x} ${y} L ${x + width} ${y + skewY}`}
+              stroke="#2B2E33"
+              strokeLinecap="round"
+              strokeWidth="0.75"
+              opacity={hovered ? 0.95 : 0.78}
+            />
+            <path
+              d={`M ${x + width} ${y + skewY} L ${x + width + depth} ${y + skewY + depth * 0.65} L ${x + width + depth} ${y + skewY + height + depth * 0.65} L ${x + width} ${y + skewY + height}`}
+              fill="#060709"
+              stroke="#2D3035"
+              strokeWidth="0.75"
+              opacity={0.85}
+            />
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
 
 function BibliookPageLayer({ gradientId }: { gradientId: string }) {
   return (
@@ -97,180 +169,9 @@ function BibliookPageLayer({ gradientId }: { gradientId: string }) {
   );
 }
 
-function YoloPaperSignal() {
-  return (
-    <svg
-      viewBox="0 0 520 260"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full"
-    >
-      <rect x="12" y="16" width="496" height="228" rx="22" fill="#09090B" />
-      <rect
-        x="12"
-        y="16"
-        width="496"
-        height="228"
-        rx="22"
-        stroke="url(#paperStroke)"
-        strokeOpacity="0.8"
-      />
-
-      <rect x="38" y="42" width="222" height="154" rx="14" fill="#111214" />
-      <rect
-        x="38"
-        y="42"
-        width="222"
-        height="154"
-        rx="14"
-        stroke="url(#frameStroke)"
-        strokeOpacity="0.7"
-      />
-
-      <rect
-        x="62"
-        y="66"
-        width="74"
-        height="84"
-        rx="8"
-        stroke="#E4E4E7"
-        strokeWidth="2"
-        className="transition-opacity duration-500"
-      />
-      <rect
-        x="152"
-        y="84"
-        width="76"
-        height="74"
-        rx="8"
-        stroke="#A1A1AA"
-        strokeWidth="2"
-        className="transition-opacity duration-500 group-hover:opacity-80"
-      />
-
-      <rect
-        x="44"
-        y="48"
-        width="210"
-        height="146"
-        rx="12"
-        fill="url(#scanGlow)"
-        className="opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-      />
-      <path
-        d="M52 116H246"
-        stroke="white"
-        strokeOpacity="0.5"
-        strokeWidth="2"
-        strokeLinecap="round"
-        className="opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-      />
-
-      <path
-        d="M286 80H472"
-        stroke="#3F3F46"
-        strokeWidth="10"
-        strokeLinecap="round"
-      />
-      <path
-        d="M286 80H404"
-        stroke="#FAFAFA"
-        strokeWidth="10"
-        strokeLinecap="round"
-        className="transition-opacity duration-500 group-hover:opacity-85"
-      />
-
-      <path
-        d="M286 118H472"
-        stroke="#3F3F46"
-        strokeWidth="10"
-        strokeLinecap="round"
-      />
-      <path
-        d="M286 118H392"
-        stroke="#D4D4D8"
-        strokeWidth="10"
-        strokeLinecap="round"
-        className="transition-opacity duration-500 group-hover:opacity-85"
-      />
-
-      <path
-        d="M286 156H472"
-        stroke="#3F3F46"
-        strokeWidth="10"
-        strokeLinecap="round"
-      />
-      <path
-        d="M286 156H374"
-        stroke="#A1A1AA"
-        strokeWidth="10"
-        strokeLinecap="round"
-        className="transition-opacity duration-500 group-hover:opacity-85"
-      />
-
-      <circle
-        cx="64"
-        cy="216"
-        r="4"
-        fill="#FAFAFA"
-        className="transition-opacity duration-500 group-hover:opacity-80"
-      />
-      <circle
-        cx="84"
-        cy="216"
-        r="4"
-        fill="#D4D4D8"
-        className="transition-opacity duration-500 delay-75 group-hover:opacity-80"
-      />
-      <circle
-        cx="104"
-        cy="216"
-        r="4"
-        fill="#A1A1AA"
-        className="transition-opacity duration-500 delay-150 group-hover:opacity-80"
-      />
-
-      <defs>
-        <linearGradient
-          id="paperStroke"
-          x1="260"
-          y1="16"
-          x2="260"
-          y2="244"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="white" stopOpacity="0.65" />
-          <stop offset="1" stopColor="white" stopOpacity="0.06" />
-        </linearGradient>
-        <linearGradient
-          id="frameStroke"
-          x1="149"
-          y1="42"
-          x2="149"
-          y2="196"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="white" stopOpacity="0.75" />
-          <stop offset="1" stopColor="white" stopOpacity="0.12" />
-        </linearGradient>
-        <radialGradient
-          id="scanGlow"
-          cx="0"
-          cy="0"
-          r="1"
-          gradientUnits="userSpaceOnUse"
-          gradientTransform="translate(152 122) rotate(90) scale(86 126)"
-        >
-          <stop stopColor="white" stopOpacity="0.1" />
-          <stop offset="1" stopColor="white" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-    </svg>
-  );
-}
-
 export default function FeaturedProjects() {
   const [isBibliookArrowHovered, setIsBibliookArrowHovered] = useState(false);
+  const [isRagCardHovered, setIsRagCardHovered] = useState(false);
 
   return (
     <section className="relative w-full pt-24 px-6 overflow-visible">
@@ -391,12 +292,24 @@ export default function FeaturedProjects() {
           </div>
 
           {/* Item 2: RAG Pipeline (Tall) */}
-          <div className="group col-span-1 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500">
+          <div
+            className="group col-span-1 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500"
+            onMouseEnter={() => setIsRagCardHovered(true)}
+            onMouseLeave={() => setIsRagCardHovered(false)}
+          >
             <div className="absolute top-8 right-8 w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-500 z-10">
               <ArrowUpRight size={20} />
             </div>
 
             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-accent-blue/10 rounded-full blur-3xl group-hover:bg-accent-blue/20 transition-all duration-500" />
+
+            <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-end px-2 py-8">
+              <div className="h-full w-full max-w-[18rem] translate-x-6 opacity-70 transition-all duration-500 group-hover:translate-x-8 group-hover:opacity-100">
+                <RagMomentumIllustration hovered={isRagCardHovered} />
+              </div>
+            </div>
+
+            <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-t from-zinc-950 via-zinc-950/70 to-transparent" />
 
             <div className="relative z-10 flex flex-col gap-4">
               <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-xl w-fit">
