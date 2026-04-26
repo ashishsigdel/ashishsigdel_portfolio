@@ -1,7 +1,30 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { KeyRound, UserRound } from "lucide-react";
+import {
+  Activity,
+  Atom,
+  Bot,
+  Boxes,
+  Braces,
+  Cloud,
+  Container,
+  Database,
+  FlaskConical,
+  GitBranch,
+  Globe,
+  KeyRound,
+  Layers,
+  Link,
+  Paintbrush,
+  Rocket,
+  Search,
+  Server,
+  Sparkles,
+  UserRound,
+  Wind,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type Rect = { x: number; y: number; w: number; h: number };
 
@@ -12,30 +35,114 @@ type Layout = {
   boxes: Record<string, Rect>;
 };
 
-const FRONTEND_LINES = ["REACT", "NEXTJS", "TYPESCRIPT", "HTML5"];
-const MOTION_LINES = ["FRAMER", "MOTION", "GSAP"];
-const BACKEND_LINES = ["NODEJS", "FASTAPI", "FLASK", "EXPRESS.JS"];
-const ML_LINES = ["PYTORCH", "TRANSFORMERS", "LLM"];
+type TechItem = {
+  key: string;
+  label: string;
+};
 
 const dark = {
-  panel: "#101014",
-  panelSoft: "#0d0d11",
+  panel: "#0b0d12",
+  panelSoft: "#0a0b10",
   line: "#6b7280",
-  border: "#4b5563",
-  text: "#e5e7eb",
+  border: "#44506a",
   textSoft: "#cbd5e1",
 };
 
-function fitMainBlock(x: number, y: number, lines: string[]): Rect {
-  const maxLen = Math.max(...lines.map((line) => line.length));
-  const w = Math.max(140, Math.round(maxLen * 13 + 44));
-  const h = Math.round(lines.length * 38 + 28);
-  return { x, y, w, h };
-}
+const FRONTEND_ITEMS: TechItem[] = [
+  { key: "react", label: "React" },
+  { key: "vite", label: "Vite" },
+  { key: "nextjs", label: "Next.js" },
+  { key: "tailwind", label: "Tailwind" },
+  { key: "shadcn", label: "shadcn/ui" },
+];
 
-function center(r: Rect) {
-  return { x: r.x + r.w / 2, y: r.y + r.h / 2 };
-}
+const STATE_ITEMS: TechItem[] = [
+  { key: "redux", label: "Redux" },
+  { key: "query", label: "React Query" },
+];
+
+const MOTION_ITEMS: TechItem[] = [
+  { key: "framer", label: "Framer Motion" },
+  { key: "gsap", label: "GSAP" },
+];
+
+const STYLE_ITEMS: TechItem[] = [
+  { key: "tailwind", label: "Tailwind" },
+  { key: "css", label: "CSS3" },
+  { key: "scss", label: "SCSS" },
+];
+
+const BACKEND_ITEMS: TechItem[] = [
+  { key: "node", label: "Node.js" },
+  { key: "fastapi", label: "FastAPI" },
+  { key: "flask", label: "Flask" },
+  { key: "express", label: "Express" },
+];
+
+const DB_ITEMS: TechItem[] = [
+  { key: "mysql", label: "MySQL" },
+  { key: "postgres", label: "PostgreSQL" },
+  { key: "mongo", label: "MongoDB" },
+  { key: "redis", label: "Redis" },
+];
+
+const INFRA_ITEMS: TechItem[] = [
+  { key: "aws", label: "AWS" },
+  { key: "docker", label: "Docker" },
+  { key: "gha", label: "GitHub Actions" },
+  { key: "cicd", label: "CI/CD" },
+];
+
+const ML_ITEMS: TechItem[] = [
+  { key: "pytorch", label: "PyTorch" },
+  { key: "transformers", label: "Transformers" },
+  { key: "llm", label: "LLM" },
+];
+
+const ORCH_ITEMS: TechItem[] = [
+  { key: "langchain", label: "LangChain" },
+  { key: "llamaindex", label: "LlamaIndex" },
+  { key: "pinecone", label: "Pinecone" },
+];
+
+const MODELS_ITEMS: TechItem[] = [
+  { key: "openai", label: "OpenAI" },
+  { key: "claude", label: "Claude" },
+];
+
+const iconByKey: Record<string, LucideIcon> = {
+  react: Atom,
+  vite: Sparkles,
+  nextjs: Globe,
+  tailwind: Wind,
+  shadcn: Boxes,
+  redux: GitBranch,
+  query: Search,
+  framer: Sparkles,
+  gsap: Activity,
+  css: Paintbrush,
+  scss: Paintbrush,
+  node: Server,
+  fastapi: Rocket,
+  flask: FlaskConical,
+  express: Braces,
+  mysql: Database,
+  postgres: Database,
+  mongo: Database,
+  redis: Database,
+  aws: Cloud,
+  docker: Container,
+  gha: GitBranch,
+  cicd: Link,
+  pytorch: Bot,
+  transformers: Layers,
+  llm: Sparkles,
+  langchain: Link,
+  llamaindex: Boxes,
+  pinecone: Database,
+  openai: Bot,
+  claude: Sparkles,
+};
 
 function anchor(r: Rect, side: "left" | "right" | "top" | "bottom") {
   if (side === "left") return { x: r.x, y: r.y + r.h / 2 };
@@ -55,8 +162,8 @@ function cubic(a: { x: number; y: number }, b: { x: number; y: number }) {
 }
 
 function FlowStroke({ d, index }: { d: string; index: number }) {
-  const dur = 2.6 + (index % 5) * 0.28;
-  const delay = (index * 0.31) % 2.3;
+  const dur = 2.7 + (index % 4) * 0.25;
+  const delay = (index * 0.29) % 2;
 
   return (
     <g>
@@ -64,7 +171,7 @@ function FlowStroke({ d, index }: { d: string; index: number }) {
         d={d}
         fill="none"
         stroke={dark.line}
-        strokeOpacity={0.46}
+        strokeOpacity={0.48}
         strokeWidth={3.6}
         strokeLinecap="round"
       />
@@ -91,21 +198,17 @@ function FlowStroke({ d, index }: { d: string; index: number }) {
   );
 }
 
-function PillGroup({
+function SegmentedIconBlock({
   box,
-  title,
   items,
+  direction,
 }: {
   box: Rect;
-  title?: string;
-  items: string[];
+  items: TechItem[];
+  direction: "vertical" | "horizontal";
 }) {
-  const pad = 14;
-  const titleH = title ? 22 : 2;
-  const innerY = box.y + pad + titleH;
-  const avail = box.h - pad * 2 - titleH;
-  const gap = 10;
-  const pillH = (avail - gap * (items.length - 1)) / items.length;
+  const isVertical = direction === "vertical";
+  const segmentMain = isVertical ? box.h / items.length : box.w / items.length;
 
   return (
     <g>
@@ -114,205 +217,51 @@ function PillGroup({
         y={box.y}
         width={box.w}
         height={box.h}
-        rx={14}
+        rx={isVertical ? 28 : 20}
         fill={dark.panelSoft}
         stroke={dark.border}
         strokeWidth={1.4}
       />
-      {title && (
-        <text
-          x={box.x + box.w / 2}
-          y={box.y + 20}
-          textAnchor="middle"
-          fill={dark.text}
-          fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-          fontSize={11}
-          fontWeight={700}
-          letterSpacing="0.08em"
-        >
-          {title}
-        </text>
-      )}
+
       {items.map((item, idx) => {
-        const y = innerY + idx * (pillH + gap);
-        const compact = item.length > 18;
-        const multiline = item.includes(" (") && item.length > 24;
-        const [l1, l2] = multiline ? item.split(" (") : [item, ""];
+        const Icon = iconByKey[item.key] ?? Boxes;
+        const cx =
+          direction === "vertical"
+            ? box.x + box.w / 2
+            : box.x + idx * segmentMain + segmentMain / 2;
+        const cy =
+          direction === "vertical"
+            ? box.y + idx * segmentMain + segmentMain / 2
+            : box.y + box.h / 2;
+
         return (
-          <g key={item}>
-            <rect
-              x={box.x + 16}
-              y={y}
-              width={box.w - 32}
-              height={pillH}
-              rx={pillH / 2}
-              fill={dark.panel}
-              stroke={dark.border}
-              strokeWidth={1.2}
-            />
-            <text
-              x={box.x + box.w / 2}
-              y={y + pillH / 2 + (multiline ? -1 : 4)}
-              textAnchor="middle"
-              fill={dark.text}
-              fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-              fontSize={compact ? 10 : 11}
-              fontWeight={700}
-              letterSpacing="0.03em"
-            >
-              {multiline ? (
-                <>
-                  <tspan x={box.x + box.w / 2} dy={0}>
-                    {l1}
-                  </tspan>
-                  <tspan x={box.x + box.w / 2} dy={11}>
-                    ({l2}
-                  </tspan>
-                </>
+          <g key={item.label}>
+            {idx !== 0 &&
+              (isVertical ? (
+                <line
+                  x1={box.x}
+                  y1={box.y + idx * segmentMain}
+                  x2={box.x + box.w}
+                  y2={box.y + idx * segmentMain}
+                  stroke={dark.border}
+                  strokeWidth={1.1}
+                />
               ) : (
-                item
-              )}
-            </text>
+                <line
+                  x1={box.x + idx * segmentMain}
+                  y1={box.y}
+                  x2={box.x + idx * segmentMain}
+                  y2={box.y + box.h}
+                  stroke={dark.border}
+                  strokeWidth={1.1}
+                />
+              ))}
+            <g transform={`translate(${cx - 11},${cy - 11})`}>
+              <Icon size={22} color={dark.textSoft} strokeWidth={1.9} />
+            </g>
           </g>
         );
       })}
-    </g>
-  );
-}
-
-function MainBlock({ box, lines }: { box: Rect; lines: string[] }) {
-  const inset = 12;
-  const innerH = box.h - inset * 2;
-  const rowH = innerH / lines.length;
-
-  return (
-    <g>
-      <rect
-        x={box.x}
-        y={box.y}
-        width={box.w}
-        height={box.h}
-        rx={8}
-        fill={dark.panel}
-        stroke={dark.border}
-        strokeWidth={1.4}
-      />
-      {lines.map((_, i) => {
-        if (i === 0) return null;
-        const y = box.y + inset + i * rowH;
-        return (
-          <line
-            key={`sep-${i}`}
-            x1={box.x}
-            y1={y}
-            x2={box.x + box.w}
-            y2={y}
-            stroke={dark.border}
-            strokeWidth={1.1}
-          />
-        );
-      })}
-      {lines.map((line, i) => (
-        <text
-          key={line}
-          x={box.x + box.w / 2}
-          y={box.y + inset + i * rowH + rowH / 2 + 5}
-          textAnchor="middle"
-          fill={dark.text}
-          fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-          fontSize={17}
-          fontWeight={700}
-          letterSpacing="0.02em"
-        >
-          {line}
-        </text>
-      ))}
-    </g>
-  );
-}
-
-function SplitGroup({
-  box,
-  leftTitle,
-  leftItems,
-  rightItems,
-}: {
-  box: Rect;
-  leftTitle: string;
-  leftItems: string[];
-  rightItems: string[];
-}) {
-  const left: Rect = {
-    x: box.x + 14,
-    y: box.y + 14,
-    w: box.w * 0.44,
-    h: box.h - 28,
-  };
-  const right: Rect = {
-    x: box.x + box.w * 0.53,
-    y: box.y + 18,
-    w: box.w * 0.42,
-    h: box.h - 36,
-  };
-
-  return (
-    <g>
-      <rect
-        x={box.x}
-        y={box.y}
-        width={box.w}
-        height={box.h}
-        rx={14}
-        fill={dark.panelSoft}
-        stroke={dark.border}
-        strokeWidth={1.4}
-      />
-      <PillGroup box={left} title={leftTitle} items={leftItems} />
-      <PillGroup box={right} items={rightItems} />
-    </g>
-  );
-}
-
-function CircleGroup({ box, items }: { box: Rect; items: string[] }) {
-  const cx = box.x + box.w / 2;
-  const cy = box.y + box.h / 2;
-  const r = box.w / 2;
-  return (
-    <g>
-      <circle
-        cx={cx}
-        cy={cy}
-        r={r}
-        fill={dark.panelSoft}
-        stroke={dark.border}
-        strokeWidth={1.4}
-      />
-      {items.map((item, i) => (
-        <g key={item}>
-          {i !== 0 && (
-            <line
-              x1={box.x + 14}
-              y1={box.y + (box.h / 3) * i}
-              x2={box.x + box.w - 14}
-              y2={box.y + (box.h / 3) * i}
-              stroke={dark.border}
-              strokeWidth={1.1}
-            />
-          )}
-          <text
-            x={cx}
-            y={box.y + box.h / 6 + i * (box.h / 3) + 6}
-            textAnchor="middle"
-            fill={dark.text}
-            fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-            fontSize={15}
-            fontWeight={700}
-            letterSpacing="0.03em"
-          >
-            {item}
-          </text>
-        </g>
-      ))}
     </g>
   );
 }
@@ -339,20 +288,20 @@ function PathKeyGlyph({ x, y }: { x: number; y: number }) {
 
 function getDesktopLayout(): Layout {
   return {
-    width: 1560,
-    height: 700,
-    minWidth: 1280,
+    width: 1460,
+    height: 760,
+    minWidth: 1180,
     boxes: {
-      frontend: fitMainBlock(316, 244, FRONTEND_LINES),
-      state: { x: 324, y: 62, w: 176, h: 126 },
-      motion: fitMainBlock(154, 476, MOTION_LINES),
-      style: { x: 327, y: 514, w: 158, h: 158 },
-      backend: fitMainBlock(664, 244, BACKEND_LINES),
-      db: { x: 662, y: 26, w: 192, h: 206 },
-      infra: { x: 606, y: 530, w: 314, h: 170 },
-      ml: fitMainBlock(1038, 244, ML_LINES),
-      orchestration: { x: 982, y: 10, w: 346, h: 170 },
-      models: { x: 1060, y: 508, w: 228, h: 146 },
+      frontend: { x: 280, y: 170, w: 66, h: 330 },
+      state: { x: 206, y: 92, w: 214, h: 56 },
+      motion: { x: 176, y: 558, w: 174, h: 56 },
+      style: { x: 366, y: 558, w: 252, h: 56 },
+      backend: { x: 646, y: 170, w: 66, h: 264 },
+      db: { x: 560, y: 86, w: 236, h: 56 },
+      infra: { x: 542, y: 558, w: 268, h: 56 },
+      ml: { x: 994, y: 200, w: 66, h: 198 },
+      orchestration: { x: 902, y: 48, w: 250, h: 56 },
+      models: { x: 932, y: 558, w: 190, h: 56 },
     },
   };
 }
@@ -360,96 +309,54 @@ function getDesktopLayout(): Layout {
 function getMobileLayout(): Layout {
   return {
     width: 980,
-    height: 1920,
+    height: 1760,
     minWidth: 0,
     boxes: {
-      frontend: fitMainBlock(336, 258, FRONTEND_LINES),
-      state: { x: 92, y: 140, w: 210, h: 154 },
-      motion: fitMainBlock(92, 556, MOTION_LINES),
-      style: { x: 352, y: 558, w: 220, h: 220 },
-      backend: fitMainBlock(336, 884, BACKEND_LINES),
-      db: { x: 82, y: 792, w: 222, h: 252 },
-      infra: { x: 94, y: 1194, w: 564, h: 246 },
-      ml: fitMainBlock(342, 1556, ML_LINES),
-      orchestration: { x: 668, y: 1458, w: 288, h: 270 },
-      models: { x: 94, y: 1570, w: 226, h: 178 },
+      frontend: { x: 430, y: 230, w: 72, h: 352 },
+      state: { x: 288, y: 120, w: 356, h: 72 },
+      motion: { x: 154, y: 694, w: 324, h: 72 },
+      style: { x: 516, y: 694, w: 330, h: 72 },
+      backend: { x: 430, y: 850, w: 72, h: 282 },
+      db: { x: 272, y: 748, w: 392, h: 72 },
+      infra: { x: 220, y: 1240, w: 500, h: 72 },
+      ml: { x: 794, y: 900, w: 72, h: 212 },
+      orchestration: { x: 620, y: 784, w: 340, h: 72 },
+      models: { x: 688, y: 1240, w: 248, h: 72 },
     },
   };
 }
 
-function getPillCenter(box: Rect, idx: number, count: number, title = false) {
-  const pad = 14;
-  const titleH = title ? 22 : 2;
-  const innerY = box.y + pad + titleH;
-  const avail = box.h - pad * 2 - titleH;
-  const gap = 10;
-  const pillH = (avail - gap * (count - 1)) / count;
-  return { x: box.x + box.w / 2, y: innerY + idx * (pillH + gap) + pillH / 2 };
-}
-
 function buildEdges(layout: Layout) {
   const b = layout.boxes;
-  const frontend = b.frontend;
-  const state = b.state;
-  const motion = b.motion;
-  const style = b.style;
-  const backend = b.backend;
-  const db = b.db;
-  const infra = b.infra;
-  const ml = b.ml;
-  const orchestration = b.orchestration;
-  const models = b.models;
+  const user = layout.width > 1000 ? { x: 96, y: 334 } : { x: 124, y: 406 };
 
-  const user = layout.width > 1000 ? { x: 56, y: 340 } : { x: 428, y: 106 };
-  const frontRight = anchor(frontend, "right");
-  const backLeft = anchor(backend, "left");
+  const frontRight = anchor(b.frontend, "right");
+  const backLeft = anchor(b.backend, "left");
   const key = {
     x: (frontRight.x + backLeft.x) / 2,
-    y: (frontRight.y + backLeft.y) / 2 - 28,
+    y: (frontRight.y + backLeft.y) / 2 - 26,
   };
 
   const lines: string[] = [];
-  lines.push(cubic({ x: user.x + 22, y: user.y }, anchor(frontend, "left")));
-  lines.push(cubic({ x: user.x + 18, y: user.y - 30 }, anchor(state, "left")));
-  lines.push(cubic({ x: user.x + 18, y: user.y + 30 }, anchor(motion, "left")));
+  lines.push(cubic({ x: user.x + 22, y: user.y }, anchor(b.frontend, "left")));
+  lines.push(
+    cubic({ x: user.x + 18, y: user.y - 30 }, anchor(b.state, "left")),
+  );
+  lines.push(
+    cubic({ x: user.x + 18, y: user.y + 30 }, anchor(b.motion, "left")),
+  );
 
-  lines.push(cubic(anchor(frontend, "top"), anchor(state, "bottom")));
-  lines.push(cubic(anchor(frontend, "left"), anchor(motion, "top")));
-  lines.push(cubic(anchor(frontend, "bottom"), anchor(style, "top")));
+  lines.push(cubic(anchor(b.frontend, "top"), anchor(b.state, "bottom")));
+  lines.push(cubic(anchor(b.frontend, "bottom"), anchor(b.motion, "top")));
+  lines.push(cubic(anchor(b.frontend, "bottom"), anchor(b.style, "top")));
 
   lines.push(cubic(frontRight, backLeft));
+  lines.push(cubic(anchor(b.backend, "top"), anchor(b.db, "bottom")));
+  lines.push(cubic(anchor(b.backend, "bottom"), anchor(b.infra, "top")));
+  lines.push(cubic(anchor(b.backend, "right"), anchor(b.ml, "left")));
 
-  lines.push(cubic(anchor(backend, "top"), anchor(db, "bottom")));
-  const dbHub = { x: anchor(db, "bottom").x, y: anchor(db, "bottom").y - 10 };
-  [0, 1, 2, 3].forEach((idx) => {
-    const p = getPillCenter(db, idx, 4);
-    lines.push(cubic(dbHub, { x: db.x + 18, y: p.y }));
-  });
-
-  lines.push(cubic(anchor(backend, "bottom"), anchor(infra, "top")));
-  const infraSplit = { x: infra.x + infra.w * 0.56, y: infra.y + infra.h / 2 };
-  [0, 1, 2].forEach((idx) => {
-    const right = {
-      x: infra.x + infra.w * 0.74,
-      y: infra.y + 40 + idx * 56,
-    };
-    lines.push(cubic(infraSplit, right));
-  });
-
-  lines.push(cubic(anchor(backend, "right"), anchor(ml, "left")));
-
-  lines.push(cubic(anchor(ml, "top"), anchor(orchestration, "bottom")));
-  [0, 1, 2].forEach((idx) => {
-    const p = getPillCenter(orchestration, idx, 3, true);
-    lines.push(
-      cubic(
-        { x: orchestration.x, y: center(orchestration).y },
-        { x: orchestration.x + 18, y: p.y },
-      ),
-    );
-  });
-
-  lines.push(cubic(anchor(ml, "bottom"), anchor(models, "top")));
+  lines.push(cubic(anchor(b.ml, "top"), anchor(b.orchestration, "bottom")));
+  lines.push(cubic(anchor(b.ml, "bottom"), anchor(b.models, "top")));
 
   return { lines, user, key };
 }
@@ -478,8 +385,6 @@ export default function SkillsTree() {
         overflowX: isMobile ? "hidden" : "auto",
         overflowY: "hidden",
         background: "transparent",
-        border: "none",
-        borderRadius: 0,
       }}
     >
       <svg
@@ -488,8 +393,8 @@ export default function SkillsTree() {
         style={{
           display: "block",
           minWidth: layout.minWidth || undefined,
-          height: isMobile ? "auto" : 700,
-          maxHeight: isMobile ? "none" : 700,
+          height: isMobile ? "auto" : 760,
+          maxHeight: isMobile ? "none" : 760,
         }}
         aria-label="Skills architecture"
       >
@@ -500,33 +405,53 @@ export default function SkillsTree() {
         <UserGlyph x={user.x} y={user.y} />
         <PathKeyGlyph x={key.x} y={key.y} />
 
-        <MainBlock box={b.frontend} lines={FRONTEND_LINES} />
-        <PillGroup box={b.state} items={["REDUX", "REACT QUERY"]} />
-        <MainBlock box={b.motion} lines={MOTION_LINES} />
-        <CircleGroup box={b.style} items={["TAILWIND", "CSS3", "SCSS"]} />
+        <SegmentedIconBlock
+          box={b.frontend}
+          items={FRONTEND_ITEMS}
+          direction="vertical"
+        />
+        <SegmentedIconBlock
+          box={b.state}
+          items={STATE_ITEMS}
+          direction="horizontal"
+        />
+        <SegmentedIconBlock
+          box={b.motion}
+          items={MOTION_ITEMS}
+          direction="horizontal"
+        />
+        <SegmentedIconBlock
+          box={b.style}
+          items={STYLE_ITEMS}
+          direction="horizontal"
+        />
 
-        <MainBlock box={b.backend} lines={BACKEND_LINES} />
-        <PillGroup
+        <SegmentedIconBlock
+          box={b.backend}
+          items={BACKEND_ITEMS}
+          direction="vertical"
+        />
+        <SegmentedIconBlock
           box={b.db}
-          items={["MYSQL", "POSTGRESQL", "MONGODB", "REDIS"]}
+          items={DB_ITEMS}
+          direction="horizontal"
         />
-        <SplitGroup
+        <SegmentedIconBlock
           box={b.infra}
-          leftTitle="AWS"
-          leftItems={["S3", "EC2", "BEDROCK"]}
-          rightItems={["DOCKER", "GITHUB ACTIONS", "CI/CD"]}
+          items={INFRA_ITEMS}
+          direction="horizontal"
         />
 
-        <MainBlock box={b.ml} lines={ML_LINES} />
-        <PillGroup
+        <SegmentedIconBlock box={b.ml} items={ML_ITEMS} direction="vertical" />
+        <SegmentedIconBlock
           box={b.orchestration}
-          title="AGENTIC & ORCHESTRATION"
-          items={["LANGCHAIN", "LLAMAINDEX", "VECTOR DATABASE (PINECONE)"]}
+          items={ORCH_ITEMS}
+          direction="horizontal"
         />
-        <PillGroup
+        <SegmentedIconBlock
           box={b.models}
-          title="MODELS & APIS"
-          items={["OPENAI API", "CLAUDE API"]}
+          items={MODELS_ITEMS}
+          direction="horizontal"
         />
       </svg>
     </div>

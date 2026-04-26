@@ -188,9 +188,18 @@ export default function FeaturedProjects() {
           <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">
             Projects
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Featured <span className="text-orange-600">Works</span>
-          </h2>
+          <div className="flex items-end justify-between">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Featured <span className="text-orange-600">Works</span>
+            </h2>
+            <Link
+              href="/portfolio"
+              className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-mono"
+            >
+              View all <ArrowUpRight size={16} />
+            </Link>
+          </div>
+
           <p className="text-zinc-400 text-lg max-w-3xl">
             A selection of projects that highlight my skills and experience.
           </p>
@@ -228,7 +237,7 @@ export default function FeaturedProjects() {
             {/* Background design */}
             <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent z-0" />
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent-green/10 rounded-full blur-3xl group-hover:bg-accent-green/20 transition-all duration-500" />
-            <div className="pointer-events-none absolute -right-16 top-24 z-0 w-72 opacity-40 transition duration-300 group-hover:opacity-70 md:-right-20 md:top-32 md:w-md">
+            <div className="pointer-events-none absolute -right-16 top-24 z-0 w-72 opacity-20 transition duration-300 group-hover:opacity-30 md:-right-20 md:top-32 md:w-md">
               <div className="relative mt-2">
                 <div className="absolute left-12 -top-8 transition-transform duration-300 group-hover:translate-x-4 group-hover:rotate-3">
                   <BibliookPageLayer gradientId="bibliook-layer-back" />
@@ -293,7 +302,7 @@ export default function FeaturedProjects() {
 
           {/* Item 2: RAG Pipeline (Tall) */}
           <div
-            className="group col-span-1 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500"
+            className="group cursor-pointer col-span-1 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500"
             onMouseEnter={() => setIsRagCardHovered(true)}
             onMouseLeave={() => setIsRagCardHovered(false)}
           >
@@ -304,7 +313,7 @@ export default function FeaturedProjects() {
             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-accent-blue/10 rounded-full blur-3xl group-hover:bg-accent-blue/20 transition-all duration-500" />
 
             <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-end px-2 py-8">
-              <div className="h-full w-full max-w-[18rem] translate-x-6 opacity-70 transition-all duration-500 group-hover:translate-x-8 group-hover:opacity-100">
+              <div className="h-full w-full max-w-[18rem] translate-x-6 transition-all duration-500 group-hover:translate-x-8">
                 <RagMomentumIllustration hovered={isRagCardHovered} />
               </div>
             </div>
@@ -312,17 +321,19 @@ export default function FeaturedProjects() {
             <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-t from-zinc-950 via-zinc-950/70 to-transparent" />
 
             <div className="relative z-10 flex flex-col gap-4">
-              <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-xl w-fit">
-                <Cpu className="text-white" size={24} />
-              </div>
               <div>
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  RAG Pipeline Explorer
+                  ClearText AI
                 </h3>
                 <p className="text-zinc-400">
-                  Visualizing multi-step data retrieval, chunking, and embedding
-                  workflows on complex high-density data.
+                  ClearText AI is an intelligent{" "}
+                  <span className="text-orange-600">agentic</span> humanization
+                  platform that automatically detects and removes AI
+                  fingerprints from your content.
                 </p>
+              </div>
+              <div className="rounded-lg border border-zinc-800 bg-zinc-900/70 px-2 py-1 transition-colors duration-300 group-hover:border-zinc-700 group-hover:text-zinc-300 text-xs w-fit">
+                Drop your file. Our AI does the rest.
               </div>
             </div>
           </div>
