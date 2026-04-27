@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function BibliookHero() {
@@ -29,15 +29,6 @@ export default function BibliookHero() {
       }}
     >
       <div className="absolute inset-0 bg-linear-to-b from-black/65 via-black/45 to-black/70" />
-
-      <Link
-        href="/"
-        className="fixed left-1/2 top-32 z-50 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/20 bg-black/45 px-3 py-2 text-sm font-medium text-zinc-100 backdrop-blur-md transition-all duration-300 hover:border-white/35 hover:bg-black/60 hover:text-white sm:px-4 md:left-6 md:top-1/2 md:translate-x-0 md:-translate-y-1/2"
-        aria-label="Back to home"
-      >
-        <ArrowLeft size={16} />
-        <span>Back</span>
-      </Link>
 
       {/* Content */}
       <div

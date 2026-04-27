@@ -1,7 +1,7 @@
-import BibliookHeader from "@/components/bibliook/BibliookHeader";
 import BibliookHero from "@/components/bibliook/BibliookHero";
 import BibliookCTA from "@/components/bibliook/BibliookCTA";
 import BibliookFooter from "@/components/bibliook/BibliookFooter";
+import Navbar from "@/components/utils/Navbar";
 
 export const metadata = {
   title: "Bibliook — AI-Powered Study Workspace",
@@ -12,7 +12,7 @@ export const metadata = {
 export default function BibliookPage() {
   return (
     <main className="min-h-screen bg-black text-white antialiased overflow-x-hidden">
-      <BibliookHeader />
+      <Navbar />
       <BibliookHero />
       <BibliookCTA />
       <BibliookFooter />

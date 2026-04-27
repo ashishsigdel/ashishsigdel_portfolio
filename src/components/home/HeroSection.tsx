@@ -1,25 +1,15 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { MoveUp, Menu, X } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { MoveUp } from "lucide-react";
 import ScrollVideo from "./ScrollVideo";
-import Button from "@/components/ui/Buttons";
-import { TextScramble } from "../ui/text-scramble";
 import { Spotlight } from "../ui/spotlight";
+import Navbar from "@/components/utils/Navbar";
 
 // Increase to make frames change faster. Height auto-adjusts so scroll ends with last frame.
 const SCROLL_SPEED = 4;
 
 const greetings = ["Hello", "Bonjour", "Hola", "Namaste", "Ciao", "Olá"];
-
-const navLinks = [
-  { name: "Bibliook", href: "/bibliook" },
-  { name: "About", href: "/about" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "Blog", href: "/blog" },
-];
 
 interface Message {
   role: "user" | "assistant";
@@ -31,9 +21,6 @@ export default function HeroSection() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-  const [isNavHovered, setIsNavHovered] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSendMessage = async (text: string) => {
     if (!text.trim() || isTyping) return;
@@ -88,69 +75,7 @@ export default function HeroSection() {
           scrollContainerRef={scrollContainerRef}
           scrollSpeed={SCROLL_SPEED}
         />
-
-        {/* Dim overlay when nav is hovered */}
-        <div
-          className={cn(
-            "absolute inset-0 bg-black/40 z-40 pointer-events-none transition-opacity duration-300",
-            isNavHovered ? "opacity-100" : "opacity-0",
-          )}
-        />
-
-        {/* Mobile menu backdrop */}
-        {isMobileMenuOpen && (
-          <div
-            className="absolute inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-        )}
-
-        {/* Top Right - Nav Links */}
-        <div className="absolute top-6 right-4 md:right-12 z-50 flex items-center gap-3 md:gap-6 text-sm font-medium touch-manipulation">
-          <nav
-            className="hidden md:flex items-center gap-4 md:gap-6"
-            onMouseEnter={() => setIsNavHovered(true)}
-            onMouseLeave={() => {
-              setIsNavHovered(false);
-              setHoveredLink(null);
-            }}
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onMouseEnter={() => setHoveredLink(link.name)}
-                onMouseLeave={() => setHoveredLink(null)}
-                className={cn(
-                  "transition-all duration-300",
-                  hoveredLink && hoveredLink !== link.name
-                    ? "text-white opacity-40"
-                    : "text-white opacity-100",
-                )}
-              >
-                {/* <TextScramble text={link.name} /> */}
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-          <Button
-            title="Contact"
-            onClick={() => {
-              const contactSection = document.getElementById("contact");
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-          />
-          {/* Hamburger - mobile only */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex items-center justify-center w-9 h-9 text-white"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
+        <Navbar />
 
         {/* Top Left - Greeting & Name only */}
         <div className="absolute top-14 left-4 md:top-24 md:left-12 z-10">
@@ -269,33 +194,6 @@ export default function HeroSection() {
 
         <div className="hidden md:block absolute bottom-4 left-1/2 -translate-x-1/2 text-sm font-medium gradient-sweep-text">
           Based on Nepal. 🇳🇵
-        </div>
-
-        {/* Mobile Bottom Sheet Nav  */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-50 md:hidden">
-          <div
-            className={cn(
-              "absolute bottom-0 left-0 right-0 bg-black border-t border-zinc-800 transition-transform duration-300 ease-out rounded-t-3xl pointer-events-auto",
-              isMobileMenuOpen ? "translate-y-0" : "translate-y-full",
-            )}
-          >
-            {/* Handle */}
-            <div className="flex justify-center pt-3 pb-2">
-              <div className="w-12 h-1 bg-zinc-700 rounded-full" />
-            </div>
-            <nav className="flex flex-col px-6 pb-10 pt-4 gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium py-4 px-4 rounded-lg text-white hover:bg-zinc-900 transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
         </div>
       </section>
     </div>
