@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Github, Clock } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock, Mail } from "lucide-react";
 import Navbar from "@/components/utils/Navbar";
 import Footer from "@/components/Footer";
 import ProjectCard from "@/components/portfolio/ProjectCard";
@@ -10,11 +10,10 @@ import {
 } from "@/lib/portfolio";
 import {
   BackToTop,
-  LikeButton,
-  CommentSection,
+  EngagementPanel,
 } from "@/components/portfolio/Projectdetailclient";
+import Description from "@/components/portfolio/Description";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 type PageProps = {
   params: Promise<{ id: string }>;
 };
@@ -24,7 +23,6 @@ export const metadata: Metadata = {
   description: "Project details",
 };
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 function readingTime(text: string) {
   const words = text.trim().split(/\s+/).length;
   return Math.max(1, Math.ceil(words / 200));
@@ -39,7 +37,6 @@ function formatDate(iso?: string) {
   });
 }
 
-// ─── Small pure server components ─────────────────────────────────────────────
 function TagPill({ label }: { label: string }) {
   return (
     <span className="group inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium tracking-wide rounded-full border border-zinc-700/60 bg-zinc-900/50 text-zinc-400 hover:border-orange-500/40 hover:text-orange-400 hover:bg-orange-500/5 transition-all duration-200 cursor-default">
@@ -55,12 +52,20 @@ function ProjectNotFoundState({ requestedId }: { requestedId: string }) {
     .slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-[#080808] text-white antialiased overflow-x-hidden">
+    <main className="min-h-screen bg-black text-white antialiased overflow-x-clip">
       <BackToTop />
       <Navbar />
 
       <section className="relative w-full pt-34 pb-16 px-6">
-        <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-10">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-32 left-1/2 -translate-x-1/2 w-screen"
+        >
+          <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/25 to-transparent" />
+          <div className="absolute left-1/2 top-0 h-52 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(234,88,12,0.18),rgba(234,88,12,0.07)_38%,rgba(0,0,0,0)_100%)] blur-2xl" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-10">
           <div className="rounded-3xl p-8 md:p-10 bg-linear-to-br from-[#060606]/60 to-[#0c0c0c]/60">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2 flex items-center justify-center">
@@ -132,9 +137,9 @@ function ProjectNotFoundState({ requestedId }: { requestedId: string }) {
                   Looks like this project went missing
                 </h2>
                 <p className="text-zinc-400 max-w-3xl leading-relaxed mb-6">
-                  We couldn't find a project for route id "{requestedId}". Try
-                  exploring other projects below or reach out if you think this
-                  is an error.
+                  We couldn&apos;t find a project for route id &quot;
+                  {requestedId}&quot;. Try exploring other projects below or
+                  reach out if you think this is an error.
                 </p>
 
                 <div className="flex flex-wrap gap-3">
@@ -156,6 +161,7 @@ function ProjectNotFoundState({ requestedId }: { requestedId: string }) {
             </div>
           </div>
 
+          {/* ── Suggestions ── */}
           <div className="space-y-5">
             <h2 className="text-xl md:text-2xl font-semibold text-zinc-100">
               Suggested Projects
@@ -175,7 +181,6 @@ function ProjectNotFoundState({ requestedId }: { requestedId: string }) {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { id } = await params;
   const projectId = Number(id);
@@ -196,301 +201,105 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const minutes = readingTime(project.description ?? "");
   const dateLabel = formatDate(project.createdAt);
 
+  // Get suggestion projects (excluding current)
+  const suggestions = hardcodedPortfolioProjects
+    .filter((p) => p.isEnable && p.id !== project.id)
+    .slice(0, 3);
+
   return (
-    <main className="min-h-screen bg-[#080808] text-white antialiased overflow-x-hidden">
+    <main className="min-h-screen bg-black text-white antialiased overflow-x-hidden">
       <BackToTop />
       <Navbar />
 
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative w-full h-[70vh] min-h-120 max-h-175 overflow-hidden">
-        {/* Background image */}
-        <img
-          src={project.coverPhoto}
-          alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover scale-105"
-          style={{ filter: "brightness(0.32) saturate(0.75)" }}
-        />
-
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-linear-to-t from-[#080808] via-[#080808]/55 to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-r from-[#080808]/35 to-transparent" />
-
-        {/* Film grain overlay */}
+      <article className="relative w-full pt-32 pb-24 px-6">
         <div
-          className="absolute inset-0 opacity-[0.035] pointer-events-none mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: "200px 200px",
-          }}
-        />
-
-        {/* Hero content */}
-        <div className="relative z-10 h-full flex flex-col justify-end max-w-6xl mx-auto px-6 pb-14">
-          {/* Breadcrumb */}
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 hover:text-zinc-200 transition-colors mb-8 w-fit group"
-          >
-            <ArrowLeft
-              size={12}
-              className="group-hover:-translate-x-0.5 transition-transform"
-            />
-            <span className="tracking-widest uppercase">Portfolio</span>
-          </Link>
-
-          {/* Meta row */}
-          <div className="flex flex-wrap items-center gap-3 mb-5">
-            <span className="px-2.5 py-1 text-[10px] font-mono font-semibold tracking-[0.15em] uppercase rounded border border-orange-500/30 bg-orange-500/10 text-orange-400">
-              Project #{project.id}
-            </span>
-            {dateLabel && (
-              <span className="text-xs font-mono text-zinc-500">
-                {dateLabel}
-              </span>
-            )}
-            <span className="flex items-center gap-1.5 text-xs font-mono text-zinc-500">
-              <Clock size={10} />
-              {minutes} min read
-            </span>
-          </div>
-
-          {/* Title */}
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-tighter leading-[0.92] text-white mb-5"
-            style={{
-              fontFamily: "'Syne', 'Arial Black', sans-serif",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            {project.title}
-          </h1>
-
-          {/* Subtitle */}
-          <p className="max-w-2xl text-base md:text-lg text-zinc-400 leading-relaxed font-light">
-            {project.shortDescription}
-          </p>
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-32 left-1/2 -translate-x-1/2 w-screen"
+        >
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+          <div className="absolute left-1/2 top-0 h-52 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(234,88,12,0.18),rgba(234,88,12,0.07)_38%,rgba(0,0,0,0)_100%)] blur-2xl" />
         </div>
-      </section>
 
-      {/* ── Body ──────────────────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_296px] gap-14 xl:gap-20">
-          {/* ── Main column ──────────────────────────────────────────── */}
-          <div className="space-y-12 min-w-0">
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <TagPill key={tag} label={tag} />
-              ))}
-            </div>
+        <div className="relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-12 font-mono text-sm"
+            >
+              <ArrowLeft size={16} /> Back to Portfolio
+            </Link>
 
-            {/* Action buttons */}
-            <div className="flex flex-wrap gap-3">
-              {project.previewLink && (
-                <Link
-                  href={project.previewLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black text-sm font-bold tracking-wide hover:bg-orange-50 transition-all duration-200"
-                >
-                  Live Preview
-                  <ArrowUpRight
-                    size={14}
-                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                  />
-                </Link>
-              )}
-              {project.githubLink && (
-                <Link
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-zinc-700 text-zinc-300 text-sm font-semibold hover:border-zinc-500 hover:text-white transition-all duration-200"
-                >
-                  Source Code
-                  <Github
-                    size={14}
-                    className="group-hover:rotate-[8deg] transition-transform"
-                  />
-                </Link>
-              )}
-            </div>
-
-            {/* ── About section ── */}
-            <article>
-              <div className="flex items-center gap-3 mb-8">
-                <span className="text-[10px] font-mono font-semibold tracking-[0.2em] uppercase text-zinc-600">
-                  About this project
-                </span>
-                <div className="flex-1 h-px bg-zinc-800" />
-              </div>
-
-              {/* Description — split by double newlines into paragraphs */}
-              <div className="space-y-5">
-                {(project.description ?? "")
-                  .split("\n\n")
-                  .filter(Boolean)
-                  .map((para, i) => (
-                    <p
-                      key={i}
-                      className="text-zinc-300/90 leading-[1.85] text-[15px] md:text-base"
-                      style={{
-                        fontFamily: "'Georgia', 'Times New Roman', serif",
-                      }}
-                    >
-                      {para}
-                    </p>
-                  ))}
-              </div>
-            </article>
-
-            {/* ── Tech highlight strip ── */}
-            {tags.length > 0 && (
-              <div className="rounded-2xl border border-zinc-800/60 bg-zinc-900/20 p-6">
-                <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-600 mb-5">
-                  Technologies used
-                </p>
-                <div className="flex flex-wrap gap-2">
+            <header className="flex flex-col gap-6 mb-12">
+              {tags.length > 0 && (
+                <div className="flex flex-wrap gap-3 mb-2">
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center px-4 py-2 rounded-xl bg-zinc-800/60 border border-zinc-700/40 text-zinc-300 text-xs font-mono font-medium tracking-wide hover:bg-zinc-700/40 hover:border-zinc-600/60 transition-all duration-150"
+                      className="px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-xs font-mono text-zinc-300 uppercase tracking-wider"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* ── Comments (client) ── */}
-            <CommentSection />
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white !leading-tight">
+                {project.title}
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-6 mt-4 text-zinc-400">
+                {dateLabel && (
+                  <div className="flex items-center gap-2">
+                    <Clock size={16} className="text-zinc-500" />
+                    <span>{dateLabel}</span>
+                  </div>
+                )}
+                <div className="flex items-center gap-2">
+                  <Clock size={16} className="text-zinc-500" />
+                  <span>{minutes} min read</span>
+                </div>
+              </div>
+            </header>
+
+            <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden mb-6 border border-zinc-800">
+              <img
+                src={project.coverPhoto}
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="flex justify-end mb-16">
+              <EngagementPanel
+                githubLink={project.githubLink}
+                previewLink={project.previewLink}
+              />
+            </div>
+
+            <div className="prose prose-invert prose-lg max-w-none text-zinc-300 prose-headings:text-white prose-a:text-orange-500 hover:prose-a:text-orange-400">
+              <Description project={project} />
+            </div>
           </div>
 
-          {/* ── Sticky sidebar ───────────────────────────────────────── */}
-          <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-            {/* Engagement card */}
-            <div className="rounded-2xl border border-zinc-800/70 bg-zinc-900/30 backdrop-blur-sm p-5 space-y-3">
-              <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-600 pb-1">
-                Engagement
-              </p>
-              <LikeButton />
-            </div>
-
-            {/* Project info card */}
-            <div className="rounded-2xl border border-zinc-800/70 bg-zinc-900/30 p-5">
-              <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-600 mb-5">
-                Project Info
-              </p>
-              <div className="space-y-4">
-                {dateLabel && (
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="text-zinc-600 font-mono text-xs shrink-0">
-                      Published
-                    </span>
-                    <span className="text-zinc-300 text-xs text-right">
-                      {dateLabel}
-                    </span>
-                  </div>
-                )}
-                <div className="flex items-start justify-between gap-3">
-                  <span className="text-zinc-600 font-mono text-xs shrink-0">
-                    Read time
-                  </span>
-                  <span className="text-zinc-300 text-xs">{minutes} min</span>
+          <div className="max-w-7xl mx-auto">
+            {suggestions.length > 0 && (
+              <div className="mt-24 pt-12 border-t border-zinc-800">
+                <h2 className="text-2xl font-bold text-zinc-100 mb-8">
+                  Suggested Projects
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {suggestions.map((p) => (
+                    <ProjectCard key={p.id} project={p} />
+                  ))}
                 </div>
-                <div className="flex items-start justify-between gap-3">
-                  <span className="text-zinc-600 font-mono text-xs shrink-0">
-                    Project
-                  </span>
-                  <span className="text-zinc-300 text-xs font-mono">
-                    #{project.id}
-                  </span>
-                </div>
-                {tags.length > 0 && (
-                  <div className="pt-1 border-t border-zinc-800">
-                    <span className="text-zinc-600 font-mono text-xs block mb-2.5">
-                      Stack
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {tags.map((t) => (
-                        <span
-                          key={t}
-                          className="text-[10px] px-2 py-1 rounded-lg bg-zinc-800/70 text-zinc-400 font-mono"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
-            </div>
-
-            {/* Links card */}
-            <div className="rounded-2xl border border-zinc-800/70 bg-zinc-900/30 p-5">
-              <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-600 mb-4">
-                Links
-              </p>
-              <div className="space-y-1">
-                {project.previewLink && (
-                  <Link
-                    href={project.previewLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between py-2.5 px-3 -mx-3 text-sm text-zinc-400 hover:text-orange-400 hover:bg-orange-500/5 rounded-xl transition-all group"
-                  >
-                    <span>Live preview</span>
-                    <ArrowUpRight
-                      size={13}
-                      className="text-zinc-700 group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-                    />
-                  </Link>
-                )}
-                {project.githubLink && (
-                  <Link
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between py-2.5 px-3 -mx-3 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800/40 rounded-xl transition-all group"
-                  >
-                    <span>GitHub repository</span>
-                    <Github
-                      size={13}
-                      className="text-zinc-700 group-hover:text-zinc-300 transition-colors"
-                    />
-                  </Link>
-                )}
-                <Link
-                  href="/portfolio"
-                  className="flex items-center justify-between py-2.5 px-3 -mx-3 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800/40 rounded-xl transition-all group"
-                >
-                  <span>All projects</span>
-                  <ArrowLeft
-                    size={13}
-                    className="text-zinc-700 group-hover:text-zinc-300 rotate-180 transition-all"
-                  />
-                </Link>
-              </div>
-            </div>
-
-            {/* Divider call-to-action */}
-            <div className="rounded-2xl border border-dashed border-zinc-800/60 p-5 text-center space-y-3">
-              <p className="text-xs text-zinc-600 leading-relaxed">
-                Interested in working together or have questions?
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-400 hover:text-orange-300 transition-colors"
-              >
-                Get in touch
-                <ArrowUpRight size={11} />
-              </Link>
-            </div>
-          </aside>
+            )}
+          </div>
         </div>
-      </div>
+      </article>
 
+      {/* Spacer before footer */}
+      <div className="h-16" />
       <Footer />
     </main>
   );

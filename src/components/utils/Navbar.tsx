@@ -49,7 +49,13 @@ export default function Navbar() {
   };
 
   const currentPath = normalizePath(pathname || "/");
-  const isActiveLink = (href: string) => normalizePath(href) === currentPath;
+  const isActiveLink = (href: string) => {
+    const normalizedHref = normalizePath(href);
+    if (normalizedHref === "/") {
+      return currentPath === "/";
+    }
+    return currentPath.startsWith(normalizedHref);
+  };
 
   if (!isMounted) {
     return null;

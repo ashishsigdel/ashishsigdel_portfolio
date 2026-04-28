@@ -42,22 +42,19 @@ const fallbackProjects: Project[] = [
     deletedAt: null,
   },
   {
-    id: 20,
-    title: "PlantCare - Cauliflower Disease Detection",
-    shortDescription:
-      "PlantCare Apps can help you detect cauliflower disease and provide guidance for your plant.",
-    description: "YOLOv8 powered disease detection mobile application.",
-    coverPhoto:
-      "https://res.cloudinary.com/dasbcsvma/image/upload/v1761325863/ashishsigdel-web/logo.png",
-    githubLink: "https://github.com/ashishsigdel/plantcare",
-    previewLink:
-      "https://huggingface.co/spaces/ashishsigdel/plantcare_inference",
-    isEnable: true,
-    tags: "machine learning,app development,research",
-    createdAt: "2025-10-24T17:09:12.000Z",
-    updatedAt: "2025-10-25T02:39:10.000Z",
-    deletedAt: null,
-  },
+                "id": 20,
+                "title": "PlantCare - Cauliflower Disease Detection",
+                "shortDescription": "PlantCare Apps can help you detect cauliflower disease and provide guidance for your plant.",
+                "description": "# 🌿 PlantCare: Cauliflower Disease Detection Using YOLOv8\r\n\r\n**PlantCare** is a mobile application that detects **cauliflower plant diseases** using **YOLOv8 deep learning models**.  \r\n\r\nThis project was developed as a **college minor project** at **Pashchimanchal Campus, Institute of Engineering, Tribhuvan University** by: \r\n- Ashish Sigdel (me)\r\n- Indra Prasad Sapkota  \r\n- Sijan Paudel  \r\n- Sneha Chhetri  \r\n\r\n## Key Functionalities\r\n\r\n- Real-time disease detection via YOLOv8 model  \r\n- Multi-language UI with audio output  \r\n- Secure authentication and user history  \r\n- Cloud-based inference and data storage  \r\n- Disease details with preventive measures and cure suggestions  \r\n\r\n**Results:**  \r\nYOLOv8s achieved **Precision 34.4%**, **Recall 31.9%**, and **mAP@50 28.1%**, proving effective for early-stage disease detection in local crops.\r\n\r\n**Tech Stack:** React Native, Node.js, Flask, YOLOv8, Cloudinary  \r\n\r\n## Preview\r\n\r\n![Plantcare-screenshot](https://i.postimg.cc/8PTkm7GC/plantcare-screenshot.png)\r\n\r\n",
+                "coverPhoto": "https://res.cloudinary.com/dasbcsvma/image/upload/v1761325863/ashishsigdel-web/logo.png",
+                "githubLink": "https://github.com/ashishsigdel/plantcare",
+                "previewLink": "https://huggingface.co/spaces/ashishsigdel/plantcare_inference",
+                "isEnable": true,
+                "tags": "machine learning,app development,research",
+                "createdAt": "2025-10-24T17:09:12.000Z",
+                "updatedAt": "2025-10-25T02:39:10.000Z",
+                "deletedAt": null
+            },
   {
     id: 19,
     title: "Bibliook - AI Study Workspace",

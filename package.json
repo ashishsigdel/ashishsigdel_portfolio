@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.118",
+    "@ashish-ui/markup-renderer": "^1.0.9",
     "@chenglou/pretext": "^0.0.4",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.74",
     "ai": "^6.0.116",
+    "axios": "^1.15.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.577.0",

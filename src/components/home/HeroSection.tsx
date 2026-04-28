@@ -1,60 +1,261 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { MoveUp } from "lucide-react";
 import ScrollVideo from "./ScrollVideo";
 import { Spotlight } from "../ui/spotlight";
 import Navbar from "@/components/utils/Navbar";
+import { myAxios } from "@/services/apiServices";
 
 // Increase to make frames change faster. Height auto-adjusts so scroll ends with last frame.
 const SCROLL_SPEED = 4;
 
 const greetings = ["Hello", "Bonjour", "Hola", "Namaste", "Ciao", "Olá"];
 
-interface Message {
-  role: "user" | "assistant";
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type HistoryMessage = {
+  id: string;
   content: string;
+  isUser: boolean;
+  timestamp: Date;
+};
+
+// ─── Token helpers (mirrored from Chat.tsx) ───────────────────────────────────
+
+const TOKEN_KEY = "ai.jwt";
+const TOKEN_EXP_KEY = "ai.jwt.exp";
+
+function loadTokenFromStorage(): { t: string | null; e: number | null } {
+  try {
+    const t = localStorage.getItem(TOKEN_KEY);
+    const e = localStorage.getItem(TOKEN_EXP_KEY);
+    if (!t || !e) return { t: null, e: null };
+    return { t, e: Number(e) };
+  } catch {
+    return { t: null, e: null };
+  }
 }
+
+function saveTokenToStorage(
+  t: string,
+  setToken: (v: string) => void,
+  setTokenExpiry: (v: number) => void,
+  expMsFromNow = 60 * 60 * 1000,
+) {
+  const expiry = Date.now() + expMsFromNow;
+  try {
+    localStorage.setItem(TOKEN_KEY, t);
+    localStorage.setItem(TOKEN_EXP_KEY, String(expiry));
+  } catch {}
+  setToken(t);
+  setTokenExpiry(expiry);
+}
+
+function clearTokenStorage(
+  setToken: (v: null) => void,
+  setTokenExpiry: (v: null) => void,
+) {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(TOKEN_EXP_KEY);
+  } catch {}
+  setToken(null);
+  setTokenExpiry(null);
+}
+
+function buildHistoryString(msgs: HistoryMessage[]): string {
+  return msgs
+    .filter((m) => !!m.content)
+    .map((m) => {
+      const ts = (
+        m.timestamp instanceof Date ? m.timestamp : new Date(m.timestamp as any)
+      ).toISOString();
+      return `[${ts}] ${m.isUser ? "User" : "AI"}: ${m.content}`;
+    })
+    .join("\n");
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Visible state — only the latest exchange
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [userText, setUserText] = useState("");
+  const [aiText, setAiText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  // Internal full history (sent to API, never rendered)
+  const historyRef = useRef<HistoryMessage[]>([]);
+
+  // Token state
+  const [token, setToken] = useState<string | null>(null);
+  const [tokenExpiry, setTokenExpiry] = useState<number | null>(null);
+
+  // ── Token initialisation (same logic as Chat.tsx) ──────────────────────────
+
+  const initializeToken = useCallback(async (): Promise<string | null> => {
+    try {
+      const { t, e } = loadTokenFromStorage();
+      if (t && e && Date.now() < e) {
+        setToken(t);
+        setTokenExpiry(e);
+        return t;
+      }
+      const resp = await myAxios.get("/ai", {
+        headers: {
+          accept: "application/json, text/plain, */*",
+          "cache-control": "no-cache",
+          pragma: "no-cache",
+        },
+      });
+      const newToken =
+        typeof resp?.data === "string" ? resp.data : resp?.data?.token;
+      if (!newToken) throw new Error("Token not received");
+      saveTokenToStorage(newToken, setToken, setTokenExpiry, 60 * 60 * 1000);
+      return newToken;
+    } catch {
+      clearTokenStorage(setToken, setTokenExpiry);
+      return null;
+    }
+  }, []);
+
+  // ── Send message ────────────────────────────────────────────────────────────
 
   const handleSendMessage = async (text: string) => {
     if (!text.trim() || isTyping) return;
 
-    const userMessage: Message = { role: "user", content: text };
-    setMessages([userMessage]);
+    setErrorMsg("");
+    setUserText(text);
+    setAiText("");
     setInput("");
     setIsTyping(true);
 
-    const responseText =
-      "Hey amigo! I'm Ashish — Full-Stack Engineer, AI enthusiast, and problem solver. Ask me anything. I promise to keep it real. 👍";
-
-    const assistantMessage: Message = { role: "assistant", content: "" };
-    setMessages([userMessage, assistantMessage]);
-
-    const chunks = responseText.split(" ");
-    for (let i = 0; i < chunks.length; i++) {
-      await new Promise((r) => setTimeout(r, 40));
-      setMessages((prev) => {
-        const newMessages = [...prev];
-        newMessages[1] = {
-          ...newMessages[1],
-          content: newMessages[1].content + (i === 0 ? "" : " ") + chunks[i],
-        };
-        return newMessages;
-      });
+    // ── Resolve auth token ──
+    let authToken = token;
+    if (!authToken || !tokenExpiry) {
+      authToken = await initializeToken();
     }
-    setIsTyping(false);
+
+    const { t: storedToken, e: storedExp } = loadTokenFromStorage();
+    const effectiveToken = authToken || storedToken;
+    const effectiveExp = storedExp ?? tokenExpiry;
+
+    if (!effectiveToken || !effectiveExp || Date.now() >= effectiveExp) {
+      setAiText(
+        "Session expired. Please refresh the page to start a new conversation.",
+      );
+      setIsTyping(false);
+      return;
+    }
+
+    // ── Build history from internal log ──
+    const previousMessages = [...historyRef.current];
+    const historyString = buildHistoryString(previousMessages);
+
+    // Add user message to internal history
+    const userMsg: HistoryMessage = {
+      id: Date.now().toString(),
+      content: text,
+      isUser: true,
+      timestamp: new Date(),
+    };
+    historyRef.current = [...previousMessages, userMsg];
+
+    // ── Streaming fetch (SSE) ──
+    try {
+      const response = await fetch(`${myAxios.defaults.baseURL}/ai`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+          Authorization: `Bearer ${effectiveToken}`,
+        },
+        body: JSON.stringify({ prompt: text, history: historyString }),
+      });
+
+      if (!response.ok || !response.body) {
+        throw new Error("Failed to get AI response");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let sseBuffer = "";
+      let fullAiResponse = "";
+
+      const appendText = (chunk: string) => {
+        fullAiResponse += chunk;
+        setAiText(fullAiResponse);
+      };
+
+      outer: while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        sseBuffer += decoder.decode(value, { stream: true });
+
+        const lines = sseBuffer.split("\n");
+        sseBuffer = lines.pop() || "";
+
+        for (const raw of lines) {
+          const line = raw.trim();
+          if (!line) continue;
+
+          if (line.startsWith("event:")) {
+            const evt = line.slice(6).trim();
+            if (evt === "done" || evt === "end") break outer;
+            continue;
+          }
+
+          if (line.startsWith("data:")) {
+            const dataContent = line.slice(5).trim();
+            if (dataContent === "[DONE]") break outer;
+
+            let textToAdd = "";
+            try {
+              const parsed = JSON.parse(dataContent);
+              textToAdd =
+                parsed.text || (typeof parsed === "string" ? parsed : "");
+            } catch {
+              textToAdd = dataContent;
+            }
+            if (textToAdd) appendText(textToAdd);
+          } else {
+            // Non-SSE formatted chunk — append raw
+            appendText(raw);
+          }
+        }
+      }
+
+      // Save completed AI reply to internal history
+      const aiMsg: HistoryMessage = {
+        id: (Date.now() + 1).toString(),
+        content: fullAiResponse,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      historyRef.current = [...historyRef.current, aiMsg];
+    } catch (error: any) {
+      const detail = error?.response?.data?.message ?? "";
+      setAiText(`Sorry, I encountered an error.${detail ? ` ${detail}` : ""}`);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleSendMessage(input);
   };
+
+  const hasConversation = !!userText;
+
+  // ─── Render ─────────────────────────────────────────────────────────────────
 
   return (
     <div
@@ -68,6 +269,7 @@ export default function HeroSection() {
           className="-top-40 left-0 md:left-60 md:-top-20"
           fill="white"
         />
+
         {/* Scroll-animated Background */}
         <ScrollVideo
           className="z-0"
@@ -75,11 +277,11 @@ export default function HeroSection() {
           scrollContainerRef={scrollContainerRef}
           scrollSpeed={SCROLL_SPEED}
         />
+
         <Navbar />
 
-        {/* Top Left - Greeting & Name only */}
+        {/* Top Left - Greeting & Name */}
         <div className="absolute top-14 left-4 md:top-24 md:left-12 z-10">
-          {/* Animated Greeting - Infinite Slide Up */}
           <div className="relative h-5 overflow-hidden mb-2">
             <div className="greeting-slide-animation">
               {[...greetings, greetings[0]].map((greeting, index) => (
@@ -93,7 +295,6 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Name */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
             <span className="bg-linear-to-bl from-orange-400 to-orange-950 bg-clip-text text-transparent">
               I&#39;m
@@ -102,7 +303,7 @@ export default function HeroSection() {
           </h1>
         </div>
 
-        {/* Center Left - Main Heading vertically centered */}
+        {/* Center Left - Main Heading */}
         <div className="absolute top-[28%] bottom-[38%] md:top-24 md:bottom-12 left-4 md:left-12 z-1 flex flex-col justify-center">
           <h2 className="text-[2.6rem] sm:text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tight bg-linear-to-b from-white via-white/65 to-white/30 bg-clip-text text-transparent pb-3 md:pb-7 space-y-3 sm:space-y-0">
             <span className="block">Building</span>
@@ -121,9 +322,10 @@ export default function HeroSection() {
 
         {/* Bottom - Chat Area */}
         <div className="absolute bottom-6 left-4 right-4 md:bottom-12 md:left-auto md:right-12 md:w-md z-10">
-          {/* Welcome Message or Chat Messages */}
+          {/* Single-exchange display */}
           <div className="mb-4 px-3">
-            {messages.length === 0 ? (
+            {!hasConversation ? (
+              /* Welcome state */
               <div className="text-left">
                 <p className="text-zinc-300 text-lg font-semibold mb-1">
                   <span className="text-orange-600">
@@ -131,26 +333,43 @@ export default function HeroSection() {
                   </span>
                 </p>
                 <p className="text-white text-base md:text-xl leading-snug">
-                  Explore my work with AI - Just ask about my projects, skills,
+                  Explore my work with AI – Just ask about my projects, skills,
                   or experience.
                 </p>
               </div>
             ) : (
+              /* Latest exchange */
               <div className="text-left">
-                <p className="text-orange-600 text-lg font-semibold mb-1">
-                  {messages[0]?.content}
+                {/* User bubble */}
+                <p className="text-orange-600 text-lg font-semibold mb-1 truncate">
+                  {userText}
                 </p>
+
+                {/* AI response — streaming or settled */}
                 <p className="text-white text-lg md:text-xl leading-snug">
-                  {messages[1]?.content}
+                  {aiText || (isTyping ? "" : errorMsg)}
                   {isTyping && (
                     <span className="inline-block w-0.5 h-5 bg-white ml-1 animate-pulse" />
                   )}
                 </p>
+
+                {/* Dot loader while waiting for first token */}
+                {isTyping && !aiText && (
+                  <span className="inline-flex gap-1 mt-1">
+                    {[0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse"
+                        style={{ animationDelay: `${i * 150}ms` }}
+                      />
+                    ))}
+                  </span>
+                )}
               </div>
             )}
           </div>
 
-          {/* Input Area */}
+          {/* Input */}
           <form
             onSubmit={handleSubmit}
             className="relative w-full touch-manipulation"
@@ -168,6 +387,7 @@ export default function HeroSection() {
                 }}
                 placeholder="Ask me anything ..."
                 className="min-w-0 flex-1 bg-transparent outline-none text-white font-semibold text-base placeholder:text-white/60 px-6 py-2"
+                disabled={isTyping}
               />
               <button
                 type="submit"
