@@ -69,18 +69,46 @@ function buildHistoryString(msgs: HistoryMessage[]): string {
   return msgs
     .filter((m) => !!m.content)
     .map((m) => {
-      const ts = (
-        m.timestamp instanceof Date ? m.timestamp : new Date(m.timestamp as any)
-      ).toISOString();
+      const ts = m.timestamp.toISOString();
       return `[${ts}] ${m.isUser ? "User" : "AI"}: ${m.content}`;
     })
     .join("\n");
+}
+
+function getErrorDetail(error: unknown): string {
+  if (typeof error !== "object" || error === null || !("response" in error)) {
+    return "";
+  }
+
+  const response = (error as { response?: { data?: { message?: unknown } } })
+    .response;
+  return typeof response?.data?.message === "string"
+    ? response.data.message
+    : "";
+}
+
+function ChatLoading() {
+  return (
+    <div className="mt-1 inline-flex items-center gap-2 text-sm font-medium text-zinc-300">
+      <span>Thinking</span>
+      <span className="inline-flex gap-1" aria-hidden="true">
+        {[0, 1, 2].map((dot) => (
+          <span
+            key={dot}
+            className="size-1.5 rounded-full bg-zinc-300 animate-pulse"
+            style={{ animationDelay: `${dot * 140}ms` }}
+          />
+        ))}
+      </span>
+    </div>
+  );
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Visible state — only the latest exchange
   const [input, setInput] = useState("");
@@ -134,6 +162,7 @@ export default function HeroSection() {
     setAiText("");
     setInput("");
     setIsTyping(true);
+    requestAnimationFrame(() => inputRef.current?.focus());
 
     // ── Resolve auth token ──
     let authToken = token;
@@ -219,9 +248,17 @@ export default function HeroSection() {
 
             let textToAdd = "";
             try {
-              const parsed = JSON.parse(dataContent);
-              textToAdd =
-                parsed.text || (typeof parsed === "string" ? parsed : "");
+              const parsed: unknown = JSON.parse(dataContent);
+              if (typeof parsed === "string") {
+                textToAdd = parsed;
+              } else if (
+                typeof parsed === "object" &&
+                parsed !== null &&
+                "text" in parsed
+              ) {
+                const parsedText = (parsed as { text?: unknown }).text;
+                textToAdd = typeof parsedText === "string" ? parsedText : "";
+              }
             } catch {
               textToAdd = dataContent;
             }
@@ -241,11 +278,12 @@ export default function HeroSection() {
         timestamp: new Date(),
       };
       historyRef.current = [...historyRef.current, aiMsg];
-    } catch (error: any) {
-      const detail = error?.response?.data?.message ?? "";
+    } catch (error: unknown) {
+      const detail = getErrorDetail(error);
       setAiText(`Sorry, I encountered an error.${detail ? ` ${detail}` : ""}`);
     } finally {
       setIsTyping(false);
+      requestAnimationFrame(() => inputRef.current?.focus());
     }
   };
 
@@ -348,35 +386,35 @@ export default function HeroSection() {
 
                 {/* AI response — streaming or settled */}
                 <div className="text-white text-lg md:text-xl leading-snug prose prose-invert prose-sm max-w-none">
-                  <ReactMarkdown
-                    components={{
-                      a: ({ href, children }) => (
-                        <a href={href} target="_blank" rel="noopener noreferrer" className="text-orange-400 underline">
-                          {children}
-                        </a>
-                      ),
-                      p: ({ children }) => <p className="mb-1 last:mb-0">{children}</p>,
-                    }}
-                  >
-                    {aiText || (isTyping ? "" : errorMsg)}
-                  </ReactMarkdown>
-                  {isTyping && (
-                    <span className="inline-block w-0.5 h-5 bg-white ml-1 animate-pulse" />
+                  {aiText || !isTyping ? (
+                    <>
+                      <ReactMarkdown
+                        components={{
+                          a: ({ href, children }) => (
+                            <a
+                              href={href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-orange-400 underline"
+                            >
+                              {children}
+                            </a>
+                          ),
+                          p: ({ children }) => (
+                            <p className="mb-1 last:mb-0">{children}</p>
+                          ),
+                        }}
+                      >
+                        {aiText || errorMsg}
+                      </ReactMarkdown>
+                      {isTyping && (
+                        <span className="inline-block w-0.5 h-5 bg-white ml-1 animate-pulse" />
+                      )}
+                    </>
+                  ) : (
+                    <ChatLoading />
                   )}
                 </div>
-
-                {/* Dot loader while waiting for first token */}
-                {isTyping && !aiText && (
-                  <span className="inline-flex gap-1 mt-1">
-                    {[0, 1, 2].map((i) => (
-                      <span
-                        key={i}
-                        className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse"
-                        style={{ animationDelay: `${i * 150}ms` }}
-                      />
-                    ))}
-                  </span>
-                )}
               </div>
             )}
           </div>
@@ -388,6 +426,7 @@ export default function HeroSection() {
           >
             <div className="relative rounded-full bg-white/15 backdrop-blur-sm flex items-center shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.3)]">
               <input
+                ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -399,7 +438,8 @@ export default function HeroSection() {
                 }}
                 placeholder="Ask me anything ..."
                 className="min-w-0 flex-1 bg-transparent outline-none text-white font-semibold text-base placeholder:text-white/60 px-6 py-2"
-                disabled={isTyping}
+                readOnly={isTyping}
+                aria-busy={isTyping}
               />
               <button
                 type="submit"
