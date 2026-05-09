@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import { MoveUp } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import ScrollVideo from "./ScrollVideo";
 import { Spotlight } from "../ui/spotlight";
 import Navbar from "@/components/utils/Navbar";
@@ -346,12 +347,23 @@ export default function HeroSection() {
                 </p>
 
                 {/* AI response — streaming or settled */}
-                <p className="text-white text-lg md:text-xl leading-snug">
-                  {aiText || (isTyping ? "" : errorMsg)}
+                <div className="text-white text-lg md:text-xl leading-snug prose prose-invert prose-sm max-w-none">
+                  <ReactMarkdown
+                    components={{
+                      a: ({ href, children }) => (
+                        <a href={href} target="_blank" rel="noopener noreferrer" className="text-orange-400 underline">
+                          {children}
+                        </a>
+                      ),
+                      p: ({ children }) => <p className="mb-1 last:mb-0">{children}</p>,
+                    }}
+                  >
+                    {aiText || (isTyping ? "" : errorMsg)}
+                  </ReactMarkdown>
                   {isTyping && (
                     <span className="inline-block w-0.5 h-5 bg-white ml-1 animate-pulse" />
                   )}
-                </p>
+                </div>
 
                 {/* Dot loader while waiting for first token */}
                 {isTyping && !aiText && (
