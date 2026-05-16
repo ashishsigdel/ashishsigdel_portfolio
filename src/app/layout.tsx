@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ashish Sigdel | Senior Frontend Engineer",
+  title: "Ashish Sigdel | AI, Developer, and Enthusiast",
   description:
-    "Portfolio of Ashish Sigdel, showcasing intelligent digital systems and frontend excellence.",
+    "Portfolio of Ashish Sigdel, showcasing intelligent digital systems and innovative solutions.",
 };
 
 export default function RootLayout({
