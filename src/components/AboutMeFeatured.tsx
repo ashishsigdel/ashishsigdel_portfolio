@@ -43,32 +43,17 @@ export default function AboutMeFeatured() {
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/4 rounded-full blur-3xl pointer-events-none" />
               <div className="relative z-10">
                 <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
-                  Who I Am
+                  Professional Summary
                 </p>
                 <p className="text-zinc-400 text-base leading-relaxed">
-                  I&apos;m a full-stack developer who loves building useful,
-                  thoughtful products with clean design and reliable
-                  engineering.
+                  AI Engineer and full stack developer with production
+                  experience building clinical intelligence systems, end-to-end
+                  agentic workflows, scalable SaaS software, full stack web
+                  applications, and predictive models over Electronic Health
+                  Record data. Proficient in Javascript, Nodejs, Python,
+                  FastAPI, Django, React, LangChain, LangGraph, RAG, and LLM
+                  fine-tuning (QLoRA/LoRA).
                 </p>
-              </div>
-              <div className="relative z-10 mt-8 pt-6 border-t border-zinc-800 grid grid-cols-3 divide-x divide-zinc-800">
-                {[
-                  { val: "3+", label: "Years" },
-                  { val: "20+", label: "Projects" },
-                  { val: "400+", label: "AI Answers" },
-                ].map((s) => (
-                  <div
-                    key={s.label}
-                    className="flex min-w-0 flex-col items-start px-4"
-                  >
-                    <span className="text-xl font-bold text-zinc-100 leading-tight">
-                      {s.val}
-                    </span>
-                    <span className="text-xs uppercase tracking-wider text-zinc-500 mt-0.5">
-                      {s.label}
-                    </span>
-                  </div>
-                ))}
               </div>
             </div>
 
