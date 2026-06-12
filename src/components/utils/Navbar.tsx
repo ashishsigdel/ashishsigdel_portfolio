@@ -2,11 +2,13 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import Button from "../ui/Buttons";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
+
+const emptySubscribe = () => () => {};
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -14,7 +16,12 @@ export default function Navbar() {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  // false during SSR/hydration, true once mounted — portals need the DOM.
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,10 +34,6 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  useEffect(() => {
-    setIsMounted(true);
   }, []);
 
   const navLinks = [

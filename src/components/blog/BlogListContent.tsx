@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { BlogPost, blogPosts } from "@/data/blogs";
+import { blogPosts } from "@/data/blogs";
 
 export default function BlogListContent() {
   const INITIAL_LOAD = 4; // 1 featured + 3 cards

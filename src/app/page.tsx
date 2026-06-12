@@ -1,5 +1,3 @@
-"use client";
-
 import Experience from "@/components/Experience";
 import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";

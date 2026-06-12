@@ -465,7 +465,7 @@ export default function HeroSection() {
         </div>
 
         <div className="hidden md:block absolute bottom-4 left-1/2 -translate-x-1/2 text-sm font-medium gradient-sweep-text">
-          Based on Nepal. 🇳🇵
+          Based in Nepal. 🇳🇵
         </div>
       </section>
     </div>

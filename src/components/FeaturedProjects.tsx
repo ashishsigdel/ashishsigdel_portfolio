@@ -1,9 +1,10 @@
 "use client";
 
-import { ArrowUpRight, Cpu, Globe } from "lucide-react";
+import { ArrowUpRight, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Reveal from "@/components/ui/Reveal";
 
 function RagMomentumIllustration({ hovered }: { hovered: boolean }) {
   const layerHeights = [
@@ -184,7 +185,7 @@ export default function FeaturedProjects() {
         <div className="absolute inset-x-0 top-0 h-20 bg-linear-to-b from-white/10 via-white/5 to-transparent" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-14 ">
-        <div className="space-y-4">
+        <Reveal className="space-y-4">
           <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">
             Projects
           </p>
@@ -203,10 +204,13 @@ export default function FeaturedProjects() {
           <p className="text-zinc-400 text-lg max-w-3xl">
             A selection of projects that highlight my skills and experience.
           </p>
-        </div>
+        </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[400px]">
           {/* Item 1: Bibliook */}
-          <div className="group col-span-1 md:col-span-2 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500">
+          <Reveal
+            delay={0.1}
+            className="group col-span-1 md:col-span-2 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500"
+          >
             <Link
               href="https://bibliook.ashishsigdel.com.np"
               target="_blank"
@@ -298,14 +302,15 @@ export default function FeaturedProjects() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Item 2: RAG Pipeline (Tall) */}
-          <div
-            className="group cursor-pointer col-span-1 relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500"
-            onMouseEnter={() => setIsRagCardHovered(true)}
-            onMouseLeave={() => setIsRagCardHovered(false)}
-          >
+          <Reveal delay={0.2} className="col-span-1">
+            <div
+              className="group cursor-pointer h-full relative flex flex-col justify-end p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500"
+              onMouseEnter={() => setIsRagCardHovered(true)}
+              onMouseLeave={() => setIsRagCardHovered(false)}
+            >
             <div className="absolute top-8 right-8 w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-500 z-10">
               <ArrowUpRight size={20} />
             </div>
@@ -336,10 +341,14 @@ export default function FeaturedProjects() {
                 Drop your file. Our AI does the rest.
               </div>
             </div>
-          </div>
+            </div>
+          </Reveal>
 
           {/* Item 3: YOLO Cauliflower Disease Detection (Wide/Small) */}
-          <div className="group col-span-1 md:col-span-3 relative overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-zinc-700 hover:bg-zinc-900/70">
+          <Reveal
+            delay={0.1}
+            className="group col-span-1 md:col-span-3 relative overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950 transition-all duration-500 hover:border-zinc-700 hover:bg-zinc-900/70"
+          >
             <div className="grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr] h-full">
               <div className="relative p-8 md:p-10 lg:p-12">
                 <div className="absolute -left-14 top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl pointer-events-none" />
@@ -421,7 +430,7 @@ export default function FeaturedProjects() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Clock, Mail } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
 import Navbar from "@/components/utils/Navbar";
 import Footer from "@/components/Footer";
 import ProjectCard from "@/components/portfolio/ProjectCard";
@@ -18,10 +18,36 @@ type PageProps = {
   params: Promise<{ id: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Project — Portfolio",
-  description: "Project details",
-};
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const projectId = Number(id);
+  const project = Number.isNaN(projectId)
+    ? null
+    : getHardcodedProjectByRouteId(projectId);
+
+  if (!project || !project.isEnable) {
+    return { title: "Project Not Found" };
+  }
+
+  return {
+    title: project.title,
+    description: project.shortDescription,
+    alternates: { canonical: `/portfolio/${project.id}` },
+    openGraph: {
+      type: "article",
+      title: project.title,
+      description: project.shortDescription,
+      url: `/portfolio/${project.id}`,
+      images: [{ url: project.coverPhoto }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.shortDescription,
+      images: [project.coverPhoto],
+    },
+  };
+}
 
 function readingTime(text: string) {
   const words = text.trim().split(/\s+/).length;
@@ -35,15 +61,6 @@ function formatDate(iso?: string) {
     month: "long",
     day: "numeric",
   });
-}
-
-function TagPill({ label }: { label: string }) {
-  return (
-    <span className="group inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium tracking-wide rounded-full border border-zinc-700/60 bg-zinc-900/50 text-zinc-400 hover:border-orange-500/40 hover:text-orange-400 hover:bg-orange-500/5 transition-all duration-200 cursor-default">
-      <span className="w-1 h-1 rounded-full bg-zinc-600 group-hover:bg-orange-500 transition-colors" />
-      {label}
-    </span>
-  );
 }
 
 function ProjectNotFoundState({ requestedId }: { requestedId: string }) {
@@ -216,7 +233,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 z-0 h-32 left-1/2 -translate-x-1/2 w-screen"
         >
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/25 to-transparent" />
           <div className="absolute left-1/2 top-0 h-52 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(234,88,12,0.18),rgba(234,88,12,0.07)_38%,rgba(0,0,0,0)_100%)] blur-2xl" />
         </div>
 
@@ -243,7 +260,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 </div>
               )}
 
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white !leading-tight">
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight!">
                 {project.title}
               </h1>
 
@@ -261,7 +278,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </div>
             </header>
 
-            <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden mb-6 border border-zinc-800">
+            <div className="relative w-full aspect-21/9 rounded-3xl overflow-hidden mb-6 border border-zinc-800">
               <img
                 src={project.coverPhoto}
                 alt={project.title}

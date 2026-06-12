@@ -7,15 +7,42 @@ import Navbar from "@/components/utils/Navbar";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blogs";
 
-export const metadata: Metadata = {
-  title: "Blog Article — Ashish Sigdel",
-  description: "Read the latest thought pieces from Ashish Sigdel",
-};
-
-// Next 15 Dynamic Route Params Type
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({ id: post.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const post = blogPosts.find((p) => p.slug === id || p.id === id);
+
+  if (!post) {
+    return { title: "Article Not Found" };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      images: [{ url: post.image }],
+      authors: [post.author.name],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+  };
+}
 
 export default async function BlogDetail(props: Props) {
   const params = await props.params;
@@ -104,41 +131,11 @@ export default async function BlogDetail(props: Props) {
               <p className="text-xl md:text-2xl text-zinc-200 font-medium mb-8 leading-relaxed">
                 {post.excerpt}
               </p>
-              {/* Split content by standard line breaks for demo formatting */}
               {post.content.split("\n\n").map((para, i) => (
                 <p className="mb-6 leading-relaxed" key={i}>
                   {para}
                 </p>
               ))}
-
-              <p className="mb-6 leading-relaxed">
-                This is a dummy extended text block representing the body of the
-                article. When building realistic designs, making sure the
-                reading width is comfortable keeps the users engaged in
-                long-form content. An optimal line length is considered to be
-                between 50-75 characters per line. The max-w-4xl paired with
-                Tailwind's prose class gives us excellent typography
-                out-of-the-box.
-              </p>
-
-              <h2 className="text-2xl font-bold mt-12 mb-6">
-                Structuring The Component Layer
-              </h2>
-              <p className="mb-6 leading-relaxed">
-                When taking a design systems approach, abstracting individual UI
-                elements into generic atoms pays massive dividends as the scale
-                of the application increases. Buttons, inputs, and typography
-                layers should be completely abstracted from business logic. In a
-                Next.js application leveraging Server Components, defining
-                proper component boundaries dictates exactly where the client
-                Javascript bundle begins.
-              </p>
-
-              <blockquote className="border-l-4 border-orange-600 pl-6 my-10 italic text-zinc-400 bg-zinc-900/50 py-4 rounded-r-xl">
-                "The cost of a component is more than just bytes over the wire.
-                It's the complexity of state synchronization distributed across
-                the entire render tree."
-              </blockquote>
             </div>
           </div>
 

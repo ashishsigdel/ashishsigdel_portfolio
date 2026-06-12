@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { MapPin, Briefcase, GraduationCap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 

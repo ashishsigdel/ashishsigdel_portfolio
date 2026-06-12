@@ -3,6 +3,7 @@
 import { ChartGantt, ChartNetwork, Dot, Globe } from "lucide-react";
 import { clients } from "@/data/clients";
 import LogoAvatar from "@/components/ui/LogoAvatar";
+import Reveal from "@/components/ui/Reveal";
 
 type ExperienceItem = {
   company: string;
@@ -87,7 +88,7 @@ export default function Experience() {
   return (
     <section className="w-full py-24 px-6">
       <div className="max-w-7xl mx-auto flex flex-col gap-14">
-        <div className="space-y-4">
+        <Reveal className="space-y-4">
           <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">
             Experience
           </p>
@@ -98,10 +99,10 @@ export default function Experience() {
             I architect and ship full-stack systems — from robust backend APIs
             to AI-powered features that work in the real world.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <div className="lg:col-span-3 rounded-3xl">
+          <Reveal className="lg:col-span-3 rounded-3xl" delay={0.1}>
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2.5 rounded-xl border border-zinc-800 bg-zinc-900">
                 <ChartGantt size={20} className="text-white" />
@@ -173,9 +174,9 @@ export default function Experience() {
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="lg:col-span-2">
+          <Reveal className="lg:col-span-2" delay={0.2}>
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2.5 rounded-xl border border-zinc-800 bg-zinc-900">
                 <ChartNetwork size={20} className="text-white" />
@@ -230,7 +231,7 @@ export default function Experience() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

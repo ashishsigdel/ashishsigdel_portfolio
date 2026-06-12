@@ -132,22 +132,22 @@ export default function ScrollVideo({
       });
     };
 
+    const handleResize = () => drawFrame(currentFrameRef.current);
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", () => drawFrame(currentFrameRef.current));
+    window.addEventListener("resize", handleResize);
 
     // Initial call
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", () =>
-        drawFrame(currentFrameRef.current),
-      );
+      window.removeEventListener("resize", handleResize);
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [imagesLoaded, drawFrame, scrollContainerRef]);
+  }, [imagesLoaded, drawFrame, scrollContainerRef, scrollSpeed]);
 
   return (
     <div

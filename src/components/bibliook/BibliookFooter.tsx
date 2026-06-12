@@ -1,17 +1,4 @@
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-
-const footerLinks = [
-  { label: "Home", href: "/" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "About", href: "/about" },
-  {
-    label: "Open App",
-    href: "https://bibliook.ashishsigdel.com.np",
-    external: true,
-  },
-];
 
 export default function BibliookFooter() {
   return (

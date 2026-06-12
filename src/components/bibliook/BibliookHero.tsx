@@ -1,22 +1,23 @@
 "use client";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
+
+function getDownloadHref() {
+  const ua = navigator.userAgent || "";
+  const isMobile =
+    /Android|iPhone|iPad|iPod|Mobile|IEMobile|Opera Mini/i.test(ua);
+  return `https://bibliook.ashishsigdel.com.np/download/${isMobile ? "mobile" : "desktop"}`;
+}
 
 export default function BibliookHero() {
-  const [downloadHref, setDownloadHref] = useState(
-    "https://bibliook.ashishsigdel.com.np/download/desktop",
+  const downloadHref = useSyncExternalStore(
+    emptySubscribe,
+    getDownloadHref,
+    () => "https://bibliook.ashishsigdel.com.np/download/desktop",
   );
-
-  useEffect(() => {
-    const ua = navigator.userAgent || "";
-    const isMobile =
-      /Android|iPhone|iPad|iPod|Mobile|IEMobile|Opera Mini/i.test(ua);
-
-    setDownloadHref(
-      `https://bibliook.ashishsigdel.com.np/download/${isMobile ? "mobile" : "desktop"}`,
-    );
-  }, []);
 
   return (
     <section

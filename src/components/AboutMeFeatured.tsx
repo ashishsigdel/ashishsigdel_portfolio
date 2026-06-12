@@ -1,28 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import Reveal from "@/components/ui/Reveal";
 
 export default function AboutMeFeatured() {
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.1 },
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
   return (
-    <section ref={ref} className="relative w-full pt-24 px-6 overflow-visible">
+    <section className="relative w-full pt-24 px-6 overflow-visible">
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-14">
         {/* Header */}
-        <div className="space-y-4">
+        <Reveal className="space-y-4">
           <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">
             Me
           </p>
@@ -32,12 +18,12 @@ export default function AboutMeFeatured() {
           <p className="text-zinc-400 text-lg max-w-3xl">
             A quick snapshot of who I am and how I build products.
           </p>
-        </div>
+        </Reveal>
 
         {/* Cards grid — info left, image right */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* LEFT COLUMN — info cards stacked */}
-          <div className="col-span-1 flex flex-col gap-6">
+          <Reveal delay={0.1} className="col-span-1 flex flex-col gap-6">
             {/* Who I am */}
             <div className="group relative flex flex-col justify-between p-8 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500">
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/4 rounded-full blur-3xl pointer-events-none" />
@@ -87,10 +73,13 @@ export default function AboutMeFeatured() {
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* RIGHT COLUMN — skills image */}
-          <div className="group col-span-1 md:col-span-2 relative rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500 flex flex-col">
+          <Reveal
+            delay={0.2}
+            className="group col-span-1 md:col-span-2 relative rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 overflow-hidden transition-all duration-500 flex flex-col"
+          >
             <div className="absolute -top-20 -left-20 w-64 h-64 bg-orange-600/5 rounded-full blur-3xl group-hover:bg-orange-600/10 transition-all duration-500 pointer-events-none" />
 
             {/* Window bar */}
@@ -124,7 +113,7 @@ export default function AboutMeFeatured() {
                 products from concept to deployment.
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -16,7 +16,7 @@ const links = {
       href: "https://bibliook.ashishsigdel.com.np",
       external: true,
     },
-    { label: "ClearText AI", href: "/cleartext", external: false },
+    { label: "ClearText AI", href: "/portfolio", external: false },
     {
       label: "YOLO Research",
       href: "https://ieeexplore.ieee.org/document/11485071",
@@ -55,12 +55,19 @@ function GrainCanvas() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const FPS = 12;
+    const frameInterval = 1000 / FPS;
     let animId: number;
-    let frame = 0;
+    let lastFrameTime = 0;
+    let isVisible = true;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-    const draw = () => {
+    const renderGrain = () => {
       const w = canvas.width;
       const h = canvas.height;
+      if (!w || !h) return;
       const imageData = ctx.createImageData(w, h);
       const data = imageData.data;
 
@@ -91,24 +98,42 @@ function GrainCanvas() {
 
       ctx.clearRect(0, 0, w, h);
       ctx.putImageData(imageData, 0, 0);
-      frame++;
-      animId = requestAnimationFrame(draw);
+    };
+
+    const loop = (time: number) => {
+      animId = requestAnimationFrame(loop);
+      if (!isVisible || time - lastFrameTime < frameInterval) return;
+      lastFrameTime = time;
+      renderGrain();
     };
 
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      renderGrain();
     };
 
     resize();
-    draw();
 
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
+    // Static grain only when the user prefers reduced motion
+    if (reducedMotion) {
+      return () => ro.disconnect();
+    }
+
+    const io = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    });
+    io.observe(canvas);
+
+    animId = requestAnimationFrame(loop);
+
     return () => {
       cancelAnimationFrame(animId);
       ro.disconnect();
+      io.disconnect();
     };
   }, []);
 
