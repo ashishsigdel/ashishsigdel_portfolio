@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { MoveUp } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import ScrollVideo from "./ScrollVideo";
+import MorphHeading from "../ui/morph-heading";
 import { Spotlight } from "../ui/spotlight";
 import Navbar from "@/components/utils/Navbar";
 import { myAxios } from "@/services/apiServices";
@@ -344,12 +345,10 @@ export default function HeroSection() {
 
         {/* Center Left - Main Heading */}
         <div className="absolute top-[28%] bottom-[38%] md:top-24 md:bottom-12 left-4 md:left-12 z-1 flex flex-col justify-center">
-          <h2 className="text-[2.6rem] sm:text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tight bg-linear-to-b from-white via-white/65 to-white/30 bg-clip-text text-transparent pb-3 md:pb-7 space-y-3 sm:space-y-0">
-            <span className="block">Building</span>
-            <span className="block">Intelligent</span>
-            <span className="block">Digital</span>
-            <span className="block">Systems</span>
-          </h2>
+          <MorphHeading
+            className="text-[2.6rem] sm:text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tight pb-3 md:pb-7 space-y-3 sm:space-y-0"
+            wordClassName="bg-linear-to-b from-white via-zinc-400 to-zinc-600 bg-clip-text text-transparent"
+          />
 
           <p className="text-zinc-400 text-sm font-medium tracking-wide mt-2 block sm:hidden">
             AI/ML Engineer +<br /> Full Stack Developer
